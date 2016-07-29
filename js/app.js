@@ -8,16 +8,47 @@ var yes;
 
 var teams = [
 	{
+		id: 'nyg',
 		name: 'Giants',
 		city: 'New York',
-		color: blue
+		color1: '#000099',
+		color2: '#0000ff',
+		depth: 'http://www.ourlads.com/nfldepthcharts/depthchart/NYG',
+		offseason: 'http://espn.go.com/nfl/team/transactions/_/name/nyg',
+		logo: 'logos/nyg.jpeg'
 	},
 	{
+		id: 'nyj',
 		name: 'Jets',
 		city: 'New York',
-		color: green
+		color1: '#006600',
+		color2: '#009900',
+		depth: 'http://www.ourlads.com/nfldepthcharts/depthchart/NYG',
+		offseason: 'http://espn.go.com/nfl/team/transactions/_/name/nyg',
+		logo: 'logos/nyg.jpeg'
 	}
 ]
+
+for (team in teams) {
+	console.log(teams[team].color2)
+	$('#'+teams[team].id)
+	.mouseover(function() {
+		$(this).css("background-color", teams[team].color2);
+	})
+	.mouseout(function() {
+		$(this).css("background-color", teams[team].color1);
+	});
+}
+
+//$('#nyg').mouseover( mouseIn).mouseout( mouseOut);
+
+function mouseIn(color) {
+	$(this).css("background-color", '#000099');
+}
+
+function mouseOut(color) {
+	$(this).css("background-color", '#0000ff');
+}
 
 /*
 $.get( url, function( data ) {

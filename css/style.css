@@ -1,8 +1,13 @@
+#content {
+	display:flex;
+	flex-direction:column;
+}
+/*
 li:hover {
     background-color: #4A2E2E;
     color: white;
 	cursor: pointer;
-}
+}*/
 
 .conference {
 	padding: 0;
@@ -17,8 +22,8 @@ li:hover {
 
 .division {
 	background: tomato;
-	padding: 2px;
-	margin: 2px;
+	padding: 1px;
+	margin: 1px;
 	display: flex;
 	flex:1;
 	flex-direction:column;
