@@ -30,16 +30,17 @@ var teams = [
 ]
 
 for (team in teams) {
-	console.log(teams[team].color2)
 	$('#'+teams[team].id)
-	.mouseover(function() {
+	.bind( "mouseenter", function() {
+		console.log(teams[team].color2)
 		$(this).css("background-color", teams[team].color2);
-	})
-	.mouseout(function() {
-		$(this).css("background-color", teams[team].color1);
 	});
 }
-
+/*
+	.mouseout(function() {
+		console.log(teams[team].color1)
+		$(this).css("background-color", teams[team].color1);
+	});*/
 //$('#nyg').mouseover( mouseIn).mouseout( mouseOut);
 
 function mouseIn(color) {
