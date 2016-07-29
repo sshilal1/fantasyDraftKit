@@ -1,0 +1,39 @@
+li:hover {
+    background-color: #4A2E2E;
+    color: white;
+	cursor: pointer;
+}
+
+.conference {
+	padding: 0;
+	margin: 0;
+	height: 48%;
+	list-style: none;
+	display: flex;
+
+	-webkit-flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.division {
+	background: tomato;
+	padding: 2px;
+	margin: 2px;
+	display: flex;
+	flex:1;
+	flex-direction:column;
+}
+
+.team {
+
+	background: blue;
+	display: flex;
+	margin:1%;
+	flex:1;
+
+	line-height: 50px;
+	color: white;
+	font-weight: bold;
+	font-size: 2em;
+	text-align: center;
+}
