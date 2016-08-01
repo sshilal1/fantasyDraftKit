@@ -32,6 +32,31 @@ var teams = {
 		color1: '#203731',
 		color2: '#203700'
 	},
+	// North
+	bal: {
+		name: 'Ravens',
+		city: 'New York',
+		color1: '#203731',
+		color2: '#203700'
+	},
+	cin: {
+		name: 'Jets',
+		city: 'New York',
+		color1: '#203731',
+		color2: '#203700'
+	},
+	cle: {
+		name: 'Jets',
+		city: 'New York',
+		color1: '#203731',
+		color2: '#203700'
+	},
+	pit: {
+		name: 'Jets',
+		city: 'New York',
+		color1: '#203731',
+		color2: '#203700'
+	},
 	// East
 	nyg: {
 		name: 'Giants',
