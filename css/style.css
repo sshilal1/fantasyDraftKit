@@ -15,7 +15,6 @@
 }
 
 .division {
-	background: tomato;
 	padding: 1px;
 	margin: 1px;
 	display: flex;
@@ -27,14 +26,11 @@
 	display: flex;
 	margin:1%;
 	flex:1;
-
-	line-height: 50px;
-	color: white;
-	font-weight: bold;
-	font-size: 2em;
-	text-align: center;
+	border-radius: 5px;
 }
 
-.link{
-	color: white;
+.teamName {
+	float:left;
+	font-size: 1.5em;
+    font-weight: bolder;
 }
