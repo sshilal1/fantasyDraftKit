@@ -30,14 +30,14 @@ var teams = {
 		name: 'Jets',
 		city: 'New York',
 		color1: '#203700',
-		color2: '#000000'
+		color2: '#ffffff'
 	},
 	// North
 	bal: {
 		name: 'Ravens',
 		city: 'Baltimore',
 		color1: '#241773',
-		color2: '#000000'
+		color2: '#9E7C0C'
 	},
 	cin: {
 		name: 'Bengals',
@@ -174,13 +174,13 @@ var teams = {
 	no: {
 		name: 'Saints',
 		city: 'New Orleans',
-		color1: '#006778',
-		color2: '#D7A22A'
+		color1: '#9F8958',
+		color2: '#000000'
 	},
 	tb: {
 		name: 'Buccaneers',
 		city: 'Tampa Bay',
-		color1: '#9F8958',
+		color1: '#D50A0A',
 		color2: '#000000'
 	},
 	// West
@@ -193,8 +193,8 @@ var teams = {
 	ram: {
 		name: 'Rams',
 		city: 'Los Angeles',
-		color1: '#B3995D',
-		color2: '#002244'
+		color1: '#002244',
+		color2: '#B3995D'
 	},
 	sf: {
 		name: '49ers',
@@ -232,27 +232,25 @@ for (var t in teams) {
 	var logo = document.createElement('img');
 	
 	// Data location online
-	var depthLoc = "http://www.ourlads.com/nfldepthcharts/depthchart/" + t;
+	var depthLoc = "http://www.espn.com/nfl/team/depth/_/name/" + t;
 	var offseasonLoc = "http://espn.go.com/nfl/team/transactions/_/name/" + t;
 	var logoLoc;
 	
 	// 'ari' and 'la' instead of 'arz' and 'ram' for these teams
 	if (t == 'arz') {logoLoc = "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/" + "ari" + ".png";}
 	else if (t == 'ram') {logoLoc = "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/" + "la" + ".png";}
+	else if (t == 'nyg') {logoLoc = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/New_York_Giants_logo.svg/200px-New_York_Giants_logo.svg.png";}
 	else {logoLoc = "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/" + t + ".png";}
 	
-	/*
-	teamName.setAttribute("class", "teamName");
-	teamName.innerHTML = teams[t].city + ' ' + teams[t].name;
-	teamName.style.color =  teams[t].color2;
-	teamBox.appendChild(teamName);
-	*/
-	
 	logo.src = logoLoc;
-	logo.setAttribute("width", "30%");
+	logo.setAttribute("width", "25%");
+	logo.setAttribute("height", "25%");
+	logo.style.padding = '2px';
+	logo.style.margin = '10px';
 	teamBox.appendChild(logo);
 	
 	depthChart.innerHTML = "Depth";
+	depthChart.setAttribute("class", "link");
 	depthChart.style.color =  teams[t].color2;
 	depthChart.setAttribute("href", depthLoc);
 	depthChart.setAttribute("target", "_blank");
@@ -260,6 +258,7 @@ for (var t in teams) {
 	
 	offseasonMoves.innerHTML = "Off Season Moves";
 	offseasonMoves.setAttribute("class", "link");
+	offseasonMoves.style.color =  teams[t].color2;
 	offseasonMoves.setAttribute("href", offseasonLoc);
 	offseasonMoves.setAttribute("target", "_blank");
 	teamBox.appendChild(offseasonMoves);
