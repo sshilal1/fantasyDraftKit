@@ -264,12 +264,6 @@ for (var t in teams) {
 	teamBox.appendChild(offseasonMoves);
 }
 
-/*
-$.get( url, function( data ) {
-  $( ".result" ).html( data );
-});
-*/
-
 function shadeColor(color, percent) {
 
     var R = parseInt(color.substring(1,3),16);
