@@ -30,17 +30,18 @@ draft.processMessage {
 .draftstatus
 	.timeRemaining
 	.joinedTeamIds
+	.currentSelectionId
 .pickhistory [ objects
 	{
 	.selectionId
 	.teamId
 	.undo = false
 	.player
-		.playerId
-		.firstname
-		.lastname
-		.positionId
-		.proTeamId
+		.playerId = bigUselessNumber
+		.firstname = adrian
+		.lastname = peterson
+		.positionId = 3
+		.proTeamId = 
 	.slotCategoryId
 	.isKeeper
 	}
