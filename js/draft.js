@@ -25,7 +25,7 @@ for (var t in draftInfo.teams) {
 	owner.style.margin = "10px";
 	teamBox.appendChild(owner);
 
-	console.log(draftInfo.teams[t]);
+	//console.log(draftInfo.teams[t]);
 }
 
 $("button").click(function(){
@@ -36,14 +36,37 @@ $("button").click(function(){
 	var newData;
 	drawCanvas(30);
 	
+	$.ajax({
+		type:'GET',
+		url: 'http://games.espn.com/ffl/htmldraft?leagueId=564312&teamId=3&fromTeamId=3',
+		dataType: 'html',
+		cache: true,
+		success: function(result) {
+			//var test = $.getScript(url); // we don't want this to be cached - so we'll use the $.getScript() method
+			console.log(result);
+		}
+	});
+	/*
+	$.ajax({
+		url: "http://games.espn.com/ffl/htmldraft?leagueId=551811&teamId=9&fromTeamId=9",
+		dataType: "script",
+		success: function(result) {
+			console.log(result);
+		}		
+	});
+	
+	/*
 	$.ajax({url: url, success: function(result){
 		newData = result.replace('draft.processMessage(','');
-		newData = newData.replace(/\);draft.processMessage.*/,'');
+		newData = newData.replace(/\);draft.processMessage.*//*,'');
 		console.log(result);
 		var obj = JSON.parse(newData);
 		
 		console.log(obj);
 	}});
+	*/
+	
+
 });
 
 var counter=0;
