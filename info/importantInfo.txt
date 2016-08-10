@@ -1,5 +1,12 @@
+#TODO 
+1. Work on populating main list (HTML TABLE EXTRACTER)
+2. 
+
+
 http://games.espn.com/ffl/htmldraft/json/getPlayer?leagueId=448727&playerId=16799
-http://games.espn.com/ffl/htmldraft/draftlistiframe?leagueId=448727&teamId=3&fromTeamId=3
+
+THIS IS WHERE U GET THE LIST OF NAMES FROM
+http://games.espn.com/ffl/htmldraft/draftlistiframe?leagueId=633199
 
 var url = DraftConstants.SERVICE + command + '?' + this.paramsToQueryString(params) + this.pollParams() 
 

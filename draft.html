@@ -7,6 +7,16 @@
 	<link rel="stylesheet" type="text/css" href="http://g.espncdn.com/ffl/static/css/main?v=31139102711">
 	<link rel="stylesheet" type="text/css" href="http://g.espncdn.com/ffl/static/css/everyDay?v=442">
 	<link rel="stylesheet" href="css/style.css">
+	<script   src="https://code.jquery.com/jquery-1.8.3.js"   integrity="sha256-dW19+sSjW7V1Q/Z3KD1saC6NcE5TUIhLJzJbrdKzxKc="   crossorigin="anonymous"></script>
+	
+	
+	<script src="http://a.espncdn.com/legacy/desktop/1.0.9/js/fantasy-critical.js"></script> 
+	
+	<script src="js/lib/queryUser.js"></script>
+	<script type="text/javascript" src="http://g.espncdn.com/ffl/static/js/libraries?v=517525"></script>
+	<script type="text/javascript" src="http://g.espncdn.com/ffl/static/js/everyDay?v=13162332"></script>
+	
+	
   </head>
 
   <body>
@@ -19,11 +29,12 @@
 	<div class="draft" style=width:95%;float:right;height:99vh;>
 		<div style="flex:1;">box1
 			<button>QueryDraft</button>
-			<canvas id="mycanvas" width="210" height="210"></canvas> 
+			<canvas id="mycanvas" width="210" height="210"></canvas>
+			<div id="draftPlayerList"></div>
 		</div>
 		<div class="draftTeams" style="flex:5;">
 			<div id="team1" class="draftTeam">
-				<a href="http://games.espn.com/ffl/format/playerpop/overview?leagueId=1582906&playerId=5362&playerIdType=playerId&seasonId=2016&xhr=1" class="flexpop" content="tabs#ppc" instance="_ppc" fpopheight="357px" fpopwidth="490px" tab="null" leagueid="1582906" playerid="2580" teamid="3" seasonid="2016" cache="true">Drew Brees</a>
+				<a href="" class="flexpop" content="tabs#ppc" instance="_ppc" fpopheight="357px" fpopwidth="490px" tab="null" leagueid="1582906" playerid="2580" teamid="3" seasonid="2016" cache="true">Drew Brees</a>
 			</div>
 			<div id="team2" class="draftTeam"></div>
 			<div id="team3" class="draftTeam"></div>
@@ -38,8 +49,8 @@
 			<div id="team12" class="draftTeam"></div>
 		</div>
 	</div>
-	<script src="js/lib/jQuery.js"></script>
     <script src="js/draft.js"></script>
+	
   </body>
 
 </html>
