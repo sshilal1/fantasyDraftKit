@@ -72,11 +72,88 @@ $("button").click(function(){
 
 });
 
-// Parse through json objects
-for (var pick in results.pickHistory) {
-	
+var results = {
+  pickHistory: [{
+    selectionId: 1,
+    teamId: 1,
+    undo: false,
+    player: {
+      playerId:13934,
+      firstname:"Antonio",
+      lastname:"Brown",
+      positionId:3,
+      proTeamId:23,
+    }
+  },
+  {
+    selectionId: 2,
+    teamId: 2,
+    undo: false,
+    player: {
+      playerId:13982,
+      firstname:"Julio",
+      lastname:"Jones",
+      positionId:3,
+      proTeamId:1,
+    }
+  }]
 }
 
+// Parse through json objects
+for (var pick in results.pickHistory) {
+  // create element
+  var draftList = document.getElementById("draftPlayerList"); 
+  var teamBox = document.getElementById("team1");
+  
+  var playerPick = document.createElement('div');
+  playerPick.innerHTML = results.pickHistory[pick].player.firstname + " " + results.pickHistory[pick].player.lastname;
+  playerPick.setAttribute("href", "");
+  playerPick.setAttribute("class", "flexpop");
+  playerPick.setAttribute("content", "tabs#ppc");
+  playerPick.setAttribute("instance", "_ppc");
+  playerPick.setAttribute("fpopheight", "357px");
+  playerPick.setAttribute("fpopwidth", "490px");
+  playerPick.setAttribute("tab", "null");
+  playerPick.setAttribute("leagueid", draftInfo.leagueId);
+  playerPick.setAttribute("playerid", results.pickHistory[pick].player.playerId);
+  playerPick.setAttribute("teamid", results.pickHistory[pick].teamId);
+  playerPick.setAttribute("seasonid", "2016");
+  playerPick.setAttribute("cache", "true");
+  playerPick.style.padding = '2px';
+  playerPick.style.margin = '2px';
+  teamBox.appendChild(playerPick);
+
+  var draftPick = document.createElement('div');
+  draftPick.innerHTML = results.pickHistory[pick].selectionId + ". " + results.pickHistory[pick].player.firstname + " " + results.pickHistory[pick].player.lastname;
+  draftPick.setAttribute("href", "");
+  draftPick.setAttribute("class", "flexpop");
+  draftPick.setAttribute("content", "tabs#ppc");
+  draftPick.setAttribute("instance", "_ppc");
+  draftPick.setAttribute("fpopheight", "357px");
+  draftPick.setAttribute("fpopwidth", "490px");
+  draftPick.setAttribute("tab", "null");
+  draftPick.setAttribute("leagueid", draftInfo.leagueId);
+  draftPick.setAttribute("playerid", results.pickHistory[pick].player.playerId);
+  draftPick.setAttribute("teamid", draftInfo.toTeamId);
+  draftPick.setAttribute("seasonid", "2016");
+  draftPick.setAttribute("cache", "true");
+  draftPick.style.padding = '2px';
+  draftPick.style.margin = '2px';
+  draftList.appendChild(draftPick);
+}
+/*
+<a href="" class="flexpop" 
+content="tabs#ppc" 
+instance="_ppc" 
+fpopheight="357px" 
+fpopwidth="490px" 
+tab="null" 
+leagueid="1582906" 
+playerid="2580" 
+teamid="3" 
+seasonid="2016" 
+cache="true">Drew Brees</a>
+*/
 var counter=0;
 
 function drawCanvas(theCount){
