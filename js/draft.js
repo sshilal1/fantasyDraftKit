@@ -72,6 +72,11 @@ $("button").click(function(){
 
 });
 
+// Parse through json objects
+for (var pick in results.pickHistory) {
+	
+}
+
 var counter=0;
 
 function drawCanvas(theCount){
