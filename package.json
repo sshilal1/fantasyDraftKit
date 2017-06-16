@@ -10,6 +10,7 @@
   "dependencies": {
     "cheerio": "latest",
     "express": "latest",
+    "mssql": "^4.0.4",
     "nodemon": "^1.11.0",
     "request": "latest"
   }
