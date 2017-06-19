@@ -329,11 +329,35 @@ var x = '.tablehead';
 				firstPlayer =  data.children().children().eq(2);
 				links = firstPlayer.children().eq(1).html().toString();
 				id = links.match(/\d+/)[0];
-				name = firstPlayer.children().eq(1).text();
+				bname = firstPlayer.children().eq(1).text();
 				
+				console.log(data.children().children().length);
+				
+				var stopRecord = false;
+				data.children().children().each(function() {
+					var tableRowStr = $(this).text().toString();
+					if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
+					else if ($(this).text().toString().includes('Defense') && !stopRecord) {
+						// Stops recording once we hit defensive players
+						stopRecord = true;
+					}
+					else if (!stopRecord) {
+						// Main Iteration
+						name = $(this).children().eq(1).text();
+						id = $(this).children().eq(1).html().toString().match(/\d+/)[0];
+						position = $(this).children().eq(2).text();
+						age = $(this).children().eq(3).text();
+						height = $(this).children().eq(4).text();
+						weight = $(this).children().eq(5).text();
+						experience = $(this).children().eq(6).text();
+						college = $(this).children().eq(7).text();
+						
+						console.log(name + ' ' + id + ' Height: ' + height);
+					}
+				});				
 			})
 						
-			console.log(name);
+			console.log(bname);
 			console.log(id);
 		}
 	})
