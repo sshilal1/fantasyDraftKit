@@ -48,100 +48,132 @@ var teams = {
 		name: 'Bills',
 		city: 'Buffalo',
 		color1: '#00338D',
-		color2: '#C60C30'
+		color2: '#C60C30',
+		players: {},
+		offseason: {}
 	},
 	mia: {
 		name: 'Dolphins',
 		city: 'Miami',
 		color1: '#008E97',
-		color2: '#F58220'
+		color2: '#F58220',
+		players: {},
+		offseason: {}
 	},
 	ne: {
 		name: 'Patriots',
 		city: 'New England',
 		color1: '#002244',
-		color2: '#C60C30'
+		color2: '#C60C30',
+		players: {},
+		offseason: {}
 	},
 	nyj: {
 		name: 'Jets',
 		city: 'New York',
 		color1: '#203700',
-		color2: '#ffffff'
+		color2: '#ffffff',
+		players: {},
+		offseason: {}
 	},
 	// North
 	bal: {
 		name: 'Ravens',
 		city: 'Baltimore',
 		color1: '#241773',
-		color2: '#9E7C0C'
+		color2: '#9E7C0C',
+		players: {},
+		offseason: {}
 	},
 	cin: {
 		name: 'Bengals',
 		city: 'Cincinatti',
 		color1: '#FB4F14',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	cle: {
 		name: 'Browns',
 		city: 'Cleveland',
 		color1: '#FB4F14',
-		color2: '#22150C'
+		color2: '#22150C',
+		players: {},
+		offseason: {}
 	},
 	pit: {
 		name: 'Steelers',
 		city: 'Pittsburgh',
 		color1: '#FFB612',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	// South
 	hou: {
 		name: 'Texans',
 		city: 'Houston',
 		color1: '#03202F',
-		color2: '#A71930'
+		color2: '#A71930',
+		players: {},
+		offseason: {}
 	},
 	ind: {
 		name: 'Colts',
 		city: 'Indianapolis',
 		color1: '#002C5F',
-		color2: '#A5ACAF'
+		color2: '#A5ACAF',
+		players: {},
+		offseason: {}
 	},
 	jac: {
 		name: 'Jaguars',
 		city: 'Jacksonville',
 		color1: '#006778',
-		color2: '#D7A22A'
+		color2: '#D7A22A',
+		players: {},
+		offseason: {}
 	},
 	ten: {
 		name: 'Titans',
 		city: 'Tennessee',
 		color1: '#002244',
-		color2: '#4B92DB'
+		color2: '#4B92DB',
+		players: {},
+		offseason: {}
 	},
 	// West
 	den: {
 		name: 'Broncos',
 		city: 'Denver',
 		color1: '#002244',
-		color2: '#FB4F14'
+		color2: '#FB4F14',
+		players: {},
+		offseason: {}
 	},
 	kc: {
 		name: 'Chiefs',
 		city: 'Kansas City',
 		color1: '#E31837',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	oak: {
 		name: 'Raiders',
 		city: 'Oakland',
 		color1: '#A5ACAF',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	sd: {
 		name: 'Chargers',
 		city: 'San Diego',
 		color1: '#FFB612',
-		color2: '#002244'
+		color2: '#002244',
+		players: {},
+		offseason: {}
 	},
 	// NFC
 	// East
@@ -149,100 +181,132 @@ var teams = {
 		name: 'Cowboys',
 		city: 'Dallas',
 		color1: '#002244',
-		color2: '#B0B7BC'
+		color2: '#B0B7BC',
+		players: {},
+		offseason: {}
 	},
 	nyg: {
 		name: 'Giants',
 		city: 'New York',
 		color1: '#0B2265',
-		color2: '#A71930'
+		color2: '#A71930',
+		players: {},
+		offseason: {}
 	},
 	phi: {
 		name: 'Eagles',
 		city: 'Philidelphia',
 		color1: '#004953',
-		color2: '#A5ACAF'
+		color2: '#A5ACAF',
+		players: {},
+		offseason: {}
 	},
 	was: {
 		name: 'Redskins',
 		city: 'Washington',
 		color1: '#773141',
-		color2: '#FFB612'
+		color2: '#FFB612',
+		players: {},
+		offseason: {}
 	},
 	// North
 	chi: {
 		name: 'Bears',
 		city: 'Chicago',
 		color1: '#0B162A',
-		color2: '#C83803'
+		color2: '#C83803',
+		players: {},
+		offseason: {}
 	},
 	det: {
 		name: 'Lions',
 		city: 'Detroit',
 		color1: '#005A8B',
-		color2: '#B0B7BC'
+		color2: '#B0B7BC',
+		players: {},
+		offseason: {}
 	},
 	gb: {
 		name: 'Packers',
 		city: 'Green Bay',
 		color1: '#203731',
-		color2: '#FFB612'
+		color2: '#FFB612',
+		players: {},
+		offseason: {}
 	},
 	min: {
 		name: 'Vikings',
 		city: 'Minnesota',
 		color1: '#4F2683',
-		color2: '#FFC62F'
+		color2: '#FFC62F',
+		players: {},
+		offseason: {}
 	},
 	// South
 	atl: {
 		name: 'Falcons',
 		city: 'Atlanta',
 		color1: '#A71930',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	car: {
 		name: 'Panthers',
 		city: 'Carolina',
 		color1: '#0085CA',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	no: {
 		name: 'Saints',
 		city: 'New Orleans',
 		color1: '#9F8958',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	tb: {
 		name: 'Buccaneers',
 		city: 'Tampa Bay',
 		color1: '#D50A0A',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	// West
 	arz: {
 		name: 'Cardinals',
 		city: 'Arizona',
 		color1: '#97233F',
-		color2: '#000000'
+		color2: '#000000',
+		players: {},
+		offseason: {}
 	},
 	ram: {
 		name: 'Rams',
 		city: 'Los Angeles',
 		color1: '#002244',
-		color2: '#B3995D'
+		color2: '#B3995D',
+		players: {},
+		offseason: {}
 	},
 	sf: {
 		name: '49ers',
 		city: 'San Francisco',
 		color1: '#AA0000',
-		color2: '#B3995D'
+		color2: '#B3995D',
+		players: {},
+		offseason: {}
 	},
 	sea: {
 		name: 'Seahawks',
 		city: 'Seattle',
 		color1: '#002244',
-		color2: '#69BE28'
+		color2: '#69BE28',
+		players: {},
+		offseason: {}
 	}
 };
 
