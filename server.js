@@ -190,7 +190,7 @@ var teams = {
 		city: 'New York',
 		color1: '#0B2265',
 		color2: '#A71930',
-		players: {},
+		players: [],
 		offseason: {}
 	},
 	phi: {
@@ -313,29 +313,32 @@ var teams = {
 var x = '.tablehead';
 
 //for (team in teams) {
-	team = 'nyg';
+	var team = 'nyg';
 	url = 'http://www.espn.com/nfl/team/roster/_/name/' + team;
 	
 	request(url, function(error, response, html){
 		if(!error){
 			var $ = cheerio.load(html);
 			
-			var name, position, heightweight, team, links, id;
-			var json = { name : "", position : "", heightweight : "", team : ""};
+			var name, position, heightweight, links, id;
+			var json = { name : "", id : "", position : "", age : "", height : "", weight : "", experience : "", teamid : "", college: ""};
 
 			$('.tablehead').filter(function(){
 				var data = $(this);
 				
-				firstPlayer =  data.children().children().eq(2);
-				links = firstPlayer.children().eq(1).html().toString();
-				id = links.match(/\d+/)[0];
-				bname = firstPlayer.children().eq(1).text();
+				//firstPlayer =  data.children().children().eq(2);
+				//links = firstPlayer.children().eq(1).html().toString();
+				//id = links.match(/\d+/)[0];
+				//bname = firstPlayer.children().eq(1).text();
 				
 				console.log(data.children().children().length);
 				
 				var stopRecord = false;
 				data.children().children().each(function() {
+					
 					var tableRowStr = $(this).text().toString();
+					var allChildren = $(this).children();
+					
 					if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
 					else if ($(this).text().toString().includes('Defense') && !stopRecord) {
 						// Stops recording once we hit defensive players
@@ -343,22 +346,23 @@ var x = '.tablehead';
 					}
 					else if (!stopRecord) {
 						// Main Iteration
-						name = $(this).children().eq(1).text();
-						id = $(this).children().eq(1).html().toString().match(/\d+/)[0];
-						position = $(this).children().eq(2).text();
-						age = $(this).children().eq(3).text();
-						height = $(this).children().eq(4).text();
-						weight = $(this).children().eq(5).text();
-						experience = $(this).children().eq(6).text();
-						college = $(this).children().eq(7).text();
+						var name = allChildren.eq(1).text();
+						var id = allChildren.eq(1).html().toString().match(/\d+/)[0];
+						var num = allChildren.eq(0).text();
+						var position = allChildren.eq(2).text();
+						var age = allChildren.eq(3).text();
+						var height = allChildren.eq(4).text();
+						var weight = allChildren.eq(5).text();
+						var experience = allChildren.eq(6).text();
+						var college = allChildren.eq(7).text();
 						
-						console.log(name + ' ' + id + ' Height: ' + height);
+						var json = { name : name, id : id, num : num, position : position, age : age, height : height, weight : weight, experience : experience, teamid : team, college: college, stats: {}};
+						
+						teams[team].players.push(json);
 					}
-				});				
+				});
+				console.log(teams["nyg"]);				
 			})
-						
-			console.log(bname);
-			console.log(id);
 		}
 	})
 //}
@@ -376,26 +380,6 @@ for (id of ids) {
 
 			var name, position, heightweight, team, stats;
 			var json = { name : "", position : "", heightweight : "", team : "", stats : {}};
-
-			$('.player-stats').filter(function(){
-				var data = $(this);
-				
-				name = data.children().first().text();
-				name = name.replace(' Stats','');
-				json.name = name;
-			})
-			
-			$('.general-info').filter(function(){
-				var data = $(this);
-				
-				position = data.children().eq(0).text();
-				heightweight = data.children().eq(1).text();
-				team = data.children().last().children().text();
-				
-				json.position = position;
-				json.heightweight = heightweight;
-				json.team = team;
-			})
 			
 			$("td:contains('Rushing Stats')").filter(function(){
 				var data = $(this);
