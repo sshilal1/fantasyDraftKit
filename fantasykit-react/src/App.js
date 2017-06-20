@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import nygData from './nyg-team.json';
 
 class App extends Component {
   render() {
@@ -17,5 +18,7 @@ class App extends Component {
     );
   }
 }
+
+console.log(nygData);
 
 export default App;
