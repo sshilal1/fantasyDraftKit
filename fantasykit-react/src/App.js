@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
 import nygData from './nyg-team.json';
@@ -24,6 +25,7 @@ class Player extends React.Component {
 		return (
 			<div className="player">
 				<h4>{this.props.name}</h4>
+				<Button bsStyle="info">{this.props.id}</Button>
 			</div>
 		);
 	}
@@ -36,22 +38,23 @@ class MyApp extends React.Component {
 	}
 	
 	render() {
-		const playerNames = [];
-		for (var player of nygData.players) {
-			playerNames.push(player.name);
-		}
-		const nygPlayers = playerNames.map((name) =>
-			<li>{name}</li>
+		const nygPlayers = nygData.players.map((player) =>
+			<Player name={player.name}
+					id={player.id}
+					age={player.age}
+					height={player.height}
+					weight={player.weight}
+					num={player.num}
+					position={player.position}
+					college={player.college}
+					experience={player.experience}
+					teamid={player.teamid}
+					stats={player.stats}
+			/>
 		);
 		return (
-			/*<div className="App">
-				{this.renderPlayer("steve")}
-			</div>*/
 			<ul>{nygPlayers}</ul>
 		);
 	}
 }
-
-console.log(nygData);
-
 export default MyApp;

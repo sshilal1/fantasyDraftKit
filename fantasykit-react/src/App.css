@@ -22,3 +22,13 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/*****************
+Here starts my css
+*****************/
+
+.player {
+	width:300px;
+	height:200px;
+	border-style:solid;
+}
