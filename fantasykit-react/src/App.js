@@ -19,6 +19,39 @@ class App extends Component {
   }
 }
 
+class Player extends React.Component {
+	render() {
+		return (
+			<div className="player">
+				<h4>{this.props.name}</h4>
+			</div>
+		);
+	}
+}
+
+class MyApp extends React.Component {
+
+	renderPlayer(name) {
+		return <Player name={name} />;
+	}
+	
+	render() {
+		const playerNames = [];
+		for (var player of nygData.players) {
+			playerNames.push(player.name);
+		}
+		const nygPlayers = playerNames.map((name) =>
+			<li>{name}</li>
+		);
+		return (
+			/*<div className="App">
+				{this.renderPlayer("steve")}
+			</div>*/
+			<ul>{nygPlayers}</ul>
+		);
+	}
+}
+
 console.log(nygData);
 
-export default App;
+export default MyApp;
