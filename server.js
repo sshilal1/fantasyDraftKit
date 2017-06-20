@@ -361,7 +361,17 @@ var x = '.tablehead';
 						teams[team].players.push(json);
 					}
 				});
-				console.log(teams["nyg"]);				
+				
+				var nygstr = teams["nyg"];
+				console.log(teams["nyg"]);
+				/* THIS IS FOR WRITING TO FILE
+				var jsonfile = require('jsonfile');
+
+				var file = 'nyg-team.json';
+
+				jsonfile.writeFile(file, nygstr, function (err) {
+					console.error(err);
+				})*/
 			})
 		}
 	})

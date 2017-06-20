@@ -10,8 +10,11 @@
   "dependencies": {
     "cheerio": "latest",
     "express": "latest",
+    "jsonfile": "^3.0.0",
     "mssql": "^4.0.4",
     "nodemon": "^1.11.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "request": "latest"
   }
 }
