@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
 import logo from './logo.svg';
 import './App.css';
 import nygData from './nyg-team.json';
@@ -25,7 +26,7 @@ class Player extends React.Component {
 		return (
 			<div className="player">
 				<h4>{this.props.name}</h4>
-				<Button bsStyle="info">{this.props.id}</Button>
+				<h6>{this.props.id}</h6>
 			</div>
 		);
 	}
