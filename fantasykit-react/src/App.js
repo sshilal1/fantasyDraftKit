@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import Flexbox from 'flexbox-react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import logo from './logo.svg';
 import './App.css';
@@ -21,13 +24,20 @@ class App extends Component {
   }
 }
 
+const NewApp = () => (
+  <MuiThemeProvider>
+  </MuiThemeProvider>
+);
+
 class Player extends React.Component {
 	render() {
 		return (
-			<div className="player">
-				<h4>{this.props.name}</h4>
-				<h6>{this.props.id}</h6>
-			</div>
+			<Card style={{padding:"14px 24px 24px",margin:10,width:200}}>
+				<CardHeader
+					title={this.props.name}
+				/>
+				<CardText>{this.props.id}</CardText>
+			</Card>
 		);
 	}
 }
@@ -54,7 +64,9 @@ class MyApp extends React.Component {
 			/>
 		);
 		return (
-			<ul>{nygPlayers}</ul>
+			<MuiThemeProvider>
+				<Flexbox flexDirection="row" flexWrap="wrap">{nygPlayers}</Flexbox>
+			</MuiThemeProvider>
 		);
 	}
 }
