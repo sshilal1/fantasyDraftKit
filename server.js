@@ -310,173 +310,189 @@ var teams = {
 	}
 };
 
-var x = '.tablehead';
-
 //for (team in teams) {
-	var team = 'nyg';
-	url = 'http://www.espn.com/nfl/team/roster/_/name/' + team;
+var team = 'nyg';
+url = 'http://www.espn.com/nfl/team/roster/_/name/' + team;
+
 	
-	request(url, function(error, response, html){
-		if(!error){
-			var $ = cheerio.load(html);
+request(url, function(error, response, html){
+	if(!error){
+		var $ = cheerio.load(html);
+		
+		var name, position, heightweight, links, id;
+		//var json = { name : "", id : "", position : "", age : "", height : "", weight : "", experience : "", teamid : "", college: "", stats: {}};
+
+		$('.tablehead').filter(function(){
+			var data = $(this);
 			
-			var name, position, heightweight, links, id;
-			var json = { name : "", id : "", position : "", age : "", height : "", weight : "", experience : "", teamid : "", college: ""};
-
-			$('.tablehead').filter(function(){
-				var data = $(this);
+			var stopRecord = false;
+			data.children().children().each(function() {
 				
-				//firstPlayer =  data.children().children().eq(2);
-				//links = firstPlayer.children().eq(1).html().toString();
-				//id = links.match(/\d+/)[0];
-				//bname = firstPlayer.children().eq(1).text();
+				var tableRowStr = $(this).text().toString();
+				var allChildren = $(this).children();
 				
-				//console.log(data.children().children().length);
-				
-				var stopRecord = false;
-				data.children().children().each(function() {
+				if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
+				else if ($(this).text().toString().includes('Defense') && !stopRecord) {
+					// Stops recording once we hit defensive players
+					stopRecord = true;
+				}
+				else if (!stopRecord) {
+					// Main Iteration
+					var name = allChildren.eq(1).text();
+					var id = allChildren.eq(1).html().toString().match(/\d+/)[0];
+					var num = allChildren.eq(0).text();
+					var position = allChildren.eq(2).text();
+					var age = allChildren.eq(3).text();
+					var height = allChildren.eq(4).text();
+					var weight = allChildren.eq(5).text();
+					var experience = allChildren.eq(6).text();
+					var college = allChildren.eq(7).text();
 					
-					var tableRowStr = $(this).text().toString();
-					var allChildren = $(this).children();
+					var json = { name : name, id : id, num : num, position : position, age : age, height : height, weight : weight, experience : experience, teamid : team, college: college};
 					
-					if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
-					else if ($(this).text().toString().includes('Defense') && !stopRecord) {
-						// Stops recording once we hit defensive players
-						stopRecord = true;
-					}
-					else if (!stopRecord) {
-						// Main Iteration
-						var name = allChildren.eq(1).text();
-						var id = allChildren.eq(1).html().toString().match(/\d+/)[0];
-						var num = allChildren.eq(0).text();
-						var position = allChildren.eq(2).text();
-						var age = allChildren.eq(3).text();
-						var height = allChildren.eq(4).text();
-						var weight = allChildren.eq(5).text();
-						var experience = allChildren.eq(6).text();
-						var college = allChildren.eq(7).text();
-						
-						var json = { name : name, id : id, num : num, position : position, age : age, height : height, weight : weight, experience : experience, teamid : team, college: college, stats: {}};
-						
-						teams[team].players.push(json);
-					}
-				});
-				
-				var nygstr = teams["nyg"];
-				//console.log(teams["nyg"]);
-				/* THIS IS FOR WRITING TO FILE
-				var jsonfile = require('jsonfile');
-
-				var file = 'nyg-team.json';
-
-				jsonfile.writeFile(file, nygstr, function (err) {
-					console.error(err);
-				})*/
-			})
-		}
-	})
+					teams[team].players.push(json);
+				}
+			});
+		})
+	}
+})
 //}
 
-ids = [2977644,15786]
-url = 'http://www.espn.com/nfl/player/stats/_/id/2977644/';
+//url = 'http://www.espn.com/nfl/player/stats/_/id/2977644/';
+//headshotimg = 'http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/' + id + '.png&amp;w=350&amp;h=254';
 
-for (id of ids) {
-	
-	url = 'http://www.espn.com/nfl/player/stats/_/id/' + id + '/';
-	headshotimg = 'http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/' + id + '.png&amp;w=350&amp;h=254';
-	
-	request(url, function(error, response, html){
-		if(!error){
-			var $ = cheerio.load(html);
+setTimeout(function() { 
 
-			var rushingStats = [];
-			$("td:contains('Rushing Stats')").filter(function(){
-				var data = $(this);
-				
-				var seasonRows = data.parent().parent().children().length;
-				for (i=2;i<seasonRows - 1;i++) {
-					pStats = data.parent().parent().children().eq(i).children();
+	for (var k=0;k < 5; k++) {
+		
+		url = 'http://www.espn.com/nfl/player/stats/_/id/' + teams[team].players[k].id + '/';
+		console.log("getting stats for player " + teams[team].players[k].name);
+		
+		var returnObj = {};
+		request(url, function(error, response, html){
+			if(!error){
+				var $ = cheerio.load(html);
+
+				var rushingStats = [];
+				$("td:contains('Rushing Stats')").filter(function(){
+					var data = $(this);
 					
-					var season = {
-						"season": pStats.eq(0).text(),
-						"team": pStats.eq(1).text(),
-						"gamesplayed": pStats.eq(2).text(),
-						"receptions": pStats.eq(3).text(),
-						"rushingyards": pStats.eq(4).text(),
-						"yardspercarry": pStats.eq(5).text(),
-						"longestrun": pStats.eq(6).text(),
-						"touchdowns": pStats.eq(7).text(),
-						"firstdowns": pStats.eq(8).text(),
-						"totalfumbles": pStats.eq(9).text(),
-						"fumbleslost": pStats.eq(10).text()
+					var seasonRows = data.parent().parent().children().length;
+					for (i=2;i<seasonRows - 1;i++) {
+						pStats = data.parent().parent().children().eq(i).children();
+						
+						var season = {
+							"season": pStats.eq(0).text(),
+							"team": pStats.eq(1).text(),
+							"gamesplayed": pStats.eq(2).text(),
+							"receptions": pStats.eq(3).text(),
+							"rushingyards": pStats.eq(4).text(),
+							"yardspercarry": pStats.eq(5).text(),
+							"longestrun": pStats.eq(6).text(),
+							"touchdowns": pStats.eq(7).text(),
+							"firstdowns": pStats.eq(8).text(),
+							"totalfumbles": pStats.eq(9).text(),
+							"fumbleslost": pStats.eq(10).text()
+						}
+						
+						rushingStats.push(season);
 					}
-					
-					rushingStats.push(season);
-				}
-			})
-			console.log(rushingStats);
-			
-			var receivingStats = [];
-			$("td:contains('Receiving Stats')").filter(function(){
-				var data = $(this);
+				})
+				//console.log(rushingStats);
 				
-				var seasonRows = data.parent().parent().children().length;
-				for (i=2;i<seasonRows - 1;i++) {
-					pStats = data.parent().parent().children().eq(i).children();
+				var receivingStats = [];
+				$("td:contains('Receiving Stats')").filter(function(){
+					var data = $(this);
 					
-					var season = {
-						"season": pStats.eq(0).text(),
-						"team": pStats.eq(1).text(),
-						"gamesplayed": pStats.eq(2).text(),
-						"receptions": pStats.eq(3).text(),
-						"targets": pStats.eq(4).text(),
-						"receivingyards": pStats.eq(5).text(),
-						"yardspercatch": pStats.eq(6).text(),
-						"longestcatch": pStats.eq(7).text(),
-						"touchdowns": pStats.eq(8).text(),
-						"firstdowns": pStats.eq(9).text(),
-						"totalfumbles": pStats.eq(10).text(),
-						"fumbleslost": pStats.eq(11).text()
+					var seasonRows = data.parent().parent().children().length;
+					for (i=2;i<seasonRows - 1;i++) {
+						pStats = data.parent().parent().children().eq(i).children();
+						
+						var season = {
+							"season": pStats.eq(0).text(),
+							"team": pStats.eq(1).text(),
+							"gamesplayed": pStats.eq(2).text(),
+							"receptions": pStats.eq(3).text(),
+							"targets": pStats.eq(4).text(),
+							"receivingyards": pStats.eq(5).text(),
+							"yardspercatch": pStats.eq(6).text(),
+							"longestcatch": pStats.eq(7).text(),
+							"touchdowns": pStats.eq(8).text(),
+							"firstdowns": pStats.eq(9).text(),
+							"totalfumbles": pStats.eq(10).text(),
+							"fumbleslost": pStats.eq(11).text()
+						}
+						
+						receivingStats.push(season);
 					}
-					
-					receivingStats.push(season);
-				}
-			})
-			console.log(receivingStats);
-			
-			var passingStats = [];
-			$("td:contains('Passing Stats')").filter(function(){
-				var data = $(this);
+				})
+				//console.log(receivingStats);
 				
-				var seasonRows = data.parent().parent().children().length;
-				for (i=2;i<seasonRows - 1;i++) {
-					pStats = data.parent().parent().children().eq(i).children();
+				var passingStats = [];
+				$("td:contains('Passing Stats')").filter(function(){
+					var data = $(this);
 					
-					var season = {
-						"season": pStats.eq(0).text(),
-						"team": pStats.eq(1).text(),
-						"gamesplayed": pStats.eq(2).text(),
-						"completions": pStats.eq(3).text(),
-						"attempts": pStats.eq(4).text(),
-						"completionpercent": pStats.eq(5).text(),
-						"passingyards": pStats.eq(6).text(),
-						"yardsperpass": pStats.eq(7).text(),
-						"touchdowns": pStats.eq(8).text(),
-						"longestpass": pStats.eq(9).text(),
-						"interceptions": pStats.eq(10).text(),
-						"totalfumbles": pStats.eq(11).text(),
-						"qbrating": pStats.eq(12).text(),
-						"passerrating": pStats.eq(13).text()
+					var seasonRows = data.parent().parent().children().length;
+					for (i=2;i<seasonRows - 1;i++) {
+						pStats = data.parent().parent().children().eq(i).children();
+						
+						var season = {
+							"season": pStats.eq(0).text(),
+							"team": pStats.eq(1).text(),
+							"gamesplayed": pStats.eq(2).text(),
+							"completions": pStats.eq(3).text(),
+							"attempts": pStats.eq(4).text(),
+							"completionpercent": pStats.eq(5).text(),
+							"passingyards": pStats.eq(6).text(),
+							"yardsperpass": pStats.eq(7).text(),
+							"touchdowns": pStats.eq(8).text(),
+							"longestpass": pStats.eq(9).text(),
+							"interceptions": pStats.eq(10).text(),
+							"totalfumbles": pStats.eq(11).text(),
+							"qbrating": pStats.eq(12).text(),
+							"passerrating": pStats.eq(13).text()
+						}
+						
+						passingStats.push(season);
 					}
-					
-					passingStats.push(season);
-				}
-			})
-			console.log(passingStats);
-		}
+				})
+				//console.log(passingStats);
+				
+				returnObj = {
+					"rushingstats": rushingStats,
+					"receivingstats": receivingStats,
+					"passingstats": passingStats
+				};
+				
+				console.log(returnObj);
+				teams[team].players[k].stats = returnObj;
+				
+				//teams[team].players[k].setStats();
+				setTimeout(function() { 
+					console.log(teams[team].players[1]);
+				},5000);
+				//console.log(myStats);
+				//console.log(teams[team].players[k].name);
+				
+				
+			}
+		})
+	}
+},3000);
+/*
+setTimeout(function() { 
+	var nygstr = teams["nyg"];
+	//console.log(teams["nyg"]);
+	//THIS IS FOR WRITING TO FILE
+	var jsonfile = require('jsonfile');
+
+	var file = 'nyg-team-new.json';
+
+	jsonfile.writeFile(file, nygstr, function (err) {
+		console.error(err);
 	})
-}
-
+},5000);
+*/
 app.listen('8081')
 console.log('Magic happens on port 8081');
 exports = module.exports = app;

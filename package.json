@@ -2,7 +2,8 @@
   "name": "node-web-scrape",
   "version": "0.0.1",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+	"test": "nodemon buildTeamsJson.js"
   },
   "description": "Scrape le web.",
   "main": "server.js",
