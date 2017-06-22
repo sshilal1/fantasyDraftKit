@@ -31,12 +31,39 @@ const NewApp = () => (
 
 class Player extends React.Component {
 	render() {
+		var playerImg = "http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/" + this.props.id + ".png&amp;w=315&amp;h=229;";
 		return (
-			<Card style={{padding:"14px 24px 24px",margin:10,width:200}}>
+			<Card style={{padding:"5px 5px",margin:10,width:220}}>
 				<CardHeader
 					title={this.props.name}
+					titleStyle={{
+						fontSize:"small"
+					}}
+					subtitle={this.props.position + " #" + this.props.num}
+					subtitleColor={"blue"}
 				/>
+				<CardMedia
+					/*overlayContainerStyle={{
+						height:"10px",
+						color:"white"
+					}}*/
+					overlay={<CardTitle 
+						title={this.props.name} 
+						subtitle={this.props.position + " #" + this.props.num}
+						titleStyle={{
+							fontSize:"small"
+						}}
+						subtitleStyle={{
+							fontSize:"small"
+						}}
+					/>}
+				>
+					<img src={playerImg} alt="" />
+				</CardMedia>
 				<CardText>{this.props.id}</CardText>
+				<CardActions>
+					<FlatButton label="Stats" />
+				</CardActions>
 			</Card>
 		);
 	}
@@ -65,7 +92,7 @@ class MyApp extends React.Component {
 		);
 		return (
 			<MuiThemeProvider>
-				<Flexbox flexDirection="row" flexWrap="wrap">{nygPlayers}</Flexbox>
+				<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{nygPlayers}</Flexbox>
 			</MuiThemeProvider>
 		);
 	}

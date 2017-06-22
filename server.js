@@ -383,6 +383,7 @@ url = 'http://www.espn.com/nfl/player/stats/_/id/2977644/';
 for (id of ids) {
 	
 	url = 'http://www.espn.com/nfl/player/stats/_/id/' + id + '/';
+	headshotimg = 'http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/' + id + '.png&amp;w=350&amp;h=254';
 	
 	request(url, function(error, response, html){
 		if(!error){
