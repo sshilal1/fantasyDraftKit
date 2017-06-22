@@ -331,7 +331,7 @@ var x = '.tablehead';
 				//id = links.match(/\d+/)[0];
 				//bname = firstPlayer.children().eq(1).text();
 				
-				console.log(data.children().children().length);
+				//console.log(data.children().children().length);
 				
 				var stopRecord = false;
 				data.children().children().each(function() {
@@ -363,7 +363,7 @@ var x = '.tablehead';
 				});
 				
 				var nygstr = teams["nyg"];
-				console.log(teams["nyg"]);
+				//console.log(teams["nyg"]);
 				/* THIS IS FOR WRITING TO FILE
 				var jsonfile = require('jsonfile');
 
@@ -377,7 +377,7 @@ var x = '.tablehead';
 	})
 //}
 
-ids = [14879,2977644]
+ids = [2977644,15786]
 url = 'http://www.espn.com/nfl/player/stats/_/id/2977644/';
 
 for (id of ids) {
@@ -389,18 +389,90 @@ for (id of ids) {
 		if(!error){
 			var $ = cheerio.load(html);
 
-			var name, position, heightweight, team, stats;
-			var json = { name : "", position : "", heightweight : "", team : "", stats : {}};
-			
+			var rushingStats = [];
 			$("td:contains('Rushing Stats')").filter(function(){
 				var data = $(this);
 				
-				stats = data.parent().parent().children().eq(3).children().first().text();
-				
-				json.stats = stats;
+				var seasonRows = data.parent().parent().children().length;
+				for (i=2;i<seasonRows - 1;i++) {
+					pStats = data.parent().parent().children().eq(i).children();
+					
+					var season = {
+						"season": pStats.eq(0).text(),
+						"team": pStats.eq(1).text(),
+						"gamesplayed": pStats.eq(2).text(),
+						"receptions": pStats.eq(3).text(),
+						"rushingyards": pStats.eq(4).text(),
+						"yardspercarry": pStats.eq(5).text(),
+						"longestrun": pStats.eq(6).text(),
+						"touchdowns": pStats.eq(7).text(),
+						"firstdowns": pStats.eq(8).text(),
+						"totalfumbles": pStats.eq(9).text(),
+						"fumbleslost": pStats.eq(10).text()
+					}
+					
+					rushingStats.push(season);
+				}
 			})
+			console.log(rushingStats);
 			
-			console.log(json);
+			var receivingStats = [];
+			$("td:contains('Receiving Stats')").filter(function(){
+				var data = $(this);
+				
+				var seasonRows = data.parent().parent().children().length;
+				for (i=2;i<seasonRows - 1;i++) {
+					pStats = data.parent().parent().children().eq(i).children();
+					
+					var season = {
+						"season": pStats.eq(0).text(),
+						"team": pStats.eq(1).text(),
+						"gamesplayed": pStats.eq(2).text(),
+						"receptions": pStats.eq(3).text(),
+						"targets": pStats.eq(4).text(),
+						"receivingyards": pStats.eq(5).text(),
+						"yardspercatch": pStats.eq(6).text(),
+						"longestcatch": pStats.eq(7).text(),
+						"touchdowns": pStats.eq(8).text(),
+						"firstdowns": pStats.eq(9).text(),
+						"totalfumbles": pStats.eq(10).text(),
+						"fumbleslost": pStats.eq(11).text()
+					}
+					
+					receivingStats.push(season);
+				}
+			})
+			console.log(receivingStats);
+			
+			var passingStats = [];
+			$("td:contains('Passing Stats')").filter(function(){
+				var data = $(this);
+				
+				var seasonRows = data.parent().parent().children().length;
+				for (i=2;i<seasonRows - 1;i++) {
+					pStats = data.parent().parent().children().eq(i).children();
+					
+					var season = {
+						"season": pStats.eq(0).text(),
+						"team": pStats.eq(1).text(),
+						"gamesplayed": pStats.eq(2).text(),
+						"completions": pStats.eq(3).text(),
+						"attempts": pStats.eq(4).text(),
+						"completionpercent": pStats.eq(5).text(),
+						"passingyards": pStats.eq(6).text(),
+						"yardsperpass": pStats.eq(7).text(),
+						"touchdowns": pStats.eq(8).text(),
+						"longestpass": pStats.eq(9).text(),
+						"interceptions": pStats.eq(10).text(),
+						"totalfumbles": pStats.eq(11).text(),
+						"qbrating": pStats.eq(12).text(),
+						"passerrating": pStats.eq(13).text()
+					}
+					
+					passingStats.push(season);
+				}
+			})
+			console.log(passingStats);
 		}
 	})
 }
