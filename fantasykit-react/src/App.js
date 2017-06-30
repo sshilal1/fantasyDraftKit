@@ -61,10 +61,10 @@ class Player extends React.Component {
 					//subtitleColor={"blue"}
 				/>
 				<CardMedia
-					/*overlayContainerStyle={{
-						height:"10px",
+					overlayContentStyle={{
+						float:"left",
 						color:"white"
-					}}*/
+					}}
 					overlay={<CardTitle 
 						title={this.props.name} 
 						titleStyle={{
@@ -77,7 +77,8 @@ class Player extends React.Component {
 						style={{
 							width:"100px",
 							maxWidth:"100px",
-							minWidth:"100px"
+							minWidth:"100px",
+							height:"73px"
 						}}
 					/>
 				</CardMedia>
