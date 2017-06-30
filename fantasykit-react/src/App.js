@@ -9,7 +9,7 @@ import './App.css';
 import nygData from './nyg-team.json';
 import silhouette from './HeadshotSilhouette.png'
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div className="App">
@@ -51,24 +51,27 @@ class Player extends React.Component {
 		var playerImg = "http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/" + this.props.id + ".png&amp;w=345&amp;h=230;";
 		
 		return (
-			<Card style={{padding:"5px 5px",margin:10,width:220}}>
+			<Card style={{padding:"5px 5px",margin:10,width:200}}>
 				<CardHeader
-					title={this.props.position + " #" + this.props.num}
-					titleStyle={{
-						fontSize:"small"
+					title={this.props.name}
+					textStyle={{
+						paddingRight:0,
+						display: "flex",
+						justifyContent: "space-between"
 					}}
-					//subtitle={this.props.position + " #" + this.props.num}
-					//subtitleColor={"blue"}
+					subtitle={this.props.teamid}
 				/>
 				<CardMedia
 					overlayContentStyle={{
-						float:"left",
 						color:"white"
+						
 					}}
+					
 					overlay={<CardTitle 
-						title={this.props.name} 
-						titleStyle={{
-							fontSize:"small"
+						title={this.props.position + " #" + this.props.num} 
+						titleStyle={{fontSize:"small"}}
+						style={{
+							padding: "35px 10px 0"
 						}}
 					/>}
 				>
@@ -92,14 +95,45 @@ class Player extends React.Component {
 	}
 }
 
+function sortName(a,b) {
+	if (a.name < b.name)
+		return -1;
+	if (a.name > b.name)
+		return 1;
+	return 0;
+}
+function sortId(a,b) {
+	if (a.id < b.id)
+		return -1;
+	if (a.id > b.id)
+		return 1;
+	return 0;
+}
+
+const SORTSTYLE = {
+	'BY_NAME': sortName,
+	'BY_ID': sortId
+};
+
 class MyApp extends React.Component {
 
-	renderPlayer(name) {
+	/*renderPlayer(name) {
 		return <Player name={name} />;
+	}*/
+	
+	constructor(props) {
+		super(props);
+ 
+		this.state = {
+			list: nygData.players,
+			sortKey: 'BY_ID',
+		};
 	}
 	
 	render() {
-		const nygPlayers = nygData.players.map((player) =>
+		const { list, sortKey } = this.state;
+		const sortedList = list.sort(SORTSTYLE[sortKey]);
+		const nygPlayers = sortedList.map((player) =>
 			<Player key={player.id.toString()}
 					name={player.name}
 					id={player.id}
@@ -116,7 +150,17 @@ class MyApp extends React.Component {
 		);
 		return (
 			<MuiThemeProvider>
-				<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{nygPlayers}</Flexbox>
+				<div>
+					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
+						<FlatButton
+							onClick={() => this.setState({ sortKey: 'BY_NAME' })}
+						>By Name</FlatButton>
+						<FlatButton
+							onClick={() => this.setState({ sortKey: 'BY_ID' })}
+						>By Id</FlatButton>
+					</Flexbox>
+					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{nygPlayers}</Flexbox>
+				</div>
 			</MuiThemeProvider>
 		);
 	}
