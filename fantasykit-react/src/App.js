@@ -51,7 +51,7 @@ class Player extends React.Component {
 		var playerImg = "http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/" + this.props.id + ".png&amp;w=345&amp;h=230;";
 		
 		return (
-			<Card style={{padding:"5px 5px",margin:10,width:200}}>
+			<Card className="player">
 				<CardHeader
 					title={this.props.name}
 					textStyle={{
