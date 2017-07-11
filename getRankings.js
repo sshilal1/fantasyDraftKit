@@ -4,18 +4,29 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-var url = "";
+var url = "http://www.espn.com/fantasy/football/story/_/page/17RanksPreseason200PPR/2017-fantasy-football-ppr-rankings-top-200";
 
 request(url, function(error, response, html){
 	if(!error){
 		var $ = cheerio.load(html);
 		
-		var name, position, heightweight, links, id;
-		//var json = { name : "", id : "", position : "", age : "", height : "", weight : "", experience : "", teamid : "", college: "", stats: {}};
+		var espnRank;
 
-		$('.tablehead').filter(function(){
+		$('.inline-table').filter(function(){
 			var data = $(this);
 			
+			var tables = data.children().children().first();
+						
+			if(tables.text().toString().includes('Top-200 PPR rankings')) {
+				data.children().children().eq(2).children().each(function() {
+					var tableRowStr = $(this).text().toString();
+					console.log(tableRowStr);
+				});
+				//console.log(myTable);
+			}
+			
+			//console.log(data.children().children().text());
+			/*
 			var stopRecord = false;
 			data.children().children().each(function() {
 				
@@ -44,7 +55,19 @@ request(url, function(error, response, html){
 					teams[team].players.push(json);
 				}
 			});
+			*/
 		})
+		
+		/*
+		//THIS IS FOR WRITING TO FILE
+		var jsonfile = require('jsonfile');
+
+		var file = 'espn_rankings.json';
+
+		jsonfile.writeFile(file, espnRank, function (err) {
+			console.error(err);
+		})
+		*/
 	}
 })
 
