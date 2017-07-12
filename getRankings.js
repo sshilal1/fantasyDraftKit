@@ -4,8 +4,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-var userStartIndex = 0;
-var userRankFilter = "all";
+var userStartIndex = 160;
+var userRankFilter = "flex";
 
 var mainUrl = "http://games.espn.com/ffl/tools/projections?";
 
@@ -50,6 +50,43 @@ request(url, function(error, response, html){
 		})
 		
 		console.log(rankings);
+		
+		var mysql = require('mysql');
+		var con = mysql.createConnection({
+			host: "***",
+			user: "sshilal1",
+			password: "***",
+			database: "fantasykit",
+			port: 3306
+		});
+		con.connect(function(err) {
+			if (err) throw err;
+			console.log("Connected!");
+			
+			var sql = 'CREATE TABLE espn_rankings_' + userRankFilter + ' (rank INTEGER PRIMARY KEY, name VARCHAR(255))';
+			con.query(sql, function (err, result) {
+				if (err) 
+					console.log('Error creating table espn_rankings_' + userRankFilter);
+				else
+					console.log("Table created");
+			});
+			
+			for (i=0;i<rankings.length;i++) {
+				var sql = 'INSERT INTO espn_rankings_' + userRankFilter + ' VALUES (' + rankings[i].rank + ', "' + rankings[i].name + '");'
+				try {
+					errorF = false;
+					con.query(sql, function (err, result) {
+						if (err) errorF = true;
+						else console.log("Entry added");
+					});			
+					if (errorF) throw err;
+				}
+				catch (e) {
+					console.log("Error adding player " + rankings[i].name);
+				}
+				//console.log('INSERT INTO espn_rankings_all VALUES (' + rankings[i].rank + ', "' + rankings[i].name + '");');
+			}
+		});
 	}
 })
 
