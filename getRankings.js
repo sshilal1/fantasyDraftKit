@@ -4,9 +4,25 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-var url = "http://games.espn.com/ffl/tools/projections?startIndex=0";
-var rankings = [];
+var userStartIndex = 0;
+var userRankFilter = "all";
 
+var mainUrl = "http://games.espn.com/ffl/tools/projections?";
+
+var rankFilters = {
+	"all": "",
+	"qb" : "&slotCategoryId=0",
+	"rb" : "&slotCategoryId=2",
+	"wr" : "&slotCategoryId=4",
+	"te" : "&slotCategoryId=6",
+	"def" : "&slotCategoryId=16",
+	"k" : "&slotCategoryId=17",
+	"flex" : "&slotCategoryId=23"
+};
+var startIndex = "&startIndex=" + userStartIndex;
+var url = mainUrl + rankFilters[userRankFilter] + startIndex;
+
+var rankings = [];
 request(url, function(error, response, html){
 	if(!error){
 		var $ = cheerio.load(html);
