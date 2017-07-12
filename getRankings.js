@@ -4,7 +4,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-var url = "http://www.espn.com/fantasy/football/story/_/page/17RanksPreseason200PPR/2017-fantasy-football-ppr-rankings-top-200";
+var url = "http://games.espn.com/ffl/tools/projections?startIndex=0";
+var rankings = [];
 
 request(url, function(error, response, html){
 	if(!error){
@@ -12,62 +13,27 @@ request(url, function(error, response, html){
 		
 		var espnRank;
 
-		$('.inline-table').filter(function(){
+		$('.playerTableTable').filter(function(){
 			var data = $(this);
 			
-			var tables = data.children().children().first();
+			var rows = data.children().children();
 						
-			if(tables.text().toString().includes('Top-200 PPR rankings')) {
-				data.children().children().eq(2).children().each(function() {
-					var tableRowStr = $(this).text().toString();
-					console.log(tableRowStr);
-				});
-				//console.log(myTable);
-			}
-			
-			//console.log(data.children().children().text());
-			/*
-			var stopRecord = false;
-			data.children().children().each(function() {
-				
-				var tableRowStr = $(this).text().toString();
-				var allChildren = $(this).children();
-				
-				if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
-				else if ($(this).text().toString().includes('Defense') && !stopRecord) {
-					// Stops recording once we hit defensive players
-					stopRecord = true;
+			rowCount = 0;
+			rows.each(function() {
+				if(rowCount>1) {
+					var rank = $(this).children().eq(0).text();
+					var name = $(this).children().eq(1).children().eq(0).text();
+					var obj = {
+						"name" : name,
+						"rank" : rank
+					};
+					rankings.push(obj)
 				}
-				else if (!stopRecord) {
-					// Main Iteration
-					var name = allChildren.eq(1).text();
-					var id = allChildren.eq(1).html().toString().match(/\d+/)[0];
-					var num = allChildren.eq(0).text();
-					var position = allChildren.eq(2).text();
-					var age = allChildren.eq(3).text();
-					var height = allChildren.eq(4).text();
-					var weight = allChildren.eq(5).text();
-					var experience = allChildren.eq(6).text();
-					var college = allChildren.eq(7).text();
-					
-					var json = { name : name, id : id, num : num, position : position, age : age, height : height, weight : weight, experience : experience, teamid : team, college: college};
-					
-					teams[team].players.push(json);
-				}
+				rowCount++;
 			});
-			*/
 		})
 		
-		/*
-		//THIS IS FOR WRITING TO FILE
-		var jsonfile = require('jsonfile');
-
-		var file = 'espn_rankings.json';
-
-		jsonfile.writeFile(file, espnRank, function (err) {
-			console.error(err);
-		})
-		*/
+		console.log(rankings);
 	}
 })
 
