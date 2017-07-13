@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "flexbox-react": "^4.4.0",
+    "fs": "0.0.1-security",
     "material-ui": "^0.18.3",
+    "mysql": "^2.13.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
