@@ -4,8 +4,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-var userStartIndex = 160;
-var userRankFilter = "flex";
+var userStartIndex = 0;
+var userRankFilter = "all";
 
 var mainUrl = "http://games.espn.com/ffl/tools/projections?";
 
@@ -56,7 +56,7 @@ request(url, function(error, response, html){
 			host: "***",
 			user: "sshilal1",
 			password: "***",
-			database: "fantasykit",
+			database: "***",
 			port: 3306
 		});
 		con.connect(function(err) {

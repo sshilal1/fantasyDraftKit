@@ -46,6 +46,23 @@ Image.propTypes = {
 };
 
 class Player extends React.Component {
+
+	constructor(props) {
+		super(props);
+ 
+		this.state = {
+			list: nygData.players,
+			sortKey: 'BY_ID',
+		};
+
+		this.getRank = this.handleGetRank.bind(this);
+	}
+
+	handleGetRank(e) {
+		var self = this;
+		
+	}
+
 	render() {
 
 		var playerImg = "http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/" + this.props.id + ".png&amp;w=345&amp;h=230;";
@@ -85,7 +102,7 @@ class Player extends React.Component {
 						}}
 					/>
 				</CardMedia>
-				<CardText>{this.props.id}</CardText>
+				<CardText>Espn Id={this.props.espnrank}</CardText>
 
 				<CardActions>
 					<FlatButton label="Stats" />
@@ -109,10 +126,18 @@ function sortId(a,b) {
 		return 1;
 	return 0;
 }
+function sortRank(a,b) {
+	if (a.espnrank < b.espnrank)
+		return -1;
+	if (a.espnrank > b.espnrank)
+		return 1;
+	return 0;
+}
 
 const SORTSTYLE = {
 	'BY_NAME': sortName,
-	'BY_ID': sortId
+	'BY_ID': sortId,
+	'BY_RANK': sortRank
 };
 
 class MyApp extends React.Component {
@@ -131,7 +156,7 @@ class MyApp extends React.Component {
 	}
 	
 	render() {
-		const { list, sortKey } = this.state;
+		const { list, sortKey, rankings } = this.state;
 		const sortedList = list.sort(SORTSTYLE[sortKey]);
 		const nygPlayers = sortedList.map((player) =>
 			<Player key={player.id.toString()}
@@ -146,6 +171,7 @@ class MyApp extends React.Component {
 					experience={player.experience}
 					teamid={player.teamid}
 					stats={player.stats}
+					//espnrank={rankings[player.name]}
 			/>
 		);
 		return (

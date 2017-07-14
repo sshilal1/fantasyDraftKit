@@ -4,8 +4,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app     = express();
 
-var userAmountToStore = 80;
-var userRankFilter = "te";
+var userAmountToStore = 40;
+var userRankFilter = "k";
 
 var mainUrl = "https://www.fantasypros.com/nfl/rankings/";
 
@@ -50,29 +50,28 @@ request(url, function(error, response, html){
 		
 		console.log(rankings);
 		
-		/*
 		var mysql = require('mysql');
 		var con = mysql.createConnection({
 			host: "***",
 			user: "sshilal1",
 			password: "***",
-			database: "fantasykit",
+			database: "***",
 			port: 3306
 		});
 		con.connect(function(err) {
 			if (err) throw err;
 			console.log("Connected!");
 			
-			var sql = 'CREATE TABLE espn_rankings_' + userRankFilter + ' (rank INTEGER PRIMARY KEY, name VARCHAR(255))';
+			var sql = 'CREATE TABLE cbs_rankings_' + userRankFilter + ' (rank INTEGER PRIMARY KEY, name VARCHAR(255))';
 			con.query(sql, function (err, result) {
 				if (err) 
-					console.log('Error creating table espn_rankings_' + userRankFilter);
+					console.log('Error creating table cbs_rankings_' + userRankFilter);
 				else
 					console.log("Table created");
 			});
 			
 			for (i=0;i<rankings.length;i++) {
-				var sql = 'INSERT INTO espn_rankings_' + userRankFilter + ' VALUES (' + rankings[i].rank + ', "' + rankings[i].name + '");'
+				var sql = 'INSERT INTO cbs_rankings_' + userRankFilter + ' VALUES (' + rankings[i].rank + ', "' + rankings[i].name + '");'
 				try {
 					errorF = false;
 					con.query(sql, function (err, result) {
@@ -86,7 +85,7 @@ request(url, function(error, response, html){
 				}
 				//console.log('INSERT INTO espn_rankings_all VALUES (' + rankings[i].rank + ', "' + rankings[i].name + '");');
 			}
-		});*/
+		});
 	}
 })
 
