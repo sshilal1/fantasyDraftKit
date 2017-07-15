@@ -49,18 +49,23 @@ class Player extends React.Component {
 
 	constructor(props) {
 		super(props);
- 
-		this.state = {
-			list: nygData.players,
-			sortKey: 'BY_ID',
-		};
 
 		this.getRank = this.handleGetRank.bind(this);
 	}
 
 	handleGetRank(e) {
 		var self = this;
-		
+
+		fetch('/ranks', {
+			method: 'POST',
+			data: {
+				name: self.props.name
+			}
+		}).then(function(response) {
+			return response.json()
+		}).then(function(body) {
+			console.log(body);
+		})
 	}
 
 	render() {
@@ -105,7 +110,10 @@ class Player extends React.Component {
 				<CardText>Espn Id={this.props.espnrank}</CardText>
 
 				<CardActions>
-					<FlatButton label="Stats" />
+					<FlatButton label="Ranks" />
+					<form onSubmit={this.getRank}>
+						<input type="submit" />
+					</form>
 				</CardActions>
 			</Card>
 		);

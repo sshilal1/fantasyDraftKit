@@ -14,7 +14,7 @@ var con = mysql.createConnection({
 	host: "***",
 	user: "sshilal1",
 	password: "***",
-	database: "***",
+	database: "fantasykit",
 	port: 3306
 });
 
@@ -47,4 +47,7 @@ app.post('/ranks', function(req, res) {
 	});*/
 })
 
+/*app.listen('8081')
+console.log('Magic happens on port 8081');
+exports = module.exports = app;*/
 //east2-mysql-instance1.c9cuq70xxmoo.us-east-1.rds.amazonaws.com"
