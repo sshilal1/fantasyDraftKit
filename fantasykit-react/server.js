@@ -22,6 +22,7 @@ con.connect();
 
 app.post('/ranks', function(req, res) {
 
+	console.log("request received for " + req);
 	var name = req.body;
 	console.log(name);
 	var sql = 'SELECT rank FROM espn_rankings_all WHERE name=\'' + name + '\';';
@@ -47,7 +48,6 @@ app.post('/ranks', function(req, res) {
 	});*/
 })
 
-/*app.listen('8081')
-console.log('Magic happens on port 8081');
-exports = module.exports = app;*/
-//east2-mysql-instance1.c9cuq70xxmoo.us-east-1.rds.amazonaws.com"
+app.listen('3030')
+console.log('Magic happens on port 3030');
+exports = module.exports = app;
