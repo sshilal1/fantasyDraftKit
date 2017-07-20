@@ -17,7 +17,15 @@ module.exports = {
           plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties'],
         }
       },
-	  { test: /\.css$/, loader: "style!css" }
+	  { test: /\.css$/, loader: "style!css" },
+	  { test: /\.json$/, loader: 'json' },
+	  {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+    }
     ]
   },
   output: {

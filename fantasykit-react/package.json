@@ -16,6 +16,7 @@
     "flexbox-react": "^4.4.0",
     "fs": "0.0.1-security",
     "history": "^1.17.0",
+    "json-loader": "^0.5.4",
     "material-ui": "^0.18.3",
     "mysql": "^2.13.0",
     "react": "^0.14.6",
@@ -25,6 +26,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
+    "image-webpack-loader": "^3.3.1",
     "react-scripts": "1.0.7"
   },
   "scripts": {
