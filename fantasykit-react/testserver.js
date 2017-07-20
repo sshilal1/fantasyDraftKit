@@ -1,14 +1,13 @@
 var express = require('express');
-var path = require('path');
 var app = express();
+var http = require('http').Server(app);
 
-// Define the port to run on
-app.set('port', 3000);
+app.use(express.static(__dirname + '/public'));
 
-app.use(express.static(path.join(__dirname, 'src')));
+app.get('/', function (req, res) {
+	res.sendFile('public/index.html', { root : __dirname });
+})
 
-// Listen for requests
-var server = app.listen(app.get('port'), function() {
-  var port = server.address().port;
-  console.log('Magic happens on port ' + port);
+http.listen(3000, function(){
+	console.log('listening on *:3000');
 });
