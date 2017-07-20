@@ -9,6 +9,8 @@ import './App.css';
 import nygData from './nyg-team.json';
 import silhouette from './HeadshotSilhouette.png'
 
+import axios from 'axios';
+
 class App extends React.Component {
   render() {
     return (
@@ -56,16 +58,15 @@ class Player extends React.Component {
 	handleGetRank(e) {
 		var self = this;
 
-		fetch('/ranks', {
-			method: 'POST',
-			data: {
-				name: self.props.name
-			}
-		}).then(function(response) {
-			return response.json()
-		}).then(function(body) {
-			console.log(body);
+		axios.post('/ranks', {
+			name: this.props.name
 		})
+		.then(function (response) {
+			console.log(response);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 	}
 
 	render() {
