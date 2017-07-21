@@ -3,6 +3,9 @@ import Flexbox from 'flexbox-react';
 import FlatButton from 'material-ui/FlatButton';
 import './Card.css';
 
+import espn from '../../espn2.png'
+import pros from '../../fantasypros.png'
+
 export default class PlayerCard extends React.Component {
   render() {
     return (
@@ -24,9 +27,9 @@ export default class PlayerCard extends React.Component {
 				<div className="card-row">
           <div className="rankings-title">
 						<Flexbox flexDirection="row" justifyContent="space-between">
-							<FlatButton className="rank-button text" /*onClick={() => this.setState({ sortKey: 'TOTAL' })}*/ >Total</FlatButton>
-							<FlatButton className="rank-button text">Espn</FlatButton>
-							<FlatButton className="rank-button text">Cbs</FlatButton>
+							<FlatButton style={{minWidth:"40px"}} className="text" /*onClick={() => this.setState({ sortKey: 'TOTAL' })}*/ >Total</FlatButton>
+							<FlatButton style={{minWidth:"45px"}}><img style={{width:"80%"}} src={espn}/></FlatButton>
+							<FlatButton style={{minWidth:"85px"}}><img src={pros}/></FlatButton>
 						</Flexbox>
 						<Flexbox flexDirection="row" justifyContent="space-around">
 							<div>
