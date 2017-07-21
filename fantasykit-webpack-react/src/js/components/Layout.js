@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Footer from "./Footer";
 import Header from "./Header";
 import Player from "./Player";
+import Card from "./Card";
 
 export default class Layout extends React.Component {
   constructor() {
@@ -24,6 +25,7 @@ export default class Layout extends React.Component {
         <div>
           <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
           <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center"><Player /></Flexbox>
+					<Card />
           <Footer/>
         </div>
       </MuiThemeProvider>
