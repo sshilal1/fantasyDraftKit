@@ -18,7 +18,7 @@ export default class Players extends React.Component {
   componentWillMount() {
     PlayerStore.on("change", this.getPlayers);
   }
-	/*
+  /*
   componentWillUnmount() {
     PlayerStore.removeListener("change", this.getPlayers);
   }
@@ -41,11 +41,11 @@ export default class Players extends React.Component {
     });
 
     return (
-	<MuiThemeProvider>
-      <div>
-		{PlayerComponents}
-      </div>
-	</MuiThemeProvider>
+      <MuiThemeProvider>
+        <div>
+          {PlayerComponents}
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

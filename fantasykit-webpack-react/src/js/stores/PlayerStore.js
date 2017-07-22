@@ -5,26 +5,25 @@ import { EventEmitter } from "events";
 class PlayerStore extends EventEmitter {
   constructor() {
     super()
-    this.players = [
-      {
+    this.players = [{
         id: 5526,
         firstname: "Eli",
         lastname: "MANNING",
-		position: "QB",
+        position: "QB",
         teamid: "NYG",
-		num: 10,
+        num: 10,
         overallrank: 29,
-		positionrank: 7
+        positionrank: 7
       },
-	  {
+      {
         id: 55268,
         firstname: "John",
         lastname: "FRANCO",
-		position: "QB",
+        position: "QB",
         teamid: "NYG",
-		num: 10,
+        num: 10,
         overallrank: 29,
-		positionrank: 7
+        positionrank: 7
       },
     ];
   }
