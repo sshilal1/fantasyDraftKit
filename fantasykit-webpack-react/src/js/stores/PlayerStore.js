@@ -2,41 +2,28 @@ import { EventEmitter } from "events";
 
 import dispatcher from "../dispatcher";
 
+import nygData from './nyg-team.json';
 import _ from 'lodash';
 
 class PlayerStore extends EventEmitter {
   constructor() {
     super()
-    this.players = [{
-        id: 5526,
-        firstname: "Eli",
-        lastname: "MANNING",
-        position: "QB",
-        teamid: "NYG",
-        num: 10,
-				overallrank: 29,
-				positionrank: 7,
-				totalranks: {
-					overallrank: 29,
-					positionrank: 7
-				},
-				espn: {
-					overallrank: 32,
-					positionrank: 5
-				},
-				pros: {
-					overallrank: 34,
-					positionrank: 6
-				}
-      },
-      {
-        id: 55268,
-        firstname: "John",
-        lastname: "FRANCO",
-        position: "QB",
-        teamid: "NYG",
-        num: 10,
-				overallrank: 29,
+
+		var initialPlayers = [];
+		
+		for (var player of nygData.players) {
+			var parts = player.name.split(" "),
+				first = parts.shift(),
+				last = parts.shift().toUpperCase() || "";
+		
+			var newPlayer = {
+				firstname : first,
+				lastname : last,
+				id : player.id,
+				position: player.position,
+				num: player.num,
+				teamid: player.teamid.toUpperCase(),
+				overallrank: 27,
 				positionrank: 7,
         totalranks: {
 					overallrank: 29,
@@ -50,8 +37,12 @@ class PlayerStore extends EventEmitter {
 					overallrank: 34,
 					positionrank: 6
 				}
-      },
-    ];
+			};
+			
+			initialPlayers.push(newPlayer);
+		}
+		
+		this.players = initialPlayers;
   }
 
   createPlayer(player) {

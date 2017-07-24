@@ -72,22 +72,20 @@ export default class Players extends React.Component {
     });
 
     return (
-      <div>
-        <MuiThemeProvider>
-          <div>
-            <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
-              <FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
-              <FlatButton onClick={this.sortById.bind(this)} >By Id</FlatButton>
-              <FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
-              <FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton>
-							<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
-							<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
-              <FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
-            </Flexbox>
-            <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
-          </div>
-        </MuiThemeProvider>
-      </div>
+			<MuiThemeProvider>
+				<div>
+					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
+						<FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
+						<FlatButton onClick={this.sortById.bind(this)} >By Id</FlatButton>
+						<FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
+						<FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton>
+						<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
+						<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
+						<FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
+					</Flexbox>
+					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
+				</div>
+			</MuiThemeProvider>
     );
   }
 }
