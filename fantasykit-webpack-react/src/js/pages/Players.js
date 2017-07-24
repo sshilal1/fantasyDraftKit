@@ -19,11 +19,11 @@ export default class Players extends React.Component {
   componentWillMount() {
     PlayerStore.on("change", this.getPlayers);
   }
-  /*
+  
   componentWillUnmount() {
     PlayerStore.removeListener("change", this.getPlayers);
   }
-*/
+
   getPlayers() {
     this.setState({
       players: PlayerStore.getAll(),

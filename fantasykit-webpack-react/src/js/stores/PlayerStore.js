@@ -42,7 +42,7 @@ class PlayerStore extends EventEmitter {
     var index = _.findIndex(players, function(o) { return o.id == mod.id; });
 
     this.players[index][mod.property] = mod.change;
-    this.emit("change");
+    //this.emit("change");
   }
 
   getAll() {

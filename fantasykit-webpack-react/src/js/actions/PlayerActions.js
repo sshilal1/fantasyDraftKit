@@ -21,11 +21,7 @@ export function modPlayer(mod) {
 
   dispatcher.dispatch({
     type: "MOD_PLAYER",
-    modification: {
-      id: mod.id,
-      property: mod.property,
-      change: mod.change
-    },
+    modification: mod,
   });
 }
 
