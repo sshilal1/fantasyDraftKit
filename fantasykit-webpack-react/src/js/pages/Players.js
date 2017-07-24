@@ -1,10 +1,11 @@
 import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Flexbox from 'flexbox-react';
+import FlatButton from 'material-ui/FlatButton';
 
 import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";
-
 
 export default class Players extends React.Component {
   constructor() {
@@ -33,8 +34,14 @@ export default class Players extends React.Component {
     PlayerActions.createPlayer();
   }
 
-  reloadPlayers() {
-    PlayerActions.reloadPlayers();
+  modPlayer() {
+    var mod = {};
+
+    mod.id = 5526;
+    mod.property = 'overallrank';
+    mod.change = 19;
+
+    PlayerActions.modPlayer(mod);
   }
 
   render() {
@@ -46,10 +53,15 @@ export default class Players extends React.Component {
 
     return (
       <div>
-        <button onClick={this.createPlayer.bind(this)}>Reload!</button> 
         <MuiThemeProvider>
           <div>
-            {PlayerComponents}
+            <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
+              <FlatButton onClick={() => this.setState({ sortKey: 'BY_NAME' })}>By Name</FlatButton>
+              <FlatButton onClick={() => this.setState({ sortKey: 'BY_ID' })} >By Id</FlatButton>
+              <FlatButton onClick={this.createPlayer.bind(this)}>Add Player!</FlatButton>
+              <FlatButton onClick={this.modPlayer.bind(this)}>Modify Player</FlatButton> 
+            </Flexbox>
+            <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </MuiThemeProvider>
       </div>
