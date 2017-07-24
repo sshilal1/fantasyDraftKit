@@ -58,8 +58,8 @@ export default class Players extends React.Component {
             <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
               <FlatButton onClick={() => this.setState({ sortKey: 'BY_NAME' })}>By Name</FlatButton>
               <FlatButton onClick={() => this.setState({ sortKey: 'BY_ID' })} >By Id</FlatButton>
-              <FlatButton onClick={this.createPlayer.bind(this)}>Add Player!</FlatButton>
-              <FlatButton onClick={this.modPlayer.bind(this)}>Modify Player</FlatButton> 
+              <FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
+              <FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton> 
             </Flexbox>
             <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>

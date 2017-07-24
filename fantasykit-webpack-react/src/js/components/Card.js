@@ -3,14 +3,31 @@ import Flexbox from 'flexbox-react';
 import FlatButton from 'material-ui/FlatButton';
 import './Card.css';
 
+import * as PlayerActions from "../actions/PlayerActions";
+
 import espn from '../../espn2.png'
 import pros from '../../fantasypros.png'
 
 export default class PlayerCard extends React.Component {
+	
+	constructor() {
+		super();
+	}
+	
+	seeTotalRank() {
+		PlayerActions.seeRank(this.props.id,"totalranks");
+	}
+	seeEspnRank() {
+		PlayerActions.seeRank(this.props.id,"espn");
+	}
+	seeProsRank() {
+		PlayerActions.seeRank(this.props.id,"pros");
+	}
+	
   render() {
 	  
-	const { firstname, lastname, position, num, teamid, overallrank, positionrank } = this.props;
-	  
+	const { id, firstname, lastname, position, num, teamid, overallrank, positionrank } = this.props;
+		
     return (
       <div className="Card">
         <Flexbox className="card-row header" flexDirection="row" justifyContent="space-between">
@@ -30,9 +47,9 @@ export default class PlayerCard extends React.Component {
 		<div className="card-row">
 			<div className="rankings-title">
 				<Flexbox flexDirection="row" justifyContent="space-between">
-					<FlatButton style={{minWidth:"40px"}} className="text" /*onClick={() => this.setState({ sortKey: 'TOTAL' })}*/ >Total</FlatButton>
-					<FlatButton style={{minWidth:"45px"}}><img style={{width:"80%"}} src={espn}/></FlatButton>
-					<FlatButton style={{minWidth:"85px"}}><img src={pros}/></FlatButton>
+					<FlatButton style={{minWidth:"40px"}} onClick={this.seeTotalRank.bind(this)} className="text" /*onClick={() => this.setState({ sortKey: 'TOTAL' })}*/ >Total</FlatButton>
+					<FlatButton style={{minWidth:"45px"}} onClick={this.seeEspnRank.bind(this)}><img style={{width:"80%"}} src={espn}/></FlatButton>
+					<FlatButton style={{minWidth:"85px"}} onClick={this.seeProsRank.bind(this)}><img src={pros}/></FlatButton>
 				</Flexbox>
 				<Flexbox flexDirection="row" justifyContent="space-around">
 					<div>

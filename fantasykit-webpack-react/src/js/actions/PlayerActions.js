@@ -10,8 +10,20 @@ export function createPlayer() {
         position: "QB",
         teamid: "SF",
         num: 10,
-        overallrank: 29,
-        positionrank: 7
+				overallrank: 29,
+				positionrank: 7,
+        totalranks: {
+					overallrank: 29,
+					positionrank: 7
+				},
+				espn: {
+					overallrank: 32,
+					positionrank: 5
+				},
+				pros: {
+					overallrank: 34,
+					positionrank: 6
+				}
       },
   });
 }
@@ -22,6 +34,14 @@ export function modPlayer(mod) {
   dispatcher.dispatch({
     type: "MOD_PLAYER",
     modification: mod,
+  });
+}
+
+export function seeRank(id,rankings) {
+	dispatcher.dispatch({
+		type: "SEE_RANK",
+		rankings: rankings,
+		id: id
   });
 }
 
