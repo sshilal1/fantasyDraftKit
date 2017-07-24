@@ -52,6 +52,13 @@ export function showRankAll(rankings) {
 	});
 }
 
+export function sortBy(sortKey) {
+	dispatcher.dispatch({
+		type: "SORT_PLAYERS",
+		sort: sortKey
+	});
+}
+
 export function reloadPlayers() {
 
   // axios("http://someurl.com/somedataendpoint").then((data) => {

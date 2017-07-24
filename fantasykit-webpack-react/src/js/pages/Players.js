@@ -12,7 +12,7 @@ export default class Players extends React.Component {
     super();
     this.getPlayers = this.getPlayers.bind(this);
     this.state = {
-      players: PlayerStore.getAll(),
+      players: PlayerStore.getAll()
     };
   }
 
@@ -55,10 +55,18 @@ export default class Players extends React.Component {
 	showProsAll() {
     PlayerActions.showRankAll("pros");
   }
+	
+	sortById() {
+		PlayerActions.sortBy("id");
+	}
+	
+	sortByName() {
+		PlayerActions.sortBy("lastname");
+	}
 
   render() {
     const { players } = this.state;
-
+		
     const PlayerComponents = players.map((card) => {
         return <Card key={card.id} {...card}/>;
     });
@@ -68,8 +76,8 @@ export default class Players extends React.Component {
         <MuiThemeProvider>
           <div>
             <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
-              <FlatButton onClick={() => this.setState({ sortKey: 'BY_NAME' })}>By Name</FlatButton>
-              <FlatButton onClick={() => this.setState({ sortKey: 'BY_ID' })} >By Id</FlatButton>
+              <FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
+              <FlatButton onClick={this.sortById.bind(this)} >By Id</FlatButton>
               <FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
               <FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton>
 							<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
