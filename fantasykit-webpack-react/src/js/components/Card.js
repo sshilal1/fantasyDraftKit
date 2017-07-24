@@ -5,6 +5,7 @@ import ReactImageFallback from "react-image-fallback";
 import './Card.css';
 
 import * as PlayerActions from "../actions/PlayerActions";
+import ButtonDrop from './ButtonDrop';
 
 import espn from '../../espn2.png'
 import pros from '../../fantasypros.png'
@@ -65,10 +66,10 @@ export default class PlayerCard extends React.Component {
 				</Flexbox>
 			</div>
         </div>
-		<div className="card-row">
-			<FlatButton className="text large" label="Stats"/>
-			<FlatButton className="text large" label="Bio"/>
-        </div>
+		<Flexbox className="card-row">
+			<ButtonDrop text="stats"/>
+			<ButtonDrop text="bio" age='31'/>
+        </Flexbox>
     </div>
     );
   }
