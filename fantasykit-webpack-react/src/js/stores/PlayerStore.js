@@ -1,6 +1,6 @@
 import { EventEmitter } from "events";
 
-//import dispatcher from "../dispatcher";
+import dispatcher from "../dispatcher";
 
 class PlayerStore extends EventEmitter {
   constructor() {
@@ -28,13 +28,32 @@ class PlayerStore extends EventEmitter {
     ];
   }
 
+  createPlayer(player) {
+    this.players.push(player);
+
+    this.emit("change");
+  }
+
   getAll() {
     return this.players;
+  }
+
+  handleActions(action) {
+    switch(action.type) {
+      case "CREATE_PLAYER": {
+        this.createPlayer(action.player);
+        break;
+      }
+      case "RECEIVE_PLAYERS": {
+        this.players = action.player;
+        this.emit("change");
+        break;
+      }
+    }
   }
 }
 
 const playerStore = new PlayerStore;
-
-//dispatcher.register(playerStore.handleActions.bind(playerStore));
+dispatcher.register(playerStore.handleActions.bind(playerStore));
 
 export default playerStore;

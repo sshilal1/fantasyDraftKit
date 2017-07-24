@@ -2,7 +2,7 @@ import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Card from "../components/Card";
-//import * as TodoActions from "../actions/TodoActions";
+import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";
 
 
@@ -29,9 +29,13 @@ export default class Players extends React.Component {
     });
   }
 
-  /*reloadTodos() {
-    TodoActions.reloadTodos();
-  }*/
+  createPlayer() {
+    PlayerActions.createPlayer();
+  }
+
+  reloadPlayers() {
+    PlayerActions.reloadPlayers();
+  }
 
   render() {
     const { players } = this.state;
@@ -41,11 +45,14 @@ export default class Players extends React.Component {
     });
 
     return (
-      <MuiThemeProvider>
-        <div>
-          {PlayerComponents}
-        </div>
-      </MuiThemeProvider>
+      <div>
+        <button onClick={this.createPlayer.bind(this)}>Reload!</button> 
+        <MuiThemeProvider>
+          <div>
+            {PlayerComponents}
+          </div>
+        </MuiThemeProvider>
+      </div>
     );
   }
 }
