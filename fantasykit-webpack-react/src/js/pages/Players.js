@@ -43,6 +43,18 @@ export default class Players extends React.Component {
 
     PlayerActions.modPlayer(mod);
   }
+	
+	showTotalAll() {
+    PlayerActions.showRankAll("totalranks");
+  }
+	
+	showEspnAll() {
+    PlayerActions.showRankAll("espn");
+  }
+	
+	showProsAll() {
+    PlayerActions.showRankAll("pros");
+  }
 
   render() {
     const { players } = this.state;
@@ -59,7 +71,10 @@ export default class Players extends React.Component {
               <FlatButton onClick={() => this.setState({ sortKey: 'BY_NAME' })}>By Name</FlatButton>
               <FlatButton onClick={() => this.setState({ sortKey: 'BY_ID' })} >By Id</FlatButton>
               <FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
-              <FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton> 
+              <FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton>
+							<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
+							<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
+              <FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
             </Flexbox>
             <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>

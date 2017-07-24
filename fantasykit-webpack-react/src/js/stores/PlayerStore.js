@@ -74,10 +74,20 @@ class PlayerStore extends EventEmitter {
     const players = this.players;
     var index = _.findIndex(players, function(o) { return o.id == id; });
 
-    this.players[index]["overallrank"] = this.players[index][rankings].overallrank;
-		this.players[index]["positionrank"] = this.players[index][rankings].positionrank;
+    this.players[index].overallrank = this.players[index][rankings].overallrank;
+		this.players[index].positionrank = this.players[index][rankings].positionrank;
 
   }
+	
+	showRanks(rankings) {
+		const players = this.players;
+		
+		for (var player in players) {
+			this.players[player].overallrank = this.players[player][rankings].overallrank;
+			this.players[player].positionrank = this.players[player][rankings].positionrank;
+		}
+		
+	}
 
   getAll() {
     return this.players;
@@ -94,11 +104,16 @@ class PlayerStore extends EventEmitter {
         this.emit("change");
         break;
       }
-	  case "SEE_RANK": {
+			case "SEE_RANK": {
         this.showRank(action.rankings, action.id);
         this.emit("change");
         break;
       }
+			case "SEE_RANK_ALL": {
+				this.showRanks(action.rankings);
+				this.emit("change");
+				break;
+			}
     }
   }
 }

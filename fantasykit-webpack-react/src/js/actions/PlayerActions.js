@@ -45,6 +45,13 @@ export function seeRank(id,rankings) {
   });
 }
 
+export function showRankAll(rankings) {
+	dispatcher.dispatch({
+		type: "SEE_RANK_ALL",
+		rankings: rankings
+	});
+}
+
 export function reloadPlayers() {
 
   // axios("http://someurl.com/somedataendpoint").then((data) => {
