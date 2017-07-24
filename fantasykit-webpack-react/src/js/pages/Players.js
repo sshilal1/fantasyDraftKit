@@ -37,9 +37,12 @@ export default class Players extends React.Component {
   modPlayer() {
     var mod = {};
 
-    mod.id = 5526;
-    mod.property = 'overallrank';
-    mod.change = 19;
+    mod.id = 11394;
+    mod.property = 'totalranks';
+    mod.change = {
+			overallrank: 1,
+			positionrank: 2
+		};
 
     PlayerActions.modPlayer(mod);
   }
@@ -56,12 +59,17 @@ export default class Players extends React.Component {
     PlayerActions.showRankAll("pros");
   }
 	
-	sortById() {
-		PlayerActions.sortBy("id");
+	sortByRank() {
+		PlayerActions.sortBy("overallrank");
 	}
 	
 	sortByName() {
 		PlayerActions.sortBy("lastname");
+	}
+	
+	getRanks() {
+		const { players } = this.state;
+		PlayerActions.getRanks(players);
 	}
 
   render() {
@@ -76,12 +84,13 @@ export default class Players extends React.Component {
 				<div>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
 						<FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
-						<FlatButton onClick={this.sortById.bind(this)} >By Id</FlatButton>
+						<FlatButton onClick={this.sortByRank.bind(this)} >By Rank</FlatButton>
 						<FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
 						<FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton>
 						<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
 						<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
 						<FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
+						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton> 
 					</Flexbox>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
 				</div>

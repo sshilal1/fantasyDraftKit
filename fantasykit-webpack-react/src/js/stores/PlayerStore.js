@@ -17,6 +17,7 @@ class PlayerStore extends EventEmitter {
 				last = parts.shift().toUpperCase() || "";
 		
 			var newPlayer = {
+				name : player.name,
 				firstname : first,
 				lastname : last,
 				id : player.id,
@@ -46,6 +47,7 @@ class PlayerStore extends EventEmitter {
   }
 
   createPlayer(player) {
+
     this.players.push(player);
     this.emit("change");
   }
@@ -90,6 +92,22 @@ class PlayerStore extends EventEmitter {
 		})
 		this.emit("change");
 	}
+	
+	updateRanks(rankings) {
+		const players = this.players;
+		
+		for (var player in players) {
+			//console.log(players[player].name);
+			for (var newRank in rankings) {
+				//console.log(rankings[newRank]);
+				if (players[player].name == rankings[newRank].name) {
+					console.log("updating espn rank for " + players[player].name + " from " + players[player].espn.overallrank + " to " + rankings[newRank].rank);
+					this.players[player].espn.overallrank = rankings[newRank].rank;
+				}
+			}
+		}
+		this.emit("change");
+	}
 
   getAll() {
     return this.players;
@@ -116,6 +134,10 @@ class PlayerStore extends EventEmitter {
 			}
 			case "SORT_PLAYERS": {
 				this.sortPlayers(action.sort);
+				break;
+			}
+			case "UPDATE_RANKS": {
+				this.updateRanks(action.rankings);
 				break;
 			}
     }

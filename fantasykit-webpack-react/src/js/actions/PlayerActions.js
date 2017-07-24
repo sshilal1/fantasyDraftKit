@@ -1,5 +1,7 @@
 import dispatcher from "../dispatcher";
 
+import axios from 'axios'
+
 export function createPlayer() {
   dispatcher.dispatch({
     type: "CREATE_PLAYER",
@@ -56,6 +58,25 @@ export function sortBy(sortKey) {
 	dispatcher.dispatch({
 		type: "SORT_PLAYERS",
 		sort: sortKey
+	});
+}
+
+export function getRanks(players) {
+
+  axios.post('/ranks', {
+		name: players[0].name
+	})
+	.then(function (response) {
+		console.log(response);
+		
+		dispatcher.dispatch({
+			type: "UPDATE_RANKS",
+			rankings: response.data
+		});
+		
+	})
+	.catch(function (error) {
+		console.log(error);
 	});
 }
 
