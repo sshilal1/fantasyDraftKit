@@ -20,10 +20,12 @@ export default class Players extends React.Component {
 
   componentWillMount() {
     PlayerStore.on("change", this.getPlayers);
+    PlayerStore.on("hide", this.getPlayers);
   }
   
   componentWillUnmount() {
     PlayerStore.removeListener("change", this.getPlayers);
+    PlayerStore.removeListener("hide", this.getPlayers);
   }
 
   getPlayers() {
@@ -80,21 +82,21 @@ export default class Players extends React.Component {
 
     console.log(filter);
 
-    this.setState({
+    PlayerActions.filterPlayers(filter);
+
+    /*this.setState({
       players: _.filter(players, function(o) {
         return o.teamid == filter;
       }),
-    });
+    });*/
     
-
-    //PlayerActions.filterPlayers(filter);
   }
 
   render() {
     const { players } = this.state;
 		
     const PlayerComponents = players.map((card) => {
-        return <Card key={card.id} {...card}/>;
+        return <Card key={card.id} visible="false" {...card}/>;
     });
 
     return (

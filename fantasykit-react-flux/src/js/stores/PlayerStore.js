@@ -21,12 +21,12 @@ class PlayerStore extends EventEmitter {
 				firstname : first,
 				lastname : last,
 				id : player.id,
-				position: player.position,
+				position: player.position.toLowerCase(),
 				num: player.num,
-				teamid: player.teamid.toUpperCase(),
+				teamid: player.teamid.toLowerCase(),
 				overallrank: 27,
 				positionrank: 7,
-        totalranks: {
+        		totalranks: {
 					overallrank: 29,
 					positionrank: 7
 				},
@@ -37,7 +37,8 @@ class PlayerStore extends EventEmitter {
 				pros: {
 					overallrank: 34,
 					positionrank: 6
-				}
+				},
+				hide: false,
 			};
 			
 			initialPlayers.push(newPlayer);
@@ -95,13 +96,21 @@ class PlayerStore extends EventEmitter {
 
   filterPlayers(filter) {
     
-    console.log(filter);
-    /*
-    _.filter(this.players, function(o) {
-      o.name == filter;
-    });
-    */
-    this.emit("change");
+    const players = this.players;
+
+    this.players.forEach(function(obj) {
+
+    	const str = JSON.stringify(obj);
+
+		if (str.includes(filter)) {
+		    obj.hide = false;
+		}
+		else {
+			obj.hide = true;
+		}
+	});
+
+    this.emit("hide");
   }
 	
 	updateRanks(rankings) {
