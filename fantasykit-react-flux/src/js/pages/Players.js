@@ -78,25 +78,14 @@ export default class Players extends React.Component {
 
   handleFilter(e) {
     const filter = e.target.value;
-    const { players } = this.state;
-
-    console.log(filter);
-
-    PlayerActions.filterPlayers(filter);
-
-    /*this.setState({
-      players: _.filter(players, function(o) {
-        return o.teamid == filter;
-      }),
-    });*/
-    
+    PlayerActions.filterPlayers(filter); 
   }
 
   render() {
     const { players } = this.state;
 		
     const PlayerComponents = players.map((card) => {
-        return <Card key={card.id} visible="false" {...card}/>;
+        return <Card key={card.id} {...card}/>;
     });
 
     return (

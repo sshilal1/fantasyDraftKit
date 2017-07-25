@@ -14,18 +14,18 @@ class PlayerStore extends EventEmitter {
 		for (var player of nygData.players) {
 			var parts = player.name.split(" "),
 				first = parts.shift(),
-				last = parts.shift().toUpperCase() || "";
+				last = parts.shift();
 		
 			var newPlayer = {
-				name : player.name,
+				name : player.name.toLowerCase(),
 				firstname : first,
 				lastname : last,
 				id : player.id,
 				position: player.position.toLowerCase(),
 				num: player.num,
 				teamid: player.teamid.toLowerCase(),
-				overallrank: 27,
-				positionrank: 7,
+				overallrank: 39,
+				positionrank: 22,
         		totalranks: {
 					overallrank: 29,
 					positionrank: 7
