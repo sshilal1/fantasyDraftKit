@@ -92,6 +92,17 @@ class PlayerStore extends EventEmitter {
 		})
 		this.emit("change");
 	}
+
+  filterPlayers(filter) {
+    
+    console.log(filter);
+    /*
+    _.filter(this.players, function(o) {
+      o.name == filter;
+    });
+    */
+    this.emit("change");
+  }
 	
 	updateRanks(rankings) {
 		const players = this.players;
@@ -136,6 +147,10 @@ class PlayerStore extends EventEmitter {
 				this.sortPlayers(action.sort);
 				break;
 			}
+      case "FILTER_PLAYERS": {
+        this.filterPlayers(action.filter);
+        break;
+      }
 			case "UPDATE_RANKS": {
 				this.updateRanks(action.rankings);
 				break;

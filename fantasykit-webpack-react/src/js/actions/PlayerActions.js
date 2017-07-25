@@ -61,6 +61,13 @@ export function sortBy(sortKey) {
 	});
 }
 
+export function filterPlayers(filter) {
+  dispatcher.dispatch({
+    type: "FILTER_PLAYERS",
+    filter: filter
+  });
+}
+
 export function getRanks(players) {
 
   axios.post('/ranks', {

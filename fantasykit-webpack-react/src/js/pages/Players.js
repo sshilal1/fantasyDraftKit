@@ -2,6 +2,8 @@ import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Flexbox from 'flexbox-react';
 import FlatButton from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import _ from 'lodash';
 
 import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
@@ -72,6 +74,22 @@ export default class Players extends React.Component {
 		PlayerActions.getRanks(players);
 	}
 
+  handleFilter(e) {
+    const filter = e.target.value;
+    const { players } = this.state;
+
+    console.log(filter);
+
+    this.setState({
+      players: _.filter(players, function(o) {
+        return o.teamid == filter;
+      }),
+    });
+    
+
+    //PlayerActions.filterPlayers(filter);
+  }
+
   render() {
     const { players } = this.state;
 		
@@ -90,7 +108,8 @@ export default class Players extends React.Component {
 						<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
 						<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
 						<FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
-						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton> 
+						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton>
+            <TextField hintText="Filter Players" onChange={this.handleFilter.bind(this)} />
 					</Flexbox>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
 				</div>
