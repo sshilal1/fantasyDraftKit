@@ -25,9 +25,5 @@ setTimeout(function() {
 	}, 2000);
 }, 2000);
 
-
-
-
-
 //console.log(execSync('node downloadImages.js', {encoding: 'utf8'}));
 //console.log(execSync('node convertImages.js', {encoding: 'utf8'}));
