@@ -68,6 +68,13 @@ export function filterPlayers(filter) {
   });
 }
 
+export function filterPlayersPos(filter) {
+  dispatcher.dispatch({
+    type: "FILTER_PLAYERS_POS",
+    filter: filter
+  });
+}
+
 export function getRanks(players) {
 
   axios.post('/ranks', {

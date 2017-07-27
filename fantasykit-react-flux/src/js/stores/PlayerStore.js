@@ -44,6 +44,7 @@ class PlayerStore extends EventEmitter {
 			initialPlayers.push(newPlayer);
 		}
 		
+		this.all = initialPlayers;
 		this.players = initialPlayers;
   }
 
@@ -97,6 +98,29 @@ class PlayerStore extends EventEmitter {
 		})
 		this.emit("change");
 	}
+
+	filterPlayersPos(filter) {
+
+    const all = this.all;
+
+    if (filter == "all") {
+    	this.players = all;
+    }
+
+    else {
+    	var players = [];
+
+	    all.forEach(function(obj) {
+				if (_.includes(obj, filter)) {
+				   players.push(obj);
+				}
+			});
+
+			this.players = players; 
+    }
+
+    this.emit("hide");
+  }
 
   filterPlayers(filter) {
     
@@ -160,6 +184,10 @@ class PlayerStore extends EventEmitter {
 			}
       case "FILTER_PLAYERS": {
         this.filterPlayers(action.filter);
+        break;
+      }
+      case "FILTER_PLAYERS_POS": {
+        this.filterPlayersPos(action.filter);
         break;
       }
 			case "UPDATE_RANKS": {

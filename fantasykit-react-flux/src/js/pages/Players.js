@@ -14,6 +14,7 @@ export default class Players extends React.Component {
     super();
     this.getPlayers = this.getPlayers.bind(this);
     this.state = {
+      all: PlayerStore.getAll(),
       players: PlayerStore.getAll()
     };
   }
@@ -46,8 +47,12 @@ export default class Players extends React.Component {
     PlayerActions.modPlayer(mod);
   }
 	
+  organizePlayersAll() {
+    PlayerActions.filterPlayersPos("all");
+  }
+
   organizePlayersRbs() {
-    PlayerActions.filterPlayers("rb");
+    PlayerActions.filterPlayersPos("rb");
   }
 
 	showTotalAll() {
@@ -91,6 +96,7 @@ export default class Players extends React.Component {
 			<MuiThemeProvider>
 				<div>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
+            <FlatButton onClick={this.organizePlayersAll.bind(this)}>All</FlatButton>
             <FlatButton onClick={this.organizePlayersRbs.bind(this)}>RBs</FlatButton>
 						<FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
 						<FlatButton onClick={this.sortByRank.bind(this)} >By Rank</FlatButton>
