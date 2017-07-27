@@ -47,6 +47,10 @@ class PlayerStore extends EventEmitter {
 		this.players = initialPlayers;
   }
 
+  getAll() {
+    return this.players;
+  }
+
   createPlayer(player) {
 
     this.players.push(player);
@@ -98,17 +102,19 @@ class PlayerStore extends EventEmitter {
     
     const players = this.players;
 
+    // Not actually removing (unmounting) players, just setting state to hide
     this.players.forEach(function(obj) {
 
     	const str = JSON.stringify(obj);
 
-		if (str.includes(filter)) {
-		    obj.hide = false;
-		}
-		else {
-			obj.hide = true;
-		}
-	});
+			if (str.includes(filter)) {
+			    obj.hide = false;
+			}
+			else {
+				obj.hide = true;
+			}
+
+		});
 
     this.emit("hide");
   }
@@ -128,10 +134,6 @@ class PlayerStore extends EventEmitter {
 		}
 		this.emit("change");
 	}
-
-  getAll() {
-    return this.players;
-  }
 
   handleActions(action) {
     switch(action.type) {

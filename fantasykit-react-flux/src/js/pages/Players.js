@@ -22,11 +22,6 @@ export default class Players extends React.Component {
     PlayerStore.on("change", this.getPlayers);
     PlayerStore.on("hide", this.getPlayers);
   }
-  
-  componentWillUnmount() {
-    PlayerStore.removeListener("change", this.getPlayers);
-    PlayerStore.removeListener("hide", this.getPlayers);
-  }
 
   getPlayers() {
     this.setState({
@@ -51,6 +46,10 @@ export default class Players extends React.Component {
     PlayerActions.modPlayer(mod);
   }
 	
+  organizePlayersRbs() {
+    PlayerActions.filterPlayers("rb");
+  }
+
 	showTotalAll() {
     PlayerActions.showRankAll("totalranks");
   }
@@ -92,6 +91,7 @@ export default class Players extends React.Component {
 			<MuiThemeProvider>
 				<div>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
+            <FlatButton onClick={this.organizePlayersRbs.bind(this)}>RBs</FlatButton>
 						<FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
 						<FlatButton onClick={this.sortByRank.bind(this)} >By Rank</FlatButton>
 						<FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
