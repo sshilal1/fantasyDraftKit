@@ -51,8 +51,23 @@ export default class Players extends React.Component {
     PlayerActions.filterPlayersPos("all");
   }
 
+  organizePlayersQbs() {
+    PlayerActions.filterPlayersPos("qb");
+  }
   organizePlayersRbs() {
     PlayerActions.filterPlayersPos("rb");
+  }
+  organizePlayersWrs() {
+    PlayerActions.filterPlayersPos("wr");
+  }
+  organizePlayersTes() {
+    PlayerActions.filterPlayersPos("te");
+  }
+  organizePlayersKs() {
+    PlayerActions.filterPlayersPos("k");
+  }
+  organizePlayersDefs() {
+    // nothing yet
   }
 
 	showTotalAll() {
@@ -97,7 +112,12 @@ export default class Players extends React.Component {
 				<div>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
             <FlatButton onClick={this.organizePlayersAll.bind(this)}>All</FlatButton>
+            <FlatButton onClick={this.organizePlayersQbs.bind(this)}>QBs</FlatButton>
             <FlatButton onClick={this.organizePlayersRbs.bind(this)}>RBs</FlatButton>
+            <FlatButton onClick={this.organizePlayersWrs.bind(this)}>WRs</FlatButton>
+            <FlatButton onClick={this.organizePlayersTes.bind(this)}>TEs</FlatButton>
+            <FlatButton onClick={this.organizePlayersKs.bind(this)}>Ks</FlatButton>
+            <FlatButton onClick={this.organizePlayersDefs.bind(this)}>DEF</FlatButton>
 						<FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
 						<FlatButton onClick={this.sortByRank.bind(this)} >By Rank</FlatButton>
 						<FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
