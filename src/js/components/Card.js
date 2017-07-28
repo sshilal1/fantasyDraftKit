@@ -59,7 +59,7 @@ export default class PlayerCard extends React.Component {
 						<div className="xlarge text">{position.toUpperCase()}</div>
 	        </Flexbox>
 					<Flexbox className="card-row" flexDirection="row" justifyContent="space-between">
-						<ReactImageFallback className="player-img" src={"http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/" + id + ".png&amp;w=345&amp;h=230;"} fallbackImage={silhouette}/>
+						<ReactImageFallback className="player-img" src={"../../images/" + id + ".jpg"} fallbackImage={silhouette}/>
 						<Flexbox className="number-team" flexDirection="column" justifyContent="center">
 							<div className="center  xlarge text">{teamid.toUpperCase()}</div>
 							<div className="center text"># {num}</div>

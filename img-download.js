@@ -18,6 +18,12 @@ var logger = new (winston.Logger)({
 
 // --------------------
 // --------------------
+const dlDir = 'download';
+
+// Create the dl directory if it does not exist
+if (!fs.existsSync(dlDir)) {
+	fs.mkdirSync(dlDir);
+}
 
 var nygData = JSON.parse(fs.readFileSync('json/nyg-team.json', 'utf8'));
 
