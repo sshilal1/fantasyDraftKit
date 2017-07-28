@@ -25,7 +25,7 @@ for (var k=0; k < nygData.players.length; k++) {
 
 	var id = nygData.players[k].id;
 	var imageurl = "http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/" + id + ".png";
-	var dest = 'src/images/' + id + '.png';
+	var dest = 'src/images/download/' + id + '.png';
 
 	const options = {
 	  url: imageurl,

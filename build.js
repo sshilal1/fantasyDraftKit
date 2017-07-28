@@ -36,6 +36,9 @@ execSync('node img-download.js', {encoding: 'utf8', stdio:[0,1,2]});
 logger.info('Converting Images...');
 execSync('node img-convert.js', {encoding: 'utf8', stdio:[0,1,2]});
 
+logger.info('Deleting Images...');
+execSync('node img-delete.js', {encoding: 'utf8', stdio:[0,1,2]});
+
 /*
 console.log('Grabbing Version first...');
 setTimeout(function() {
