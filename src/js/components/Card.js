@@ -7,7 +7,7 @@ import './Card.css';
 import * as PlayerActions from "../actions/PlayerActions";
 import ButtonDrop from './ButtonDrop';
 
-import espn from '../../espn2.png'
+import espn from '../../espn.png'
 import pros from '../../fantasypros.png'
 import silhouette from '../../HeadshotSilhouette.png'
 
