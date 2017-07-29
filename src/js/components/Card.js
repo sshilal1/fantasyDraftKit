@@ -6,6 +6,7 @@ import './Card.css';
 
 import * as PlayerActions from "../actions/PlayerActions";
 import ButtonDrop from './ButtonDrop';
+import Switch from './Switch';
 
 import espn from '../../images/espn.png'
 import pros from '../../images/fantasypros.png'
@@ -49,8 +50,10 @@ export default class PlayerCard extends React.Component {
 		}
 
 		else {
+
 	    return (
 	      <div className="Card">
+	      	<Switch txtOne="Total" txtTwo="Espn" txtThree="Pros"/>
 	        <Flexbox className="card-row header" flexDirection="row" justifyContent="space-between">
 						<div>
 							<div className="text">{firstname}</div>

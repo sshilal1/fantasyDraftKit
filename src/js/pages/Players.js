@@ -5,6 +5,9 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import _ from 'lodash';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 import Layout from "./components/Layout";
 import Players from "./pages/Players";
+import Switch from "./components/Switch";
 
 const app = document.getElementById('app');
 
