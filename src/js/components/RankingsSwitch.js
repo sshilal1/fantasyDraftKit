@@ -7,7 +7,7 @@ import * as PlayerActions from "../actions/PlayerActions";
 import espn from '../../images/espn.png'
 import pros from '../../images/fantasypros.png'
 
-export default class Switch extends React.Component {
+export default class RankingsSwitch extends React.Component {
   
   constructor() {
     super();

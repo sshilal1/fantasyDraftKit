@@ -5,7 +5,7 @@ import ReactImageFallback from "react-image-fallback";
 import './Card.css';
 
 import ButtonDrop from './ButtonDrop';
-import Switch from './Switch';
+import RankingsSwitch from './RankingsSwitch';
 
 import espn from '../../images/espn.png'
 import pros from '../../images/fantasypros.png'
@@ -58,7 +58,7 @@ export default class PlayerCard extends React.Component {
 	        </Flexbox>
 					<div className="card-row">
 						<div className="rankings-title">
-							<Switch id={id}/>
+							<RankingsSwitch id={id}/>
 							<Flexbox flexDirection="row" justifyContent="space-around">
 								<div>
 									<div className="center text">Overall</div>
