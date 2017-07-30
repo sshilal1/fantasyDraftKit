@@ -4,7 +4,6 @@ import FlatButton from 'material-ui/FlatButton';
 import ReactImageFallback from "react-image-fallback";
 import './Card.css';
 
-import * as PlayerActions from "../actions/PlayerActions";
 import ButtonDrop from './ButtonDrop';
 import Switch from './Switch';
 
@@ -16,16 +15,6 @@ export default class PlayerCard extends React.Component {
 	
 	constructor() {
 		super();
-	}
-	
-	seeTotalRank() {
-		PlayerActions.seeRank(this.props.id,"totalranks");
-	}
-	seeEspnRank() {
-		PlayerActions.seeRank(this.props.id,"espn");
-	}
-	seeProsRank() {
-		PlayerActions.seeRank(this.props.id,"pros");
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -53,7 +42,6 @@ export default class PlayerCard extends React.Component {
 
 	    return (
 	      <div className="Card">
-	      	<Switch txtOne="Total" txtTwo="Espn" txtThree="Pros"/>
 	        <Flexbox className="card-row header" flexDirection="row" justifyContent="space-between">
 						<div>
 							<div className="text">{firstname}</div>
@@ -70,11 +58,7 @@ export default class PlayerCard extends React.Component {
 	        </Flexbox>
 					<div className="card-row">
 						<div className="rankings-title">
-							<Flexbox flexDirection="row" justifyContent="space-between">
-								<FlatButton style={{minWidth:"40px"}} onClick={this.seeTotalRank.bind(this)} className="text">Total</FlatButton>
-								<FlatButton style={{minWidth:"45px"}} onClick={this.seeEspnRank.bind(this)}><img style={{width:"80%"}} src={espn}/></FlatButton>
-								<FlatButton style={{minWidth:"85px"}} onClick={this.seeProsRank.bind(this)}><img src={pros}/></FlatButton>
-							</Flexbox>
+							<Switch id={id}/>
 							<Flexbox flexDirection="row" justifyContent="space-around">
 								<div>
 									<div className="center text">Overall</div>
@@ -95,7 +79,7 @@ export default class PlayerCard extends React.Component {
 	        </div>
 					<Flexbox className="card-row">
 						<ButtonDrop text="stats"/>
-						<ButtonDrop text="bio" age='31'/>
+						<ButtonDrop text="bio" age="31"/>
 	        </Flexbox>
 	    	</div>
   		);

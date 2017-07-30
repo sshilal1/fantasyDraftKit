@@ -46,7 +46,7 @@ export default class ButtonDrop extends React.Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem primaryText="Age" secondaryText={this.props.age} disabled="true" />
+            <MenuItem primaryText="Age" secondaryText={this.props.age} />
             <MenuItem primaryText="Help &amp; feedback" />
             <MenuItem primaryText="Settings" />
             <MenuItem primaryText="Sign out" />
