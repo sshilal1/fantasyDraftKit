@@ -8,6 +8,7 @@ import _ from 'lodash';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+import PageSwitch from '../components/PageSwitch';
 import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";
@@ -113,6 +114,7 @@ export default class Players extends React.Component {
     return (
 			<MuiThemeProvider>
 				<div>
+          <PageSwitch/>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
             <FlatButton onClick={this.organizePlayersAll.bind(this)}>All</FlatButton>
             <FlatButton onClick={this.organizePlayersQbs.bind(this)}>QBs</FlatButton>
