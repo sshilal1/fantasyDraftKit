@@ -1,8 +1,7 @@
 import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Flexbox from 'flexbox-react';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
+import {FlatButton,TextField,Toggle} from 'material-ui';
 import _ from 'lodash';
 
 import PageSwitch from '../components/PageSwitch';
@@ -83,14 +82,6 @@ export default class Players extends React.Component {
     PlayerActions.showRankAll("pros");
   }
 	
-	sortByRank() {
-		PlayerActions.sortBy("overallrank");
-	}
-	
-	sortByName() {
-		PlayerActions.sortBy("lastname");
-	}
-	
 	getRanks() {
 		const { players } = this.state;
 		PlayerActions.getRanks(players);
@@ -99,6 +90,15 @@ export default class Players extends React.Component {
   handleFilter(e) {
     const filter = e.target.value;
     PlayerActions.filterPlayers(filter); 
+  }
+
+  toggleSortBy(e, isInputChecked) {
+    if(isInputChecked) {
+      PlayerActions.sortBy("lastname");
+    }
+    else {
+      PlayerActions.sortBy("overallrank");
+    }
   }
 
   render() {
@@ -113,10 +113,8 @@ export default class Players extends React.Component {
 				<div>
           <PageSwitch/>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
-						<FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
-						<FlatButton onClick={this.sortByRank.bind(this)} >By Rank</FlatButton>
-						<FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
-						<FlatButton onClick={this.modPlayer.bind(this)}>Mod</FlatButton>
+            <div><Toggle label="By Rank" onToggle={this.toggleSortBy.bind(this)}/></div>
+            <div> By Name</div>
 						<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
 						<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
 						<FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
