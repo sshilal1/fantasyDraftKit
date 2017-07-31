@@ -5,9 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import _ from 'lodash';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
 import PageSwitch from '../components/PageSwitch';
 import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
@@ -116,13 +113,6 @@ export default class Players extends React.Component {
 				<div>
           <PageSwitch/>
 					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
-            <FlatButton onClick={this.organizePlayersAll.bind(this)}>All</FlatButton>
-            <FlatButton onClick={this.organizePlayersQbs.bind(this)}>QBs</FlatButton>
-            <FlatButton onClick={this.organizePlayersRbs.bind(this)}>RBs</FlatButton>
-            <FlatButton onClick={this.organizePlayersWrs.bind(this)}>WRs</FlatButton>
-            <FlatButton onClick={this.organizePlayersTes.bind(this)}>TEs</FlatButton>
-            <FlatButton onClick={this.organizePlayersKs.bind(this)}>Ks</FlatButton>
-            <FlatButton onClick={this.organizePlayersDefs.bind(this)}>DEF</FlatButton>
 						<FlatButton onClick={this.sortByName.bind(this)}>By Name</FlatButton>
 						<FlatButton onClick={this.sortByRank.bind(this)} >By Rank</FlatButton>
 						<FlatButton onClick={this.createPlayer.bind(this)}>Add</FlatButton>
