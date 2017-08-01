@@ -1,11 +1,8 @@
-var express = require('express');
 var fs = require('fs');
-var request = require('request');
+var request = require('request-promise');
 var cheerio = require('cheerio');
-var app     = express();
-var async = require('async');
 
-var nygData = JSON.parse(fs.readFileSync('nyg-team.json', 'utf8'));
+var nygData = JSON.parse(fs.readFileSync('json/nyg-team.json', 'utf8'));
 
 var ids = [];
 for (player of nygData.players) {
@@ -20,10 +17,11 @@ for (player of nygData.players) {
 var calls = [];
 
 ids.forEach(function(id){
-    calls.push(function(callback) {
 
 		var url = 'http://www.espn.com/nfl/player/stats/_/id/' + id + '/';
 		console.log(url);
+
+		var returnObj = {};
 		
 		request(url, function(error, response, html){
 			if(!error){
@@ -112,58 +110,31 @@ ids.forEach(function(id){
 						passingStats.push(season);
 					}
 				})
-				//console.log(passingStats);
 				
-				var returnObj = {
+				returnObj = {
 					"rushingstats": rushingStats,
 					"receivingstats": receivingStats,
 					"passingstats": passingStats
 				};
-				
-				//console.log(returnObj);
-				
-				for (var k=0; k < nygData.players.length; k++) {
-					if (nygData.players[k].id = id) {
-						nygData.players[k].stats = returnObj;
-					}
-				}
-				
-				//console.log(nygData.players[i]);
-				
-				/*
-				//THIS IS FOR WRITING TO FILE
-				var jsonfile = require('jsonfile');
 
-				var file = '../../nyg-team-new.json';
-
-				jsonfile.writeFile(file, nyg, function (err) {
-					console.error(err);
-				})
-				*/
+				//return returnObj;
 			}
-			callback(null, id);
+		}).then(function() {
+			console.log("\n\nLoaded player: " + id);
+			console.log("\n\nWriting to file...");
+			//console.log(returnObj);
+			//THIS IS FOR WRITING TO FILE
+			
+			var jsonfile = require('jsonfile');
+
+			var file = './json/nyg/'+ id +'.json';
+
+			jsonfile.writeFile(file, returnObj, function (err) {
+				console.error(err);
+			})		
 		})
-    }
-)});
-
-async.parallel(calls, function(err, result) {
-    /* this code will run after all calls finished the job or
-       when any of the calls passes an error */
-
-    console.log("We are Done");
-	console.log(nygData);
-	
-	var jsonfile = require('jsonfile');
-	var file = '../nyg-team-new.json';
-
-	jsonfile.writeFile(file, nygData, function (err) {
-		console.error(err);
-	})
 });
-// ------------------------
-// ------------------------
-// ------------------------
 
-app.listen('8081')
-console.log('Magic happens on port 8081');
-exports = module.exports = app;
+// ------------------------
+// ------------------------
+// ------------------------
