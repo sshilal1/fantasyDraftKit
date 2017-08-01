@@ -94,7 +94,6 @@ export function getRanks(players) {
 	});
 }
 
-/*
 export function getStats(id) {
 
   axios.post('/stats', {
@@ -112,4 +111,4 @@ export function getStats(id) {
   .catch(function (error) {
     console.log(error);
   });
-}*/
+}

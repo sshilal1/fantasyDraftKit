@@ -26,6 +26,7 @@ class PlayerStore extends EventEmitter {
 				teamid: player.teamid.toLowerCase(),
 				overallrank: 39,
 				positionrank: 22,
+				rookie: (player.experience == 'R' ? true : false),
         		totalranks: {
 					overallrank: 29,
 					positionrank: 7
