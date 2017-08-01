@@ -1,8 +1,6 @@
-var express = require('express');
 var fs = require('fs');
-var request = require('request');
+var request = require('request-promise');
 var cheerio = require('cheerio');
-var app     = express();
 
 var team = "nyg";
 var url = 'http://www.espn.com/nfl/team/roster/_/name/' + team;
@@ -46,12 +44,23 @@ request(url, function(error, response, html){
 					var college = allChildren.eq(7).text();
 					
 					var json = { name : name, id : id, num : num, position : position, age : age, height : height, weight : weight, experience : experience, teamid : team, college: college};	
+					nyg.players.push(json);
 				}
 			});
 		})
 	}
-})
+}).then(function() {
+	console.log("\n\nDone loading team" + team);
+	console.log("\n\nWriting to file...");
+	console.log(nyg);
+	//THIS IS FOR WRITING TO FILE
+	
+	var jsonfile = require('jsonfile');
 
-app.listen('8081')
-console.log('Magic happens on port 8081');
-exports = module.exports = app;
+	var file = './nyg-team-test.json';
+
+	jsonfile.writeFile(file, nyg, function (err) {
+		console.error(err);
+	})
+	
+})
