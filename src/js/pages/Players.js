@@ -1,8 +1,8 @@
 import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {FlatButton,TextField,Toggle,AppBar} from 'material-ui';
 import Flexbox from 'flexbox-react';
-import {FlatButton,TextField,Toggle} from 'material-ui';
-import _ from 'lodash';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 import PageSwitch from '../components/PageSwitch';
 import Card from "../components/Card";
@@ -46,29 +46,6 @@ export default class Players extends React.Component {
 
     PlayerActions.modPlayer(mod);
   }
-	
-  organizePlayersAll() {
-    PlayerActions.filterPlayersPos("all");
-  }
-
-  organizePlayersQbs() {
-    PlayerActions.filterPlayersPos("qb");
-  }
-  organizePlayersRbs() {
-    PlayerActions.filterPlayersPos("rb");
-  }
-  organizePlayersWrs() {
-    PlayerActions.filterPlayersPos("wr");
-  }
-  organizePlayersTes() {
-    PlayerActions.filterPlayersPos("te");
-  }
-  organizePlayersKs() {
-    PlayerActions.filterPlayersPos("k");
-  }
-  organizePlayersDefs() {
-    // nothing yet
-  }
 
 	showTotalAll() {
     PlayerActions.showRankAll("totalranks");
@@ -110,19 +87,23 @@ export default class Players extends React.Component {
 
     return (
 			<MuiThemeProvider>
-				<div>
-          <PageSwitch/>
-					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
-            <div><Toggle label="By Rank" onToggle={this.toggleSortBy.bind(this)}/></div>
-            <div> By Name</div>
-						<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
-						<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
-						<FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
-						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton>
-            <TextField hintText="Filter Players" onChange={this.handleFilter.bind(this)} />
-					</Flexbox>
-					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
-				</div>
+        <div>
+          <AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "white" }}>
+            <div style={{margin: "0 auto"}}><PageSwitch/></div>
+          </AppBar>
+          <div style={{ paddingTop: 64 }}>
+  					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
+              <div><Toggle label="By Rank" onToggle={this.toggleSortBy.bind(this)}/></div>
+              <div> By Name</div>
+  						<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
+  						<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
+  						<FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
+  						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton>
+              <TextField hintText="Filter Players" onChange={this.handleFilter.bind(this)} />
+  					</Flexbox>
+  					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
+          </div>
+        </div>
 			</MuiThemeProvider>
     );
   }
