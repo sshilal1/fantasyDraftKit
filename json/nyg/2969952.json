@@ -1,1 +1,1 @@
-{"rushingstats":[],"receivingstats":[{"season":"2015","team":"NYG","gamesplayed":"15","receptions":"1","targets":"1","receivingyards":"-11","yardspercatch":"-11.0","longestcatch":"-11","touchdowns":"0","firstdowns":"0","totalfumbles":"0","fumbleslost":"0"}],"passingstats":[]}
+{"rushingstats":[],"receivingstats":[{"yr":"2015","tm":"NYG","gm":"15","rec":"1","tar":"1","yds":"-11","avg":"-11.0","lng":"-11","td":"0","fd":"0","fmt":"0","fml":"0"}],"passingstats":[]}
