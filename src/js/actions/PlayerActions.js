@@ -94,26 +94,22 @@ export function getRanks(players) {
 	});
 }
 
-export function reloadPlayers() {
+/*
+export function getStats(id) {
 
-  // axios("http://someurl.com/somedataendpoint").then((data) => {
-  //   console.log("got the data!", data);
-  // })
-
-  dispatcher.dispatch({type: "FETCH_PLAYERS"});
-
-  /*setTimeout(() => {
-    dispatcher.dispatch({type: "RECEIVE_PLAYERS", players: [
-      {
-        id: 4732947,
-        firstname: "Buck",
-        lastname: "NELSON",
-        position: "QB",
-        teamid: "SF",
-        num: 10,
-        overallrank: 29,
-        positionrank: 7
-      },
-    ]});
-  }, 1000);*/
-}
+  axios.post('/stats', {
+    id: id
+  })
+  .then(function (response) {
+    console.log(response);
+    
+    dispatcher.dispatch({
+      type: "RECEIVE_STATS",
+      stats: response.data
+    });
+    
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}*/

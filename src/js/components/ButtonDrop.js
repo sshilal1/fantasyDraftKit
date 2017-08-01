@@ -14,6 +14,13 @@ export default class ButtonDrop extends React.Component {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.open !== nextState.open) {
+      return true;
+    }
+    return false;
+  }
+
   handleTouchTap = (event) => {
     // This prevents ghost click.
     event.preventDefault();
