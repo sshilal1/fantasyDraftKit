@@ -2,7 +2,6 @@ import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {FlatButton,TextField,Toggle,AppBar} from 'material-ui';
 import Flexbox from 'flexbox-react';
-import { StickyContainer, Sticky } from 'react-sticky';
 
 import PageSwitch from '../components/PageSwitch';
 import Card from "../components/Card";
@@ -89,17 +88,24 @@ export default class Players extends React.Component {
 			<MuiThemeProvider>
         <div>
           <AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "white" }}>
-            <div style={{margin: "0 auto"}}><PageSwitch/></div>
+            <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
+              <div><PageSwitch/></div>
+              <Flexbox flexDirection="row" justifyContent="space-between">
+                <FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
+                <FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
+                <FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton>
+                <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
+                  <div>Rank</div>
+                  <Toggle style={{width:"50px"}} onToggle={this.toggleSortBy.bind(this)}/>
+                  <div>Name</div>
+                </Flexbox>
+                <TextField style={{width:"130px",height:"36px"}} hintText="Filter Players" onChange={this.handleFilter.bind(this)} />
+              </Flexbox>
+            </Flexbox>
           </AppBar>
-          <div style={{ paddingTop: 64 }}>
-  					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
-              <div><Toggle label="By Rank" onToggle={this.toggleSortBy.bind(this)}/></div>
-              <div> By Name</div>
-  						<FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
-  						<FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
-  						<FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton> 
+          <div style={{ paddingTop: 72 }}>
+  					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center"> 						
   						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton>
-              <TextField hintText="Filter Players" onChange={this.handleFilter.bind(this)} />
   					</Flexbox>
   					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
