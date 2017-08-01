@@ -1,32 +1,37 @@
 import React from "react";
+import axios from 'axios';
 
 export default class StatsTable extends React.Component {
-  constructor() {
-    super();
-    this.state = { 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      id: props.id
     	rushingstats: {},
     	receivingstats: {},
     	passingstats: {}
     }
   }
+
   componentDidMount() {
-    fetchStats(comments =>
-      this.setState({ comments: comments }));
+    axios.post('/stats', {
+      id: this.props.id
+    })
+    .then(function (response) {
+      console.log(response);
+
+      this.state = response.data;
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
+
   render() {
     return (
-      <ul>
-        {this.state.comments.map(c => (
-          <li>{c.body}—{c.author}</li>
-        ))}
-      </ul>
+      <div>Hello</div>
     );
   }
-}
 
-// This is just a placeholder for a real request
-const fetchSomeComments = cb =>
-  cb([
-    { author: "Chan", body: "You look nice today." },
-    { author: "You", body: "I know, right?!" }
-  ]);
+}

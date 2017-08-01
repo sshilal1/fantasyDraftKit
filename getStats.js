@@ -114,13 +114,14 @@ ids.forEach(function(id){
 					}
 				})
 				
-				returnObj = {
-					"rushingstats": rushingStats,
-					"receivingstats": receivingStats,
-					"passingstats": passingStats
-				};
-
-				//return returnObj;
+				if ((rushingStats.length > 0) || (receivingStats.length > 0) || (passingStats.length > 0)) {
+					returnObj = {
+						"id":id,
+						"rushingstats": rushingStats,
+						"receivingstats": receivingStats,
+						"passingstats": passingStats
+					};
+				}
 			}
 		}).then(function() {
 			console.log("\n\nLoaded player: " + id);

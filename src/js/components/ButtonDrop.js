@@ -4,6 +4,8 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 
+import StatsTable from './StatsTable';
+
 export default class ButtonDrop extends React.Component {
 
   constructor(props) {
@@ -52,12 +54,7 @@ export default class ButtonDrop extends React.Component {
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose}
         >
-          <Menu>
-            <MenuItem primaryText="Age" secondaryText={this.props.age} />
-            <MenuItem primaryText="Help &amp; feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Sign out" />
-          </Menu>
+          <StatsTable id={this.props.id}/>
         </Popover>
       </div>
     );

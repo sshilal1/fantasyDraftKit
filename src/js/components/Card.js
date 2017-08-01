@@ -79,7 +79,7 @@ export default class PlayerCard extends React.Component {
 	        </div>
 					<Flexbox className="card-row">
 						<ButtonDrop text="stats"/>
-						<ButtonDrop text="bio" age="31"/>
+						<ButtonDrop text="bio" age="31" id={id}/>
 	        </Flexbox>
 	    	</div>
   		);
