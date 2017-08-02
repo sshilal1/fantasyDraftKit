@@ -6,3 +6,4 @@ yarn.lock
 logs
 *.log
 *client.min.js
+src/*.png
