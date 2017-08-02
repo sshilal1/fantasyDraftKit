@@ -2,6 +2,9 @@ import React from "react";
 import axios from 'axios';
 import Flexbox from 'flexbox-react';
 
+import PlayerStore from "../stores/PlayerStore";
+import * as PlayerActions from "../actions/PlayerActions";
+
 import RushingStatLine from './StatLines/RushingStatLine';
 import RushingHeader from './StatLines/RushingHeader';
 import ReceivingStatLine from './StatLines/ReceivingStatLine';
@@ -13,18 +16,19 @@ export default class StatsTable extends React.Component {
   constructor(props) {
     super(props);
 
+    var stats = PlayerStore.getStats(props.id);
+
     this.state = {
       id: props.id,
-    	rushingstats: [],
-    	receivingstats: [],
-    	passingstats: [],
-      fetched: false
+    	rushingstats: stats.rushingstats,
+    	receivingstats: stats.receivingstats,
+    	passingstats: stats.passingstats,
+      fetched: stats.fetched
     }
   }
 
   componentDidMount() {
     const {fetched} = this.state;
-    console.log("rookie?", this.props.rookie);
     console.log("fetched?", fetched);
     if ((!this.props.rookie) && (!fetched)) {
       axios.post('/stats', {

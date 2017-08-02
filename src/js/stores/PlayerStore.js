@@ -27,6 +27,12 @@ class PlayerStore extends EventEmitter {
 				overallrank: 39,
 				positionrank: 22,
 				rookie: (player.experience == 'R' ? true : false),
+				stats: {
+					rushingstats: [],
+    			receivingstats: [],
+    			passingstats: [],
+    			fetched: false
+				},
         		totalranks: {
 					overallrank: 29,
 					positionrank: 7
@@ -160,6 +166,13 @@ class PlayerStore extends EventEmitter {
 		this.emit("change");
 	}
 
+	getStats(id) {
+		const players = this.players;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    return this.players[index].stats;
+	}
+
   handleActions(action) {
     switch(action.type) {
       case "CREATE_PLAYER": {
@@ -193,6 +206,10 @@ class PlayerStore extends EventEmitter {
       }
 			case "UPDATE_RANKS": {
 				this.updateRanks(action.rankings);
+				break;
+			}
+			case "UPDATE_STATS": {
+				this.updateStats(action.stats);
 				break;
 			}
     }
