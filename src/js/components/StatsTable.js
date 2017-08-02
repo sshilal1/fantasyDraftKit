@@ -19,31 +19,20 @@ export default class StatsTable extends React.Component {
   }
 
   componentDidMount() {
-
     if ((!this.props.rookie) && (!this.state.fetched)) {
       axios.post('/stats', {
         id: this.props.id
       })
-      .then(function (response) {
-        console.log(response);
-
-        for (var season in response.data.rushingstats) {
-          //this.rushingstats.push(response.data.rushingstats[season]);
-          console.log(response.data.rushingstats[season]);
-        }
-        for (var season in response.data.receivingstats) {
-          //this.receivingstats.push(response.data.receivingstats[season]);
-          console.log(response.data.receivingstats[season]);
-        }
-        for (var season in response.data.passingstats) {
-          //this.passingstats.push(response.data.passingstats[season]);
-          console.log(response.data.passingstats[season]);
-        }
+      .then((result)=> {
+        console.log(result);
 
         this.setState({
+          rushingstats: result.data.rushingstats,
+          receivingstats: result.data.receivingstats,
+          passingstats: result.data.passingstats,
           fetched: true
         })
-        
+
       })
       .catch(function (error) {
         console.log(error);
