@@ -4,17 +4,17 @@ import Flexbox from 'flexbox-react';
 export default class ReceivingStatLine extends React.Component {
   render() {
 
-  	const {yr, tm, gm, rec, tar, yds, avg, lng, td, fd, fmt, fml} = this.props;
+  	const {yr, tm, gm, rec, tar, yds, avg, lng, td, fd, fmt, fml, color} = this.props;
 
   	const style = {
-      width: "45px",
+      width: "35px",
       height: "20px",
       textAlign: "center"
     };
 
     return (
-    	<Flexbox className="card-row" flexDirection="row" justifyContent="space-between">
-	      <div style={{...style, width:"60px"}}>{yr}</div>
+    	<Flexbox style={{fontSize:"small",fontWeight:"bold",backgroundColor:color}} justifyContent="space-between">
+	      <div style={{...style, width:"45px"}}>{yr}</div>
 	      <div style={style}>{tm}</div>
 	      <div style={style}>{gm}</div>
 	      <div style={style}>{rec}</div>

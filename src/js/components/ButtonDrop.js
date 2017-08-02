@@ -54,7 +54,7 @@ export default class ButtonDrop extends React.Component {
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
           onRequestClose={this.handleRequestClose}
         >
-          <StatsTable id={this.props.id}/>
+          <StatsTable id={this.props.id} rookie={this.props.rookie}/>
         </Popover>
       </div>
     );
