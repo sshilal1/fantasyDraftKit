@@ -4,8 +4,10 @@ import Flexbox from 'flexbox-react';
 
 import RushingStatLine from './StatLines/RushingStatLine';
 import RushingHeader from './StatLines/RushingHeader';
-//import ReceivingStatLine from './StatLines/ReceivingStatLine';
-//import PassingStatLine from './StatLines/PassingStatLine';
+import ReceivingStatLine from './StatLines/ReceivingStatLine';
+import ReceivingHeader from './StatLines/ReceivingHeader';
+import PassingStatLine from './StatLines/PassingStatLine';
+import PassingHeader from './StatLines/PassingHeader';
 
 export default class StatsTable extends React.Component {
   constructor(props) {
@@ -88,12 +90,12 @@ export default class StatsTable extends React.Component {
     const RushingStats = rushingstats.map((season) => {
         return <RushingStatLine {...season}/>;
     });
-    /*const ReceivingStats = receivingstats.map((season) => {
+    const ReceivingStats = receivingstats.map((season) => {
         return <ReceivingStatLine key={season.yr} {...season}/>;
     });
     const PassingStats = passingstats.map((season) => {
         return <PassingStatLine key={season.yr} {...season}/>;
-    });*/
+    });
 
     const style = {
       width: "45px",
@@ -105,6 +107,10 @@ export default class StatsTable extends React.Component {
       <div>
         <RushingHeader/>
         {RushingStats}
+        <ReceivingHeader/>
+        {ReceivingStats}
+        <PassingHeader/>
+        {PassingStats}
       </div>
     );
   }
