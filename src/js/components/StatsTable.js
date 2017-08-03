@@ -16,6 +16,7 @@ export default class StatsTable extends React.Component {
   constructor(props) {
     super(props);
 
+    this.getStats = this.getStats.bind(this);
     var stats = PlayerStore.getStats(props.id);
 
     this.state = {
@@ -27,10 +28,34 @@ export default class StatsTable extends React.Component {
     }
   }
 
+  componentWillMount() {
+    PlayerStore.on("stats", this.getStats);
+  }
+
+  componentWillUnmount() {
+    PlayerStore.removeListener("stats", this.getStats);
+  }
+
+  getStats() {
+    var stats = PlayerStore.getStats(this.props.id);
+
+    this.setState({
+      rushingstats: stats.rushingstats,
+      receivingstats: stats.receivingstats,
+      passingstats: stats.passingstats,
+      fetched: stats.fetched
+    });
+  }
+
   componentDidMount() {
-    const {fetched} = this.state;
-    console.log("fetched?", fetched);
-    if ((!this.props.rookie) && (!fetched)) {
+    const {id, fetched} = this.state;
+
+    if (!fetched && !this.props.rookie) {
+      // fetch them
+      PlayerActions.fetchStats(id);
+    }
+
+    /*if ((!this.props.rookie) && (!fetched)) {
       axios.post('/stats', {
         id: this.props.id
       })
@@ -47,7 +72,7 @@ export default class StatsTable extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-    }
+    }*/
   }
 
   render() {

@@ -94,7 +94,7 @@ export function getRanks(players) {
 	});
 }
 
-export function getStats(id) {
+export function fetchStats(id) {
 
   axios.post('/stats', {
     id: id

@@ -166,6 +166,20 @@ class PlayerStore extends EventEmitter {
 		this.emit("change");
 	}
 
+	updateStats(stats) {
+
+		const players = this.players;
+		const id = stats.id;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    this.players[index].stats.rushingstats = stats.rushingstats;
+    this.players[index].stats.receivingstats = stats.receivingstats;
+    this.players[index].stats.passingstats = stats.passingstats;
+    this.players[index].stats.fetched = true;
+
+		this.emit("stats");
+	}
+
 	getStats(id) {
 		const players = this.players;
     var index = _.findIndex(players, function(o) { return o.id == id; });
@@ -208,7 +222,7 @@ class PlayerStore extends EventEmitter {
 				this.updateRanks(action.rankings);
 				break;
 			}
-			case "UPDATE_STATS": {
+			case "RECEIVE_STATS": {
 				this.updateStats(action.stats);
 				break;
 			}
