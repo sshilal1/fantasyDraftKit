@@ -1,8 +1,6 @@
-var express = require('express');
 var fs = require('fs');
-var request = require('request');
+var request = require('request-promise');
 var cheerio = require('cheerio');
-var app     = express();
 
 var team = "nyg";
 var url = 'http://www.espn.com/nfl/team/roster/_/name/' + team;
@@ -29,8 +27,8 @@ request(url, function(error, response, html){
 				var allChildren = $(this).children();
 				
 				if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
-				else if ($(this).text().toString().includes('Defense') && !stopRecord) {
-					// Stops recording once we hit defensive players
+				else if ((allChildren.eq(2).text() == "C") && !stopRecord) {
+					// Stops recording once we hit Centers
 					stopRecord = true;
 				}
 				else if (!stopRecord) {
@@ -46,12 +44,38 @@ request(url, function(error, response, html){
 					var college = allChildren.eq(7).text();
 					
 					var json = { name : name, id : id, num : num, position : position, age : age, height : height, weight : weight, experience : experience, teamid : team, college: college};	
+					nyg.players.push(json);
+				}
+				else if (allChildren.eq(2).text() == "PK") {
+					var json = { 
+						name : allChildren.eq(1).text(), 
+						id : allChildren.eq(1).html().toString().match(/\d+/)[0], 
+						num : allChildren.eq(0).text(), 
+						position : "K", 
+						age : allChildren.eq(3).text(), 
+						height : allChildren.eq(4).text(), 
+						weight : allChildren.eq(5).text(), 
+						experience : allChildren.eq(6).text(), 
+						teamid : team, 
+						college: allChildren.eq(7).text()
+					};
+					nyg.players.push(json);
 				}
 			});
 		})
 	}
-})
+}).then(function() {
+	console.log("\n\nDone loading team" + team);
+	console.log("\n\nWriting to file...");
+	console.log(nyg);
+	//THIS IS FOR WRITING TO FILE
+	
+	var jsonfile = require('jsonfile');
 
-app.listen('8081')
-console.log('Magic happens on port 8081');
-exports = module.exports = app;
+	var file = './nyg-team-test.json';
+
+	jsonfile.writeFile(file, nyg, function (err) {
+		console.error(err);
+	})
+	
+})

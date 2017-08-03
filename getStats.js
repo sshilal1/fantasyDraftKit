@@ -1,11 +1,8 @@
-var express = require('express');
 var fs = require('fs');
-var request = require('request');
+var request = require('request-promise');
 var cheerio = require('cheerio');
-var app     = express();
-var async = require('async');
 
-var nygData = JSON.parse(fs.readFileSync('nyg-team.json', 'utf8'));
+var nygData = JSON.parse(fs.readFileSync('json/nyg-team.json', 'utf8'));
 
 var ids = [];
 for (player of nygData.players) {
@@ -20,10 +17,11 @@ for (player of nygData.players) {
 var calls = [];
 
 ids.forEach(function(id){
-    calls.push(function(callback) {
 
 		var url = 'http://www.espn.com/nfl/player/stats/_/id/' + id + '/';
 		console.log(url);
+
+		var returnObj = {};
 		
 		request(url, function(error, response, html){
 			if(!error){
@@ -38,18 +36,19 @@ ids.forEach(function(id){
 						pStats = data.parent().parent().children().eq(i).children();
 						
 						var season = {
-							"season": pStats.eq(0).text(),
-							"team": pStats.eq(1).text(),
-							"gamesplayed": pStats.eq(2).text(),
-							"receptions": pStats.eq(3).text(),
-							"rushingyards": pStats.eq(4).text(),
-							"yardspercarry": pStats.eq(5).text(),
-							"longestrun": pStats.eq(6).text(),
-							"touchdowns": pStats.eq(7).text(),
-							"firstdowns": pStats.eq(8).text(),
-							"totalfumbles": pStats.eq(9).text(),
-							"fumbleslost": pStats.eq(10).text()
+							"yr": pStats.eq(0).text(),
+							"tm": pStats.eq(1).text(),
+							"gm": pStats.eq(2).text(),
+							"att": pStats.eq(3).text(),
+							"yds": pStats.eq(4).text(),
+							"avg": pStats.eq(5).text(),
+							"lng": pStats.eq(6).text(),
+							"td": pStats.eq(7).text(),
+							"fd": pStats.eq(8).text(),
+							"fmt": pStats.eq(9).text(),
+							"fml": pStats.eq(10).text()
 						}
+						// season, team, games, attempts, rushingyards, yardspercarry, longest, td, firstdowns,total fumbles, fumbleslost
 						
 						rushingStats.push(season);
 					}
@@ -65,19 +64,20 @@ ids.forEach(function(id){
 						pStats = data.parent().parent().children().eq(i).children();
 						
 						var season = {
-							"season": pStats.eq(0).text(),
-							"team": pStats.eq(1).text(),
-							"gamesplayed": pStats.eq(2).text(),
-							"receptions": pStats.eq(3).text(),
-							"targets": pStats.eq(4).text(),
-							"receivingyards": pStats.eq(5).text(),
-							"yardspercatch": pStats.eq(6).text(),
-							"longestcatch": pStats.eq(7).text(),
-							"touchdowns": pStats.eq(8).text(),
-							"firstdowns": pStats.eq(9).text(),
-							"totalfumbles": pStats.eq(10).text(),
-							"fumbleslost": pStats.eq(11).text()
+							"yr": pStats.eq(0).text(),
+							"tm": pStats.eq(1).text(),
+							"gm": pStats.eq(2).text(),
+							"rec": pStats.eq(3).text(),
+							"tar": pStats.eq(4).text(),
+							"yds": pStats.eq(5).text(),
+							"avg": pStats.eq(6).text(),
+							"lng": pStats.eq(7).text(),
+							"td": pStats.eq(8).text(),
+							"fd": pStats.eq(9).text(),
+							"fmt": pStats.eq(10).text(),
+							"fml": pStats.eq(11).text()
 						}
+						// season, team, games, receptions, targets, receivingyards, yardspercatch, longest, tds, fds, fumbles total, fumbles lost
 						
 						receivingStats.push(season);
 					}
@@ -93,77 +93,52 @@ ids.forEach(function(id){
 						pStats = data.parent().parent().children().eq(i).children();
 						
 						var season = {
-							"season": pStats.eq(0).text(),
-							"team": pStats.eq(1).text(),
-							"gamesplayed": pStats.eq(2).text(),
-							"completions": pStats.eq(3).text(),
-							"attempts": pStats.eq(4).text(),
-							"completionpercent": pStats.eq(5).text(),
-							"passingyards": pStats.eq(6).text(),
-							"yardsperpass": pStats.eq(7).text(),
-							"touchdowns": pStats.eq(8).text(),
-							"longestpass": pStats.eq(9).text(),
-							"interceptions": pStats.eq(10).text(),
-							"totalfumbles": pStats.eq(11).text(),
-							"qbrating": pStats.eq(12).text(),
-							"passerrating": pStats.eq(13).text()
+							"yr": pStats.eq(0).text(),
+							"tm": pStats.eq(1).text(),
+							"gm": pStats.eq(2).text(),
+							"cmp": pStats.eq(3).text(),
+							"att": pStats.eq(4).text(),
+							"cpct": pStats.eq(5).text(),
+							"yds": pStats.eq(6).text(),
+							"avg": pStats.eq(7).text(),
+							"td": pStats.eq(8).text(),
+							"lng": pStats.eq(9).text(),
+							"i": pStats.eq(10).text(),
+							"fmt": pStats.eq(11).text(),
+							"qbr": pStats.eq(12).text(),
+							"rat": pStats.eq(13).text()
 						}
+						// ~~ completions, attempts, %complete, total yds, avg, td, longest, ints, fm total, qbrating, passrating
 						
 						passingStats.push(season);
 					}
 				})
-				//console.log(passingStats);
 				
-				var returnObj = {
-					"rushingstats": rushingStats,
-					"receivingstats": receivingStats,
-					"passingstats": passingStats
-				};
-				
-				//console.log(returnObj);
-				
-				for (var k=0; k < nygData.players.length; k++) {
-					if (nygData.players[k].id = id) {
-						nygData.players[k].stats = returnObj;
-					}
+				if ((rushingStats.length > 0) || (receivingStats.length > 0) || (passingStats.length > 0)) {
+					returnObj = {
+						"id":id,
+						"rushingstats": rushingStats,
+						"receivingstats": receivingStats,
+						"passingstats": passingStats
+					};
 				}
-				
-				//console.log(nygData.players[i]);
-				
-				/*
-				//THIS IS FOR WRITING TO FILE
-				var jsonfile = require('jsonfile');
-
-				var file = '../../nyg-team-new.json';
-
-				jsonfile.writeFile(file, nyg, function (err) {
-					console.error(err);
-				})
-				*/
 			}
-			callback(null, id);
+		}).then(function() {
+			console.log("\n\nLoaded player: " + id);
+			console.log("\n\nWriting to file...");
+			//console.log(returnObj);
+			//THIS IS FOR WRITING TO FILE
+			
+			var jsonfile = require('jsonfile');
+
+			var file = './json/nyg/'+ id +'.json';
+
+			jsonfile.writeFile(file, returnObj, function (err) {
+				console.error(err);
+			})		
 		})
-    }
-)});
-
-async.parallel(calls, function(err, result) {
-    /* this code will run after all calls finished the job or
-       when any of the calls passes an error */
-
-    console.log("We are Done");
-	console.log(nygData);
-	
-	var jsonfile = require('jsonfile');
-	var file = '../nyg-team-new.json';
-
-	jsonfile.writeFile(file, nygData, function (err) {
-		console.error(err);
-	})
 });
-// ------------------------
-// ------------------------
-// ------------------------
 
-app.listen('8081')
-console.log('Magic happens on port 8081');
-exports = module.exports = app;
+// ------------------------
+// ------------------------
+// ------------------------

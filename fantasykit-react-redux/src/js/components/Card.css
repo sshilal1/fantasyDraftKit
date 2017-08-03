@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Cuprum');
+
+.text {
+	font-family: 'Cuprum', sans-serif !important;
+}
+
+.Card {
+  width:180px;
+	margin: 5px;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12)
+}
+/* ---Generals--- */
+.card-row {
+	padding:2px;
+}
+.xsmall {
+	font-size:x-small;
+}
+.large {
+	font-size:large;
+}
+.xlarge {
+	font-size:x-large;
+}
+.xxlarge {
+	font-size:xx-large;
+}
+.center {
+	text-align: center;
+}
+/* --------------- */
+
+/* ---Specifics--- */
+.header {
+	margin: 0 10px 0;
+}
+.player-img {
+	width:90px;
+	height:65px;
+}
+.number-team {
+	width:90px;
+	height:65px;
+}
+
+.rank-button {
+	font-size: small !important;
+}
+/* --------------- */

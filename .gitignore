@@ -5,3 +5,5 @@ yarn.lock
 *.trace
 logs
 *.log
+*client.min.js
+src/*.png

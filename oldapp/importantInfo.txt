@@ -1,0 +1,60 @@
+#TODO 
+1. Work on populating main list (HTML TABLE EXTRACTER)
+2. 
+
+
+http://games.espn.com/ffl/htmldraft/json/getPlayer?leagueId=448727&playerId=16799
+
+THIS IS WHERE U GET THE LIST OF NAMES FROM
+http://games.espn.com/ffl/htmldraft/draftlistiframe?leagueId=633199
+
+var url = DraftConstants.SERVICE + command + '?' + this.paramsToQueryString(params) + this.pollParams() 
+
+(this.draft.connectionManager.token ? '&token=' + this.draft.connectionManager.token : '')
+1:448727:3:6033681:844084766
+
+http://fantasydraft.espn.com/league-448727/extdraft/json/POLL?&poll=1470333601292&token=1:448727:3:6033681:844084766&r=1634
+
+
+Tokens from different draft openings:
+http://fantasydraft.espn.com/league-452215/extdraft/json/POLL?&poll=1470341550893&token=1:452215:7:6033681:810364180&r=2140
+http://fantasydraft.espn.com/league-452215/extdraft/json/POLL?&poll=1470341624506&token=1:452215:7:6033681:810364180&r=1630
+http://fantasydraft.espn.com/league-452215/extdraft/json/POLL?&poll=1470341847283&token=1:452215:7:6033681:810364180&r=98
+... Usese same token. Need to find how to grab access to token.. I believe token is as follows...
+leagueID:profileID:randomID
+profileID is same number between 2 separate drafts
+nvm. not random.. must be generated from ESPN as well
+
+make sure poll is set to 0
+
+json data
+
+what comes back... JSON FORMATTER
+
+draft.processMessage {
+.token
+.synchtime
+.draftstatus
+	.timeRemaining
+	.joinedTeamIds
+	.currentSelectionId
+.pickhistory [ objects
+	{
+	.selectionId
+	.teamId
+	.undo = false
+	.player
+		.playerId = bigUselessNumber
+		.firstname = adrian
+		.lastname = peterson
+		.positionId = 3
+		.proTeamId = 
+	.slotCategoryId
+	.isKeeper
+	}
+.chatHistory
+]
+		
+EXAMPLE
+draft.processMessage.pickhistory[0] = first pick
+draft.processMessage.pickhistory[1].player.firstname = odell
