@@ -30,13 +30,19 @@ var logger = new (winston.Logger)({
 // --------------------
 // Team build
 // --------------------
-var teams = ["buf","mia","ne","nyj","bal","cin","cle","pit","hou","ind","jac","ten","den","kc","oak","sd","dal","nyg","phi","was","chi","det","gb","min","atl","car","no","tb","arz","ram","sf","sea"];
+var teams = ["buf","mia","ne","nyj","bal","cin","cle","pit","hou","ind","jax","ten","den","kc","oak","lac","dal","nyg","phi","wsh","chi","det","gb","min","atl","car","no","tb","ari","lar","sf","sea"];
+var players = {
+	players: []
+};
 
 for (var team in teams) {
 	logger.info('Building team: ' + teams[team] + '...');
 	var teamExecStr = 'node buildteam.js ' + teams[team];
 	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 }
+
+logger.info('Building Single Team Object...');
+execSync('node build-players.js', {encoding: 'utf8', stdio:[0,1,2]});
 // --------------------
 // --------------------
 // Image builds

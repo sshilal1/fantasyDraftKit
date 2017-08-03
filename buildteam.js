@@ -1,6 +1,7 @@
 var fs = require('fs');
 var request = require('request-promise');
 var cheerio = require('cheerio');
+var jsonfile = require('jsonfile');
 
 var team = process.argv[2];
 var url = 'http://www.espn.com/nfl/team/roster/_/name/' + team;
@@ -67,14 +68,8 @@ request(url, function(error, response, html){
 }).then(function() {
 	console.log("\n\nDone loading team: " + team);
 	console.log("Writing to file...");
-	//THIS IS FOR WRITING TO FILE
-	
-	var jsonfile = require('jsonfile');
 
 	var file = './src/teams/'+ team +'-team.json';
 
-	jsonfile.writeFile(file, teamobj, function (err) {
-		console.error(err);
-	})
-	
+	jsonfile.writeFileSync(file, teamobj);
 })
