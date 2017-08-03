@@ -27,7 +27,7 @@ request(url, function(error, response, html){
 				var allChildren = $(this).children();
 				
 				if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
-				else if ((allChildren.eq(2).text() == "C") && !stopRecord) {
+				else if (((allChildren.eq(2).text() == "C") || (allChildren.eq(2).text() == "G")) && !stopRecord) {
 					// Stops recording once we hit Centers
 					stopRecord = true;
 				}
@@ -65,7 +65,7 @@ request(url, function(error, response, html){
 		})
 	}
 }).then(function() {
-	console.log("\n\nDone loading team" + team);
+	console.log("\n\nDone loading team: " + team);
 	console.log("Writing to file...");
 	//THIS IS FOR WRITING TO FILE
 	
