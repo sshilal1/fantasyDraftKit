@@ -1,12 +1,11 @@
 const { exec, execSync } = require('child_process');
 const winston = require('winston');
 const fs = require('fs');
-
+// --------------------
 // --------------------
 // Setup Logging
 // --------------------
 const logDir = 'logs';
-
 // Create the log directory if it does not exist
 if (!fs.existsSync(logDir)) {
 	fs.mkdirSync(logDir);
@@ -27,9 +26,22 @@ var logger = new (winston.Logger)({
     })
   ]
 });
+// --------------------
+// --------------------
+// Team build
+// --------------------
+var teams = ["buf","mia","ne","nyj","bal","cin","cle","pit","hou","ind","jac","ten","den","kc","oak","sd","dal","nyg","phi","was","chi","det","gb","min","atl","car","no","tb","arz","ram","sf","sea"];
 
+for (var team in teams) {
+	logger.info('Building team: ' + teams[team] + '...');
+	var teamExecStr = 'node buildteam.js ' + teams[team];
+	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
+}
 // --------------------
 // --------------------
+// Image builds
+// --------------------
+/*
 logger.info('Downloading Images...');
 execSync('node img-download.js', {encoding: 'utf8', stdio:[0,1,2]});
 
@@ -38,7 +50,7 @@ execSync('node img-convert.js', {encoding: 'utf8', stdio:[0,1,2]});
 
 logger.info('Deleting Images...');
 execSync('node img-delete.js', {encoding: 'utf8', stdio:[0,1,2]});
-
+// --------------------
 /*
 console.log('Grabbing Version first...');
 setTimeout(function() {
