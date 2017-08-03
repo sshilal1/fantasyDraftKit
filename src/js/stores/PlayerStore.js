@@ -27,13 +27,18 @@ class PlayerStore extends EventEmitter {
 				overallrank: 39,
 				positionrank: 22,
 				rookie: (player.experience == 'R' ? true : false),
+				age: player.age,
+				height: player.height,
+				weight: player.weight,
+				experience: player.experience,
+				college: player.college,
 				stats: {
 					rushingstats: [],
     			receivingstats: [],
     			passingstats: [],
     			fetched: false
 				},
-        		totalranks: {
+        totalranks: {
 					overallrank: 29,
 					positionrank: 7
 				},

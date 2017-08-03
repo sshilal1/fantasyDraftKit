@@ -32,7 +32,7 @@ export default class PlayerCard extends React.Component {
 	
   render() {
 	  
-		const { id, firstname, lastname, position, num, teamid, overallrank, positionrank, rookie, hide } = this.props;
+		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide } = this.props;
 		
 		if (hide) {
 			return null;
@@ -78,8 +78,8 @@ export default class PlayerCard extends React.Component {
 						</div>
 	        </div>
 					<Flexbox className="card-row">
-						<ButtonDrop text="stats"/>
-						<ButtonDrop text="bio" age="31" id={id} rookie={rookie}/>
+						<ButtonDrop text="stats" age="31" id={id} rookie={rookie} stattable={true}/>
+						<ButtonDrop text="bio" stattable={false} {...this.props}/>
 	        </Flexbox>
 	    	</div>
   		);
