@@ -25,14 +25,15 @@ var total = {
 };
 
 for (var i in files) {
-	const team = files[i].toString().substring(0,4);
-	logger.info("adding players from " + team + " to total players");
-	var teamloc = 'src/teams/' + files[i];
+	const team = files[i].toString().substring(0,3);
+	logger.info("--**Adding players from " + team + " to total players**--");
+	var teamloc = './src/teams/' + files[i];
 
-	var teamPlayers = fs.readFileSync(teamloc);
+	var teamPlayers = jsonfile.readFileSync(teamloc);
 	for (var player in teamPlayers.players) {
-		total.players.push(teamPlayers[player]);
+		logger.info("Adding " + teamPlayers.players[player].name);
+		total.players.push(teamPlayers.players[player]);
 	}
 
-	jsonfile.writeFileSync("src/allplayers.json", total);
+	jsonfile.writeFileSync("./src/allplayers.json", total);
 }
