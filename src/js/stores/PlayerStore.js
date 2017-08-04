@@ -68,9 +68,10 @@ class PlayerStore extends EventEmitter {
   }
 
   addPlayersToView() {
-  	this.playersshown += 6;
-  	console.log(this.playersshown);
-  	this.filterPlayersPos(this.filter);
+  	if (this.playersshown < 50) {
+  		this.playersshown += 6;
+  		this.filterPlayersPos(this.filter);
+  	}
   }
 
   createPlayer(player) {
@@ -100,12 +101,13 @@ class PlayerStore extends EventEmitter {
   }
 	
 	showRanks(rankings) {
-		const players = this.players;
+		const all = this.all;
 		
-		for (var player in players) {
-			this.players[player].overallrank = this.players[player][rankings].overallrank;
-			this.players[player].positionrank = this.players[player][rankings].positionrank;
+		for (var player in all) {
+			this.all[player].overallrank = this.all[player][rankings].overallrank;
+			this.all[player].positionrank = this.all[player][rankings].positionrank;
 		}
+		this.filterPlayersPos(this.filter);
 		this.emit("change");
 	}
 	
@@ -177,15 +179,15 @@ class PlayerStore extends EventEmitter {
   }
 	
 	updateRanks(rankings) {
-		const players = this.players;
+		const all = this.all;
 		
-		for (var player in players) {
+		for (var player in all) {
 			//console.log(players[player].name);
 			for (var newRank in rankings) {
 				//console.log(rankings[newRank]);
-				if (players[player].name == rankings[newRank].name) {
-					console.log("updating espn rank for " + players[player].name + " from " + players[player].espn.overallrank + " to " + rankings[newRank].rank);
-					this.players[player].espn.overallrank = rankings[newRank].rank;
+				if (all[player].name == rankings[newRank].name.toLowerCase()) {
+					console.log("updating espn rank for " + all[player].name + " from " + all[player].espn.overallrank + " to " + rankings[newRank].rank);
+					this.all[player].espn.overallrank = rankings[newRank].rank;
 				}
 			}
 		}

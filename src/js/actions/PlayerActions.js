@@ -81,10 +81,10 @@ export function reachedBottom() {
   });
 }
 
-export function getRanks(players) {
+export function getRanks() {
 
   axios.post('/ranks', {
-		name: players[0].name
+		data: "test"
 	})
 	.then(function (response) {
 		console.log(response);
