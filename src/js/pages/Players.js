@@ -12,10 +12,28 @@ export default class Players extends React.Component {
   constructor() {
     super();
     this.getPlayers = this.getPlayers.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
     this.state = {
       all: PlayerStore.getAll(),
       players: PlayerStore.getAll()
     };
+  }
+
+  handleScroll() {
+    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= (docHeight-5)) { // bc of rounding
+      PlayerActions.reachedBottom();
+    }
+  }
+
+  getPlayers() {
+    this.setState({
+      players: PlayerStore.getAll(),
+    });
   }
 
   componentWillMount() {
@@ -23,10 +41,12 @@ export default class Players extends React.Component {
     PlayerStore.on("hide", this.getPlayers);
   }
 
-  getPlayers() {
-    this.setState({
-      players: PlayerStore.getAll(),
-    });
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   createPlayer() {

@@ -67,6 +67,12 @@ class PlayerStore extends EventEmitter {
     return this.players;
   }
 
+  addPlayersToView() {
+  	this.playersshown += 6;
+  	console.log(this.playersshown);
+  	this.filterPlayersPos(this.filter);
+  }
+
   createPlayer(player) {
 
     this.players.push(player);
@@ -213,6 +219,10 @@ class PlayerStore extends EventEmitter {
         this.createPlayer(action.player);
         break;
       }
+      case "REACHED_BOTTOM": {
+				this.addPlayersToView();
+				break;
+			}
       case "MOD_PLAYER": {
         this.modPlayer(action.modification);
         //this.emit("change");

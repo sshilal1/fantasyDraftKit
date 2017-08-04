@@ -75,6 +75,12 @@ export function filterPlayersPos(filter) {
   });
 }
 
+export function reachedBottom() {
+  dispatcher.dispatch({
+    type: "REACHED_BOTTOM"
+  });
+}
+
 export function getRanks(players) {
 
   axios.post('/ranks', {
