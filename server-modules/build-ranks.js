@@ -17,8 +17,10 @@ mysql.createConnection({
 		var sql = 'CREATE TABLE espn_rankings_' + filter + ' (rank INTEGER PRIMARY KEY, name VARCHAR(255), id INTEGER)';
 		connection.query(sql, function (err, result) {
 			if (err) {
-				console.log(err.sqlMessage + ", Deleting all rows...");
-				//connection.query('DELETE * FROM espn_rankings_all');
+				console.log(err.sqlMessage);
+				connection.query(('DELETE * FROM espn_rankings_' + filter), function(err, result) {
+					console.log("Deleting all rows...")
+				});
 			}
 			else {
 				console.log("Table created");
