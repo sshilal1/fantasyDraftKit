@@ -25,8 +25,8 @@ class PlayerStore extends EventEmitter {
 				position: player.position.toLowerCase(),
 				num: player.num,
 				teamid: player.teamid.toLowerCase(),
-				overallrank: 39,
-				positionrank: 22,
+				overallrank: 999,
+				positionrank: 999,
 				rookie: (player.experience == 'R' ? true : false),
 				age: player.age,
 				height: player.height,
@@ -40,16 +40,16 @@ class PlayerStore extends EventEmitter {
     			fetched: false
 				},
         totalranks: {
-					overallrank: 29,
-					positionrank: 7
+					overallrank: 999,
+					positionrank: 999
 				},
 				espn: {
-					overallrank: 32,
-					positionrank: 5
+					overallrank: 999,
+					positionrank: 999
 				},
 				pros: {
-					overallrank: 34,
-					positionrank: 6
+					overallrank: 999,
+					positionrank: 999
 				},
 				hide: false,
 			};
@@ -58,7 +58,7 @@ class PlayerStore extends EventEmitter {
 		}
 		
 		this.filter = "all";
-		this.playersshown = 10;
+		this.playersshown = 20;
 		this.all = initialPlayers;
 		this.filterPlayersPos(this.filter);
   }

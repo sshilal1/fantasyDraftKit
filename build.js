@@ -28,6 +28,15 @@ var logger = new (winston.Logger)({
 });
 // --------------------
 // --------------------
+// Rankings build (async)
+// --------------------
+logger.info('**Gathering espn rankings...');
+exec('node fetchandbuild-stats.js', (error, stdout, stderr) => {
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+});
+// --------------------
+// --------------------
 // Team build
 // --------------------
 var teams = ["buf","mia","ne","nyj","bal","cin","cle","pit","hou","ind","jax","ten","den","kc","oak","lac","dal","nyg","phi","wsh","chi","det","gb","min","atl","car","no","tb","ari","lar","sf","sea"];
@@ -36,12 +45,12 @@ var players = {
 };
 
 for (var team in teams) {
-	logger.info('Building team: ' + teams[team] + '...');
+	logger.info('-Building team: ' + teams[team] + '...');
 	var teamExecStr = 'node buildteam.js ' + teams[team];
 	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 }
 
-logger.info('Building Single Team Object...');
+logger.info('**Building Single Team Object...');
 execSync('node build-players.js', {encoding: 'utf8', stdio:[0,1,2]});
 // --------------------
 // --------------------
