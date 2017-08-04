@@ -2,7 +2,8 @@ import { EventEmitter } from "events";
 
 import dispatcher from "../dispatcher";
 
-import nygData from './nyg-team.json';
+//import playerData from './nyg-team.json';
+import playerData from '../../allplayers.json';
 import _ from 'lodash';
 
 class PlayerStore extends EventEmitter {
@@ -11,7 +12,7 @@ class PlayerStore extends EventEmitter {
 
 		var initialPlayers = [];
 		
-		for (var player of nygData.players) {
+		for (var player of playerData.players) {
 			var parts = player.name.split(" "),
 				first = parts.shift(),
 				last = parts.shift();
@@ -56,8 +57,10 @@ class PlayerStore extends EventEmitter {
 			initialPlayers.push(newPlayer);
 		}
 		
+		this.filter = "all";
+		this.playersshown = 10;
 		this.all = initialPlayers;
-		this.players = initialPlayers;
+		this.filterPlayersPos(this.filter);
   }
 
   getAll() {
@@ -101,30 +104,40 @@ class PlayerStore extends EventEmitter {
 	}
 	
 	sortPlayers(sort) {
-		this.players.sort(function(a,b) {
+		this.all.sort(function(a,b) {
 			if (a[sort]< b[sort])
 				return -1;
 			if (a[sort] > b[sort])
 				return 1;
 			return 0;
 		})
+		this.filterPlayersPos(this.filter);
 		this.emit("change");
 	}
 
 	filterPlayersPos(filter) {
 
     const all = this.all;
+    const playersshown = this.playersshown;
+
+    this.filter = filter;
+    this.players = [];
 
     if (filter == "all") {
-    	this.players = all;
+    	for(var i=0;i<playersshown;i++) {
+    		this.players.push(all[i]);
+    	}
     }
 
     else {
     	var players = [];
 
-	    all.forEach(function(obj) {
+	    all.forEach(function(obj,index) {
 				if (_.includes(obj, filter)) {
-				   players.push(obj);
+					if (players.length > playersshown) {
+						return;
+					}
+				  players.push(obj);
 				}
 			});
 
@@ -134,12 +147,13 @@ class PlayerStore extends EventEmitter {
     this.emit("hide");
   }
 
+  // this needs work
   filterPlayers(filter) {
     
     const players = this.players;
 
     // Not actually removing (unmounting) players, just setting state to hide
-    this.players.forEach(function(obj) {
+    this.all.forEach(function(obj) {
 
     	const str = JSON.stringify(obj);
 
@@ -152,6 +166,7 @@ class PlayerStore extends EventEmitter {
 
 		});
 
+    //this.filterPlayersPos("all");
     this.emit("hide");
   }
 	

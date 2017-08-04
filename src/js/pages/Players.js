@@ -65,7 +65,7 @@ export default class Players extends React.Component {
 
   handleFilter(e) {
     const filter = e.target.value;
-    PlayerActions.filterPlayers(filter); 
+    PlayerActions.filterPlayers(filter);
   }
 
   toggleSortBy(e, isInputChecked) {
