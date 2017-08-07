@@ -39,7 +39,7 @@ export default class RankingsSwitch extends React.Component {
     return false;
   }
 
-  pageSwitchRanks(rankings,num) {
+  playerSwitchRanks(rankings,num) {
 
     var bgstr = "bg" + num;
 
@@ -63,9 +63,9 @@ export default class RankingsSwitch extends React.Component {
         <MuiThemeProvider>
           <div>
             <Flexbox flexDirection="row" justifyContent="space-between">
-              <FlatButton backgroundColor={this.state.bg1 ? selected : non} style={{minWidth:"40px"}} onClick={() => this.pageSwitchRanks("totalranks",1)} className="text">Total</FlatButton>
-              <FlatButton backgroundColor={this.state.bg2 ? selected : non} style={{minWidth:"45px"}} onClick={() => this.pageSwitchRanks("espn",2)}><img style={{width:"80%"}} src={espn}/></FlatButton>
-              <FlatButton backgroundColor={this.state.bg3 ? selected : non} style={{minWidth:"85px"}} onClick={() => this.pageSwitchRanks("pros",3)}><img src={pros}/></FlatButton>
+              <FlatButton backgroundColor={this.state.bg1 ? selected : non} style={{minWidth:"40px"}} onClick={() => this.playerSwitchRanks("totalranks",1)} className="text">Total</FlatButton>
+              <FlatButton backgroundColor={this.state.bg2 ? selected : non} style={{minWidth:"45px"}} onClick={() => this.playerSwitchRanks("espn",2)}><img style={{width:"80%"}} src={espn}/></FlatButton>
+              <FlatButton backgroundColor={this.state.bg3 ? selected : non} style={{minWidth:"85px"}} onClick={() => this.playerSwitchRanks("pros",3)}><img src={pros}/></FlatButton>
             </Flexbox>
           </div>
         </MuiThemeProvider>

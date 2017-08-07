@@ -4,6 +4,7 @@ import {FlatButton,TextField,Toggle,AppBar} from 'material-ui';
 import Flexbox from 'flexbox-react';
 
 import PageSwitch from '../components/PageSwitch';
+import GlobalRankSwitch from '../components/GlobalRankSwitch'
 import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";
@@ -112,9 +113,7 @@ export default class Players extends React.Component {
             <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
               <div><PageSwitch/></div>
               <Flexbox flexDirection="row" justifyContent="space-between">
-                <FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
-                <FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
-                <FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton>
+                <GlobalRankSwitch/>
                 <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
                   <div>Rank</div>
                   <Toggle style={{width:"50px"}} onToggle={this.toggleSortBy.bind(this)}/>
