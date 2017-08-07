@@ -67,18 +67,6 @@ export default class Players extends React.Component {
 
     PlayerActions.modPlayer(mod);
   }
-
-	showTotalAll() {
-    PlayerActions.showRankAll("totalranks");
-  }
-	
-	showEspnAll() {
-    PlayerActions.showRankAll("espn");
-  }
-	
-	showProsAll() {
-    PlayerActions.showRankAll("pros");
-  }
 	
 	getRanks() {
 		const { players } = this.state;

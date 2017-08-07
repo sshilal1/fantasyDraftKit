@@ -25,7 +25,7 @@ class PlayerStore extends EventEmitter {
 				position: player.position.toLowerCase(),
 				num: player.num,
 				teamid: player.teamid.toLowerCase(),
-				overallrank: 999,
+				overallrank: Math.floor(Math.random() * (997)) + 1,
 				positionrank: 999,
 				selectedRanking: "totalranks",
 				rookie: (player.experience == 'R' ? true : false),
@@ -61,6 +61,7 @@ class PlayerStore extends EventEmitter {
 		this.filter = "all";
 		this.playersshown = 20;
 		this.all = initialPlayers;
+		this.sortPlayers("overallrank");
 		this.filterPlayersPos(this.filter);
   }
 
@@ -111,6 +112,7 @@ class PlayerStore extends EventEmitter {
 			this.all[player].positionrank = this.all[player][rankings].positionrank;
 			this.all[player].selectedRanking = rankings;
 		}
+		this.sortPlayers("overallrank");
 		this.filterPlayersPos(this.filter);
 		this.emit("change");
 	}
