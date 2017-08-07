@@ -9,3 +9,4 @@ logs
 src/*.png
 src/teams
 local-storage
+sql.js

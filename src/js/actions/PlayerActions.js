@@ -100,10 +100,11 @@ export function getRanks() {
 	});
 }
 
-export function fetchStats(id) {
+export function fetchStats(id,teamid) {
 
   axios.post('/stats', {
-    id: id
+    id: id,
+    team: teamid
   })
   .then(function (response) {
     console.log(response);

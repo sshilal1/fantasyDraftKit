@@ -78,7 +78,7 @@ export default class PlayerCard extends React.Component {
 						</div>
 	        </div>
 					<Flexbox className="card-row">
-						<ButtonDrop text="stats" age="31" id={id} rookie={rookie} stattable={true}/>
+						<ButtonDrop text="stats" age="31" id={id} rookie={rookie} teamid={teamid} stattable={true}/>
 						<ButtonDrop text="bio" stattable={false} {...this.props}/>
 	        </Flexbox>
 	    	</div>

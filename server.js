@@ -43,7 +43,7 @@ app.post('/ranks', function(req, res) {
 app.post('/stats', function(req, res) {
 
 	console.log(req.body);
-	var filepath = './json/nyg/' + req.body.id + '.json';
+	var filepath = './local-storage/stats/' + req.body.team + '/' + req.body.id + '.json';
 	console.log(filepath);
 
 	var parsedJson = require(filepath);

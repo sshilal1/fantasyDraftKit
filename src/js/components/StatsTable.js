@@ -21,6 +21,7 @@ export default class StatsTable extends React.Component {
 
     this.state = {
       id: props.id,
+      teamid: props.teamid,
     	rushingstats: stats.rushingstats,
     	receivingstats: stats.receivingstats,
     	passingstats: stats.passingstats,
@@ -48,11 +49,11 @@ export default class StatsTable extends React.Component {
   }
 
   componentDidMount() {
-    const {id, fetched} = this.state;
+    const {id, fetched, teamid} = this.state;
 
     if (!fetched && !this.props.rookie) {
       // fetch them
-      PlayerActions.fetchStats(id);
+      PlayerActions.fetchStats(id,teamid);
     }
 
     /*if ((!this.props.rookie) && (!fetched)) {

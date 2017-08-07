@@ -42,10 +42,10 @@ export default class ButtonDrop extends React.Component {
 
   render() {
 
-    const { id,rookie,age,height,weight,experience,college } = this.props;
+    const { id,rookie,age,height,weight,experience,college,teamid } = this.props;
 
     if(this.props.stattable) {
-      var table = <StatsTable id={id} rookie={rookie}/>;
+      var table = <StatsTable id={id} rookie={rookie} teamid={teamid}/>;
     }
     else {
       var table = <BioTable id={id} age={age} height={height} weight={weight} experience={experience} college={college}/>;
