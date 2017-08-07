@@ -28,8 +28,8 @@ request(url, function(error, response, html){
 				var allChildren = $(this).children();
 				
 				if (tableRowStr.includes('Offense') || tableRowStr.includes('NONAMEPOS')) {}
-				else if (((allChildren.eq(2).text() == "C") || (allChildren.eq(2).text() == "G")) && !stopRecord) {
-					// Stops recording once we hit Centers
+				else if (((allChildren.eq(2).text() == "C") || (allChildren.eq(2).text() == "G") || (allChildren.eq(2).text() == "OL")) && !stopRecord) {
+					// Stops recording once we hit Centers, Guards, or OL
 					stopRecord = true;
 				}
 				else if (!stopRecord) {
@@ -69,7 +69,7 @@ request(url, function(error, response, html){
 	console.log("\n\nDone loading team: " + team);
 	console.log("Writing to file...");
 
-	var file = './src/teams/'+ team +'-team.json';
+	var file = './local-storage/teams/'+ team +'-team.json';
 
 	jsonfile.writeFileSync(file, teamobj);
 })

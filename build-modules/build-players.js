@@ -19,7 +19,7 @@ var logger = new (winston.Logger)({
 // --------------------
 // --------------------
 
-var files = fs.readdirSync('src/teams/');
+var files = fs.readdirSync('./local-storage/teams/');
 var total = {
 	players: []
 };
@@ -27,7 +27,7 @@ var total = {
 for (var i in files) {
 	const team = files[i].toString().substring(0,3);
 	logger.info("--**Adding players from " + team + " to total players**--");
-	var teamloc = './src/teams/' + files[i];
+	var teamloc = './local-storage/teams/' + files[i];
 
 	var teamPlayers = jsonfile.readFileSync(teamloc);
 	for (var player in teamPlayers.players) {

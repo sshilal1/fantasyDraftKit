@@ -6,9 +6,16 @@ const fs = require('fs');
 // Setup Logging
 // --------------------
 const logDir = 'logs';
-// Create the log directory if it does not exist
 if (!fs.existsSync(logDir)) {
 	fs.mkdirSync(logDir);
+}
+const storageDir = 'local-storage';
+if (!fs.existsSync(storageDir)) {
+	fs.mkdirSync(storageDir);
+}
+const teamDir = 'local-storage/teams';
+if (!fs.existsSync(teamDir)) {
+	fs.mkdirSync(teamDir);
 }
 
 const tsFormat = () => (new Date()).toLocaleTimeString();
@@ -30,11 +37,13 @@ var logger = new (winston.Logger)({
 // --------------------
 // Rankings build (async)
 // --------------------
+/*
 logger.info('**Gathering espn rankings...');
 exec('node fetchandbuild-stats.js', (error, stdout, stderr) => {
   console.log(`stdout: ${stdout}`);
   console.log(`stderr: ${stderr}`);
 });
+*/
 // --------------------
 // --------------------
 // Team build
@@ -46,12 +55,17 @@ var players = {
 
 for (var team in teams) {
 	logger.info('-Building team: ' + teams[team] + '...');
-	var teamExecStr = 'node buildteam.js ' + teams[team];
+	var teamExecStr = 'node ./build-modules/buildteam.js ' + teams[team];
 	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 }
 
 logger.info('**Building Single Team Object...');
-execSync('node build-players.js', {encoding: 'utf8', stdio:[0,1,2]});
+execSync('node ./build-modules/build-players.js', {encoding: 'utf8', stdio:[0,1,2]});
+// --------------------
+// --------------------
+// Stats Build
+// --------------------
+
 // --------------------
 // --------------------
 // Image builds
