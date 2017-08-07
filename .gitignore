@@ -8,3 +8,4 @@ logs
 *client.min.js
 src/*.png
 src/teams
+local-storage
