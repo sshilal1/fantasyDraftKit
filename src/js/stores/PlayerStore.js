@@ -27,6 +27,7 @@ class PlayerStore extends EventEmitter {
 				teamid: player.teamid.toLowerCase(),
 				overallrank: 999,
 				positionrank: 999,
+				selectedRanking: "totalranks",
 				rookie: (player.experience == 'R' ? true : false),
 				age: player.age,
 				height: player.height,
@@ -44,12 +45,12 @@ class PlayerStore extends EventEmitter {
 					positionrank: 999
 				},
 				espn: {
-					overallrank: 999,
-					positionrank: 999
+					overallrank: 997,
+					positionrank: 997
 				},
 				pros: {
-					overallrank: 999,
-					positionrank: 999
+					overallrank: 998,
+					positionrank: 998
 				},
 				hide: false,
 			};
@@ -97,6 +98,8 @@ class PlayerStore extends EventEmitter {
 
     this.players[index].overallrank = this.players[index][rankings].overallrank;
 		this.players[index].positionrank = this.players[index][rankings].positionrank;
+		this.players[index].selectedRanking = rankings;
+
 		this.emit("change");
   }
 	
@@ -106,6 +109,7 @@ class PlayerStore extends EventEmitter {
 		for (var player in all) {
 			this.all[player].overallrank = this.all[player][rankings].overallrank;
 			this.all[player].positionrank = this.all[player][rankings].positionrank;
+			this.all[player].selectedRanking = rankings;
 		}
 		this.filterPlayersPos(this.filter);
 		this.emit("change");

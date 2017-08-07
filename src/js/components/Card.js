@@ -32,7 +32,7 @@ export default class PlayerCard extends React.Component {
 	
   render() {
 	  
-		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide } = this.props;
+		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide,selectedRanking } = this.props;
 		
 		if (hide) {
 			return null;
@@ -58,7 +58,7 @@ export default class PlayerCard extends React.Component {
 	        </Flexbox>
 					<div className="card-row">
 						<div className="rankings-title">
-							<RankingsSwitch id={id}/>
+							<RankingsSwitch id={id} selectedRanking={selectedRanking}/>
 							<Flexbox flexDirection="row" justifyContent="space-around">
 								<div>
 									<div className="center text">Overall</div>
