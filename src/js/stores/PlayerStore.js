@@ -55,6 +55,11 @@ class PlayerStore extends EventEmitter {
 				hide: false,
 			};
 			
+			for (var person of initialPlayers) {
+				if (newPlayer.name == person.name) {
+					console.log("Found a duplicate: " + newPlayer.name);
+				}
+			}
 			initialPlayers.push(newPlayer);
 		}
 		
