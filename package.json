@@ -44,6 +44,8 @@
     "style-loader": "^0.18.2"
   },
   "scripts": {
+    "build": "node build.js",
+    "build-images": "node build-images.js",
     "dev": "webpack-dev-server --content-base src --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
