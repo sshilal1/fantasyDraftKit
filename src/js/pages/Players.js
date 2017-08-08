@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {FlatButton,TextField,Toggle,AppBar} from 'material-ui';
 import Flexbox from 'flexbox-react';
 
+import CustomTextField from '../components/CustomTextField';
 import PageSwitch from '../components/PageSwitch';
 import GlobalRankSwitch from '../components/GlobalRankSwitch'
 import Card from "../components/Card";
@@ -41,17 +42,17 @@ export default class Players extends React.Component {
   componentWillMount() {
     PlayerStore.on("change", this.getPlayers);
     PlayerStore.on("hide", this.getPlayers);
-    this.delayedCallback = _.debounce(function (event) {
+    /*this.delayedCallback = _.debounce(function (event) {
       const filter = event.target.value;
       console.log(filter);
       PlayerActions.filterPlayers(filter);
-    }, 500);
+    }, 500);*/
   }
-
+  /*
   handleFilter(event) {
     event.persist();
     this.delayedCallback(event);
-  }
+  }*/
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);
@@ -112,7 +113,7 @@ export default class Players extends React.Component {
                   <Toggle style={{width:"50px"}} onToggle={this.toggleSortBy.bind(this)}/>
                   <div>Name</div>
                 </Flexbox>
-                <TextField style={{width:"130px",height:"36px"}} hintText="Filter Players" onChange={this.handleFilter.bind(this)} />
+                <CustomTextField/>
               </Flexbox>
             </Flexbox>
           </AppBar>
