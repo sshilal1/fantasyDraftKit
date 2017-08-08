@@ -32,7 +32,7 @@ export default class PlayerCard extends React.Component {
 	
   render() {
 	  
-		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide } = this.props;
+		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide,selectedRanking } = this.props;
 		
 		if (hide) {
 			return null;
@@ -58,27 +58,27 @@ export default class PlayerCard extends React.Component {
 	        </Flexbox>
 					<div className="card-row">
 						<div className="rankings-title">
-							<RankingsSwitch id={id}/>
+							<RankingsSwitch id={id} selectedRanking={selectedRanking}/>
 							<Flexbox flexDirection="row" justifyContent="space-around">
 								<div>
 									<div className="center text">Overall</div>
 									<Flexbox flexDirection="row" justifyContent="space-around">
 										<div className="center xlarge text">{overallrank}</div>
-										<Flexbox style={{color: "red"}} className="center text">&#8595;4</Flexbox>
+										{/*<Flexbox style={{color: "red"}} className="center text">&#8595;4</Flexbox>*/}
 									</Flexbox>
 								</div>
 								<div>
 									<div className="center text">Positional</div>
 									<Flexbox flexDirection="row" justifyContent="space-around">
 										<div className="center xlarge text">{positionrank}</div>
-										<Flexbox style={{color: "green"}} className="center text">&#8593;2</Flexbox>
+										{/*<Flexbox style={{color: "green"}} className="center text">&#8593;2</Flexbox>*/}
 									</Flexbox>
 								</div>
 							</Flexbox>
 						</div>
 	        </div>
 					<Flexbox className="card-row">
-						<ButtonDrop text="stats" age="31" id={id} rookie={rookie} stattable={true}/>
+						<ButtonDrop text="stats" age="31" id={id} rookie={rookie} teamid={teamid} stattable={true}/>
 						<ButtonDrop text="bio" stattable={false} {...this.props}/>
 	        </Flexbox>
 	    	</div>

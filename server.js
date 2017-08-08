@@ -13,17 +13,17 @@ app.get('/', function (req, res) {
 	res.sendFile('src/index.html', { root : __dirname });
 })
 
-/*
+
 var con = mysql.createConnection({
 	host: "***",
 	user: "***",
 	password: "***",
-	database: "fantasykit",
+	database: "***",
 	port: 3306
 });
 
 con.connect();
-*/
+
 
 http.listen(3000, function(){
 	console.log('listening on *:3000');
@@ -31,21 +31,19 @@ http.listen(3000, function(){
 
 app.post('/ranks', function(req, res) {
 	
-	console.log("request received for", req.body);
-	
 	var sql = 'SELECT * FROM espn_rankings_all';
-	/*
+	
 	con.query(sql, function (err, result) {
-		console.log("result is ", result);
+		//console.log("result is ", result);
 		res.send(result);
 	})
-	*/
+	
 })
 
 app.post('/stats', function(req, res) {
 
 	console.log(req.body);
-	var filepath = './json/nyg/' + req.body.id + '.json';
+	var filepath = './local-storage/stats/' + req.body.team + '/' + req.body.id + '.json';
 	console.log(filepath);
 
 	var parsedJson = require(filepath);

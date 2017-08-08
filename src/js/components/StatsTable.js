@@ -21,6 +21,7 @@ export default class StatsTable extends React.Component {
 
     this.state = {
       id: props.id,
+      teamid: props.teamid,
     	rushingstats: stats.rushingstats,
     	receivingstats: stats.receivingstats,
     	passingstats: stats.passingstats,
@@ -48,11 +49,11 @@ export default class StatsTable extends React.Component {
   }
 
   componentDidMount() {
-    const {id, fetched} = this.state;
+    const {id, fetched, teamid} = this.state;
 
     if (!fetched && !this.props.rookie) {
       // fetch them
-      PlayerActions.fetchStats(id);
+      PlayerActions.fetchStats(id,teamid);
     }
 
     /*if ((!this.props.rookie) && (!fetched)) {
@@ -79,17 +80,29 @@ export default class StatsTable extends React.Component {
 
     const { rushingstats,receivingstats,passingstats } = this.state;
     const alternatingColor = ['#d5d5d5', '#a9a9a9'];
+    var rushingHeader = false;
+    var receivingHeader = false;
+    var passingHeader = false;
 
-    const RushingStats = rushingstats.map((season, index) => {
-      return <RushingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
+    const RushingStats = rushingstats.map((season, index, array) => {
+      if (array[index].att > 0) {
+        rushingHeader = true;
+        return <RushingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
+      }
     });
 
-    const ReceivingStats = receivingstats.map((season, index) => {
-      return <ReceivingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
+    const ReceivingStats = receivingstats.map((season, index, array) => {
+      if (array[index].tar > 0) {
+        receivingHeader = true;
+        return <ReceivingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
+      }
     });
 
-    const PassingStats = passingstats.map((season, index) => {
-      return <PassingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
+    const PassingStats = passingstats.map((season, index, array) => {
+      if (array[index].att > 0) {
+        passingHeader = true;
+        return <PassingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
+      }
     });
 
     if (!this.props.rookie) {
@@ -99,7 +112,7 @@ export default class StatsTable extends React.Component {
           {RushingStats}
           <ReceivingHeader should={ReceivingStats.length > 0}/>
           {ReceivingStats}
-          <PassingHeader should={PassingStats.length > 0}/>
+          <PassingHeader should={passingHeader}/>
           {PassingStats}
         </div>
       );

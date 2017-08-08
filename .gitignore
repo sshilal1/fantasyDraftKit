@@ -7,3 +7,6 @@ logs
 *.log
 *client.min.js
 src/*.png
+src/teams
+local-storage
+sql.js

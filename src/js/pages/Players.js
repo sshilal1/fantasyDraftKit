@@ -4,6 +4,7 @@ import {FlatButton,TextField,Toggle,AppBar} from 'material-ui';
 import Flexbox from 'flexbox-react';
 
 import PageSwitch from '../components/PageSwitch';
+import GlobalRankSwitch from '../components/GlobalRankSwitch'
 import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";
@@ -12,10 +13,29 @@ export default class Players extends React.Component {
   constructor() {
     super();
     this.getPlayers = this.getPlayers.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
     this.state = {
       all: PlayerStore.getAll(),
       players: PlayerStore.getAll()
     };
+    PlayerActions.getRanks();
+  }
+
+  handleScroll() {
+    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= (docHeight-5)) { // bc of rounding
+      PlayerActions.reachedBottom();
+    }
+  }
+
+  getPlayers() {
+    this.setState({
+      players: PlayerStore.getAll(),
+    });
   }
 
   componentWillMount() {
@@ -23,10 +43,12 @@ export default class Players extends React.Component {
     PlayerStore.on("hide", this.getPlayers);
   }
 
-  getPlayers() {
-    this.setState({
-      players: PlayerStore.getAll(),
-    });
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   createPlayer() {
@@ -45,18 +67,6 @@ export default class Players extends React.Component {
 
     PlayerActions.modPlayer(mod);
   }
-
-	showTotalAll() {
-    PlayerActions.showRankAll("totalranks");
-  }
-	
-	showEspnAll() {
-    PlayerActions.showRankAll("espn");
-  }
-	
-	showProsAll() {
-    PlayerActions.showRankAll("pros");
-  }
 	
 	getRanks() {
 		const { players } = this.state;
@@ -65,7 +75,7 @@ export default class Players extends React.Component {
 
   handleFilter(e) {
     const filter = e.target.value;
-    PlayerActions.filterPlayers(filter); 
+    PlayerActions.filterPlayers(filter);
   }
 
   toggleSortBy(e, isInputChecked) {
@@ -91,9 +101,7 @@ export default class Players extends React.Component {
             <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
               <div><PageSwitch/></div>
               <Flexbox flexDirection="row" justifyContent="space-between">
-                <FlatButton onClick={this.showTotalAll.bind(this)}>Total</FlatButton>
-                <FlatButton onClick={this.showEspnAll.bind(this)}>ESPN</FlatButton>
-                <FlatButton onClick={this.showProsAll.bind(this)}>PROS</FlatButton>
+                <GlobalRankSwitch/>
                 <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
                   <div>Rank</div>
                   <Toggle style={{width:"50px"}} onToggle={this.toggleSortBy.bind(this)}/>

@@ -2,7 +2,8 @@ import { EventEmitter } from "events";
 
 import dispatcher from "../dispatcher";
 
-import nygData from './nyg-team.json';
+//import playerData from './nyg-team.json';
+import playerData from '../../allplayers.json';
 import _ from 'lodash';
 
 class PlayerStore extends EventEmitter {
@@ -11,7 +12,7 @@ class PlayerStore extends EventEmitter {
 
 		var initialPlayers = [];
 		
-		for (var player of nygData.players) {
+		for (var player of playerData.players) {
 			var parts = player.name.split(" "),
 				first = parts.shift(),
 				last = parts.shift();
@@ -24,8 +25,9 @@ class PlayerStore extends EventEmitter {
 				position: player.position.toLowerCase(),
 				num: player.num,
 				teamid: player.teamid.toLowerCase(),
-				overallrank: 39,
-				positionrank: 22,
+				overallrank: Math.floor(Math.random() * (997)) + 1,
+				positionrank: 999,
+				selectedRanking: "totalranks",
 				rookie: (player.experience == 'R' ? true : false),
 				age: player.age,
 				height: player.height,
@@ -39,29 +41,44 @@ class PlayerStore extends EventEmitter {
     			fetched: false
 				},
         totalranks: {
-					overallrank: 29,
-					positionrank: 7
+					overallrank: 999,
+					positionrank: 999
 				},
 				espn: {
-					overallrank: 32,
-					positionrank: 5
+					overallrank: 997,
+					positionrank: 997
 				},
 				pros: {
-					overallrank: 34,
-					positionrank: 6
+					overallrank: 998,
+					positionrank: 998
 				},
 				hide: false,
 			};
 			
+			for (var person of initialPlayers) {
+				if (newPlayer.name == person.name) {
+					console.log("Found a duplicate: " + newPlayer.name);
+				}
+			}
 			initialPlayers.push(newPlayer);
 		}
 		
+		this.filter = "all";
+		this.playersshown = 20;
 		this.all = initialPlayers;
-		this.players = initialPlayers;
+		this.sortPlayers("overallrank");
+		this.filterPlayersPos(this.filter);
   }
 
   getAll() {
     return this.players;
+  }
+
+  addPlayersToView() {
+  	if (this.playersshown < 100) {
+  		this.playersshown += 6;
+  		this.filterPlayersPos(this.filter);
+  	}
   }
 
   createPlayer(player) {
@@ -87,44 +104,59 @@ class PlayerStore extends EventEmitter {
 
     this.players[index].overallrank = this.players[index][rankings].overallrank;
 		this.players[index].positionrank = this.players[index][rankings].positionrank;
+		this.players[index].selectedRanking = rankings;
+
 		this.emit("change");
   }
 	
 	showRanks(rankings) {
-		const players = this.players;
+		const all = this.all;
 		
-		for (var player in players) {
-			this.players[player].overallrank = this.players[player][rankings].overallrank;
-			this.players[player].positionrank = this.players[player][rankings].positionrank;
+		for (var player in all) {
+			this.all[player].overallrank = this.all[player][rankings].overallrank;
+			this.all[player].positionrank = this.all[player][rankings].positionrank;
+			this.all[player].selectedRanking = rankings;
 		}
+		this.sortPlayers("overallrank");
+		this.filterPlayersPos(this.filter);
 		this.emit("change");
 	}
 	
 	sortPlayers(sort) {
-		this.players.sort(function(a,b) {
+		this.all.sort(function(a,b) {
 			if (a[sort]< b[sort])
 				return -1;
 			if (a[sort] > b[sort])
 				return 1;
 			return 0;
 		})
+		this.filterPlayersPos(this.filter);
 		this.emit("change");
 	}
 
 	filterPlayersPos(filter) {
 
     const all = this.all;
+    const playersshown = this.playersshown;
+
+    this.filter = filter;
+    this.players = [];
 
     if (filter == "all") {
-    	this.players = all;
+    	for(var i=0;i<playersshown;i++) {
+    		this.players.push(all[i]);
+    	}
     }
 
     else {
     	var players = [];
 
-	    all.forEach(function(obj) {
+	    all.forEach(function(obj,index) {
 				if (_.includes(obj, filter)) {
-				   players.push(obj);
+					if (players.length > playersshown) {
+						return;
+					}
+				  players.push(obj);
 				}
 			});
 
@@ -134,12 +166,13 @@ class PlayerStore extends EventEmitter {
     this.emit("hide");
   }
 
+  // this needs work
   filterPlayers(filter) {
     
     const players = this.players;
 
     // Not actually removing (unmounting) players, just setting state to hide
-    this.players.forEach(function(obj) {
+    this.all.forEach(function(obj) {
 
     	const str = JSON.stringify(obj);
 
@@ -152,19 +185,20 @@ class PlayerStore extends EventEmitter {
 
 		});
 
+    //this.filterPlayersPos("all");
     this.emit("hide");
   }
 	
 	updateRanks(rankings) {
-		const players = this.players;
+		const all = this.all;
 		
-		for (var player in players) {
+		for (var player in all) {
 			//console.log(players[player].name);
 			for (var newRank in rankings) {
 				//console.log(rankings[newRank]);
-				if (players[player].name == rankings[newRank].name) {
-					console.log("updating espn rank for " + players[player].name + " from " + players[player].espn.overallrank + " to " + rankings[newRank].rank);
-					this.players[player].espn.overallrank = rankings[newRank].rank;
+				if (all[player].name == rankings[newRank].name.toLowerCase()) {
+					console.log("updating espn rank for " + all[player].name + " from " + all[player].espn.overallrank + " to " + rankings[newRank].rank);
+					this.all[player].espn.overallrank = rankings[newRank].rank;
 				}
 			}
 		}
@@ -198,6 +232,10 @@ class PlayerStore extends EventEmitter {
         this.createPlayer(action.player);
         break;
       }
+      case "REACHED_BOTTOM": {
+				this.addPlayersToView();
+				break;
+			}
       case "MOD_PLAYER": {
         this.modPlayer(action.modification);
         //this.emit("change");

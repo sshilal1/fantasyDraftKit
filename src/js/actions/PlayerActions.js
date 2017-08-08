@@ -75,10 +75,16 @@ export function filterPlayersPos(filter) {
   });
 }
 
-export function getRanks(players) {
+export function reachedBottom() {
+  dispatcher.dispatch({
+    type: "REACHED_BOTTOM"
+  });
+}
+
+export function getRanks() {
 
   axios.post('/ranks', {
-		name: players[0].name
+		data: "test"
 	})
 	.then(function (response) {
 		console.log(response);
@@ -94,10 +100,11 @@ export function getRanks(players) {
 	});
 }
 
-export function fetchStats(id) {
+export function fetchStats(id,teamid) {
 
   axios.post('/stats', {
-    id: id
+    id: id,
+    team: teamid
   })
   .then(function (response) {
     console.log(response);
