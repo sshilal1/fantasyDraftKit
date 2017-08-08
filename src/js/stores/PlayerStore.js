@@ -169,7 +169,7 @@ class PlayerStore extends EventEmitter {
   // this needs work
   filterPlayers(filter) {
     
-    const players = this.players;
+    var players = [];
 
     // Not actually removing (unmounting) players, just setting state to hide
     this.all.forEach(function(obj) {
@@ -185,7 +185,7 @@ class PlayerStore extends EventEmitter {
 
 		});
 
-    //this.filterPlayersPos("all");
+    this.filterPlayersPos("all");
     this.emit("hide");
   }
 	

@@ -41,6 +41,14 @@ export default class Players extends React.Component {
   componentWillMount() {
     PlayerStore.on("change", this.getPlayers);
     PlayerStore.on("hide", this.getPlayers);
+    this.delayedCallback = _.debounce(function (event) {
+      PlayerActions.filterPlayers(event.target.value);
+    }, 500);
+  }
+
+  handleFilter(event) {
+    event.persist();
+    this.delayedCallback(event);
   }
 
   componentDidMount() {
@@ -72,11 +80,6 @@ export default class Players extends React.Component {
 		const { players } = this.state;
 		PlayerActions.getRanks(players);
 	}
-
-  handleFilter(e) {
-    const filter = e.target.value;
-    PlayerActions.filterPlayers(filter);
-  }
 
   toggleSortBy(e, isInputChecked) {
     if(isInputChecked) {
