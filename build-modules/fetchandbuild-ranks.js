@@ -10,7 +10,7 @@ console.log('**Populating espn rankings table');
 for (var i=0; i<filters.length; i++) {
 	for (var iters = 0; iters < numplayers[i]; iters+=40) {
 		console.log('-Gathering ' + filters[i] + ' players: ' + iters + ' to ' + (iters+40));
-		var teamExecStr = 'node ./server-modules/get-post-espn-ranks.js ' + filters[i] + ' ' + iters;
+		var teamExecStr = 'node ./get-post-espn-ranks.js ' + filters[i] + ' ' + iters;
 		execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 	}
 }

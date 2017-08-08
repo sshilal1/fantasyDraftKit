@@ -43,7 +43,7 @@ var logger = new (winston.Logger)({
 // --------------------
 /*
 logger.info('**Gathering espn rankings...');
-exec('node fetchandbuild-stats.js', (error, stdout, stderr) => {
+exec('node ./build-modules/fetchandbuild-ranks.js', (error, stdout, stderr) => {
   console.log(`stdout: ${stdout}`);
   console.log(`stderr: ${stderr}`);
 });
@@ -62,7 +62,6 @@ for (var team in teams) {
 
 logger.info('**Building Single Team Object...');
 execSync('node ./build-modules/build-players.js', {encoding: 'utf8', stdio:[0,1,2]});
-
 // --------------------
 // --------------------
 // Stats Build
@@ -72,33 +71,3 @@ for (var team in teams) {
 	var teamExecStr = 'node ./build-modules/getstats.js ' + teams[team];
 	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 }
-
-/*
-console.log('Grabbing Version first...');
-setTimeout(function() {
-  console.log(execSync('ping 172.30.177.70', {encoding: 'utf8'}));
-
-  setTimeout(function() {
-		console.log('Grabbing Version 2nd...');
-		console.log(execSync('node -v', {encoding: 'utf8'}));
-
-		setTimeout(function() {
-			console.log('Grabbing Version 3rd...');
-			console.log(execSync('node -v', {encoding: 'utf8'}));
-
-			setTimeout(function() {
-				console.log('Grabbing Version 4th...');
-				console.log(execSync('node -v', {encoding: 'utf8'}));
-
-				setTimeout(function() {
-					console.log('Grabbing Version 5th...');
-					console.log(execSync('node -v', {encoding: 'utf8'}));
-				}, 2000);
-			}, 2000);
-		}, 2000);
-	}, 2000);
-}, 2000);
-*/
-
-//console.log(execSync('node downloadImages.js', {encoding: 'utf8'}));
-//console.log(execSync('node convertImages.js', {encoding: 'utf8'}));
