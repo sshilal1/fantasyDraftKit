@@ -2,6 +2,8 @@ const download = require('image-downloader');
 const winston = require('winston');
 const fs = require('fs');
 
+var team = process.argv[2];
+
 // --------------------
 // Setup Logging
 // --------------------
@@ -18,18 +20,19 @@ var logger = new (winston.Logger)({
 
 // --------------------
 // --------------------
-const dlDir = 'download';
+const dlDir = 'src/images/download';
 
 // Create the dl directory if it does not exist
 if (!fs.existsSync(dlDir)) {
 	fs.mkdirSync(dlDir);
 }
 
-var nygData = JSON.parse(fs.readFileSync('json/nyg-team.json', 'utf8'));
+var teamLoc = 'local-storage/teams/' + team + '-team.json';
+var teamData = JSON.parse(fs.readFileSync(teamLoc, 'utf8'));
 
-for (var k=0; k < nygData.players.length; k++) {
+for (var k=0; k < teamData.players.length; k++) {
 
-	var id = nygData.players[k].id;
+	var id = teamData.players[k].id;
 	var imageurl = "http://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/" + id + ".png";
 	var dest = 'src/images/download/' + id + '.png';
 
