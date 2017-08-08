@@ -42,7 +42,9 @@ export default class Players extends React.Component {
     PlayerStore.on("change", this.getPlayers);
     PlayerStore.on("hide", this.getPlayers);
     this.delayedCallback = _.debounce(function (event) {
-      PlayerActions.filterPlayers(event.target.value);
+      const filter = event.target.value;
+      console.log(filter);
+      PlayerActions.filterPlayers(filter);
     }, 500);
   }
 

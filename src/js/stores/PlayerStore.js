@@ -163,29 +163,42 @@ class PlayerStore extends EventEmitter {
 			this.players = players; 
     }
 
-    this.emit("hide");
+    this.emit("change");
   }
 
   // this needs work
   filterPlayers(filter) {
-    
-    var players = [];
 
+  	const all = this.all;
+  	const playersshown = this.playersshown;
+
+  	var players = [];
+
+    all.forEach(function(obj,index) {
+			if (JSON.stringify(obj).includes(filter)) {
+				if (players.length > playersshown) {
+					return;
+				}
+			  players.push(obj);
+			}
+		});
+		this.players = players;
+
+  	/*
     // Not actually removing (unmounting) players, just setting state to hide
     this.all.forEach(function(obj) {
-
     	const str = JSON.stringify(obj);
-
 			if (str.includes(filter)) {
-			    obj.hide = false;
+				obj.hide = false;
 			}
 			else {
 				obj.hide = true;
 			}
 
 		});
+		*/
 
-    this.filterPlayersPos("all");
+    //this.filterPlayersPos("all");
     this.emit("hide");
   }
 	
