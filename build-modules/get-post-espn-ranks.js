@@ -33,7 +33,7 @@ request(url, function(error, response, html){
 				var obj = {
 					"name" : name,
 					"rank" : rank,
-					"pos_rank" : posrank.match(/\d+/g)
+					"pos_rank" : posrank.match(/\d+/g).toString()
 				};
 				rankings.push(obj);
 
@@ -45,10 +45,10 @@ request(url, function(error, response, html){
 }).then(function() {
 	var con = mysql.createConnection({
 		host: "***",
-		user: "***",
-		password: "***",
-		database: "***",
-		port: 3306
+	user: "***",
+	password: "***",
+	database: "***",
+	port: 3306
 	});
 	con.connect(function(err) {
 		if (err) throw err;
