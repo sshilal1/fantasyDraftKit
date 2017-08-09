@@ -30,21 +30,10 @@ http.listen(3000, function(){
 });
 
 app.post('/ranks', function(req, res) {
-	
-	var sql = 'SELECT * FROM espn_rankings_all';
-	
+	var sql = 'SELECT * FROM ' + req.body.rankingorg + '_rankings_all';	
 	con.query(sql, function (err, result) {
-		//console.log("result is ", result);
 		res.send(result);
 	})
-	
-})
-
-app.post('/yahoo', function(req, res) {
-	var sql = 'SELECT * FROM yahoo_rankings_all';
-	con.query(sql, function (err, result) {
-		res.send(result);
-	})	
 })
 
 app.post('/stats', function(req, res) {

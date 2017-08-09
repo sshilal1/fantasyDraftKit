@@ -45,7 +45,7 @@ export default class GlobalRankSwitch extends React.Component {
         <MuiThemeProvider>
           <div>
             <Flexbox flexDirection="row" justifyContent="space-between">
-              <FlatButton backgroundColor={this.state.bg1 ? selected : non} onClick={() => this.pageSwitchRanks("totalranks",1)} className="text">Total</FlatButton>
+              <FlatButton backgroundColor={this.state.bg1 ? selected : non} onClick={() => this.pageSwitchRanks("yahoo",1)} className="text">Total</FlatButton>
               <FlatButton backgroundColor={this.state.bg2 ? selected : non} onClick={() => this.pageSwitchRanks("espn",2)}><img style={{width:"80%"}} src={espn}/></FlatButton>
               <FlatButton backgroundColor={this.state.bg3 ? selected : non} onClick={() => this.pageSwitchRanks("pros",3)}><img src={pros}/></FlatButton>
             </Flexbox>

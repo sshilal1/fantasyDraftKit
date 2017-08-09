@@ -81,16 +81,17 @@ export function reachedBottom() {
   });
 }
 
-export function getRanks() {
+export function getRanks(rankingorg) {
 
   axios.post('/ranks', {
-		data: "test"
+		rankingorg: rankingorg
 	})
 	.then(function (response) {
 		console.log(response);
 		
 		dispatcher.dispatch({
 			type: "UPDATE_RANKS",
+      rankingorg: rankingorg,
 			rankings: response.data
 		});
 		

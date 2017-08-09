@@ -25,9 +25,9 @@ class PlayerStore extends EventEmitter {
 				position: player.position.toLowerCase(),
 				num: player.num,
 				teamid: player.teamid.toLowerCase(),
-				overallrank: Math.floor(Math.random() * (997)) + 1,
+				overallrank: 999,
 				positionrank: 999,
-				selectedRanking: "totalranks",
+				selectedRanking: "yahoo",
 				rookie: (player.experience == 'R' ? true : false),
 				age: player.age,
 				height: player.height,
@@ -40,7 +40,7 @@ class PlayerStore extends EventEmitter {
     			passingstats: [],
     			fetched: false
 				},
-        totalranks: {
+        yahoo: {
 					overallrank: 999,
 					positionrank: 999
 				},
@@ -183,51 +183,18 @@ class PlayerStore extends EventEmitter {
 			}
 		});
 		this.players = players;
-
-  	/*
-    // Not actually removing (unmounting) players, just setting state to hide
-    this.all.forEach(function(obj) {
-    	const str = JSON.stringify(obj);
-			if (str.includes(filter)) {
-				obj.hide = false;
-			}
-			else {
-				obj.hide = true;
-			}
-
-		});
-		*/
-
-    //this.filterPlayersPos("all");
     this.emit("hide");
   }
 	
 	updateRanks(rankings,db) {
 		const all = this.all;
-		
-		switch(db) {
-			case "espn": {
-				for (var player in all) {
-					for (var newRank in rankings) {
-						if (all[player].name == rankings[newRank].name.toLowerCase()) {
-							console.log("Updating espn rank for " + all[player].name + " from " + all[player].espn.overallrank + " to " + rankings[newRank].rank);
-							this.all[player].espn.overallrank = rankings[newRank].rank;
-						}
-					}
+		for (var player in all) {
+			for (var newRank in rankings) {
+				if (all[player].name == rankings[newRank].name.toLowerCase()) {
+					console.log("Updating " + db + " rank for " + all[player].name + " from " + all[player][db].overallrank + " to " + rankings[newRank].rank);
+					this.all[player][db].overallrank = rankings[newRank].rank;
+					this.all[player][db].positionrank = rankings[newRank].posrank;
 				}
-				break;
-			}
-			case "yahoo": {
-				for (var player in all) {
-					for (var newRank in rankings) {
-						if (all[player].name == rankings[newRank].name.toLowerCase()) {
-							console.log("Updating yahoo rank for " + all[player].name + " from " + all[player].totalranks.overallrank + " to " + rankings[newRank].rank);
-							this.all[player].totalranks.overallrank = rankings[newRank].rank;
-							this.all[player].totalranks.positionrank = rankings[newRank].posrank;
-						}
-					}
-				}
-				break;
 			}
 		}
 		this.emit("change");
@@ -290,7 +257,7 @@ class PlayerStore extends EventEmitter {
         break;
       }
 			case "UPDATE_RANKS": {
-				this.updateRanks(action.rankings,"espn");
+				this.updateRanks(action.rankings,action.rankingorg);
 				break;
 			}
 			case "UPDATE_YAHOO_RANKS": {
