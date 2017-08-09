@@ -202,17 +202,32 @@ class PlayerStore extends EventEmitter {
     this.emit("hide");
   }
 	
-	updateRanks(rankings) {
+	updateRanks(rankings,db) {
 		const all = this.all;
 		
-		for (var player in all) {
-			//console.log(players[player].name);
-			for (var newRank in rankings) {
-				//console.log(rankings[newRank]);
-				if (all[player].name == rankings[newRank].name.toLowerCase()) {
-					console.log("updating espn rank for " + all[player].name + " from " + all[player].espn.overallrank + " to " + rankings[newRank].rank);
-					this.all[player].espn.overallrank = rankings[newRank].rank;
+		switch(db) {
+			case "espn": {
+				for (var player in all) {
+					for (var newRank in rankings) {
+						if (all[player].name == rankings[newRank].name.toLowerCase()) {
+							console.log("Updating espn rank for " + all[player].name + " from " + all[player].espn.overallrank + " to " + rankings[newRank].rank);
+							this.all[player].espn.overallrank = rankings[newRank].rank;
+						}
+					}
 				}
+				break;
+			}
+			case "yahoo": {
+				for (var player in all) {
+					for (var newRank in rankings) {
+						if (all[player].name == rankings[newRank].name.toLowerCase()) {
+							console.log("Updating yahoo rank for " + all[player].name + " from " + all[player].totalranks.overallrank + " to " + rankings[newRank].rank);
+							this.all[player].totalranks.overallrank = rankings[newRank].rank;
+							this.all[player].totalranks.positionrank = rankings[newRank].posrank;
+						}
+					}
+				}
+				break;
 			}
 		}
 		this.emit("change");
@@ -275,7 +290,11 @@ class PlayerStore extends EventEmitter {
         break;
       }
 			case "UPDATE_RANKS": {
-				this.updateRanks(action.rankings);
+				this.updateRanks(action.rankings,"espn");
+				break;
+			}
+			case "UPDATE_YAHOO_RANKS": {
+				this.updateRanks(action.rankings,"yahoo");
 				break;
 			}
 			case "RECEIVE_STATS": {

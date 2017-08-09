@@ -40,6 +40,13 @@ app.post('/ranks', function(req, res) {
 	
 })
 
+app.post('/yahoo', function(req, res) {
+	var sql = 'SELECT * FROM yahoo_rankings_all';
+	con.query(sql, function (err, result) {
+		res.send(result);
+	})	
+})
+
 app.post('/stats', function(req, res) {
 
 	console.log(req.body);
