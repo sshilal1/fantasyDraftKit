@@ -9,10 +9,11 @@ var pool = mysql.createPool({
 });
 
 var filters = ["all","qb","rb","wr","te","def","k","flex"];
+filters = ["all"];
 
 pool.getConnection(function(err, connection) {
 	filters.forEach(function(filter,index) {
-		var sql = 'CREATE TABLE yahoo_rankings_' + filter + ' (rank INTEGER PRIMARY KEY, name VARCHAR(255))';
+		var sql = 'CREATE TABLE yahoo_rankings_' + filter + ' (rank INTEGER PRIMARY KEY, name VARCHAR(255), posrank INTEGER)';
 		console.log(sql);
 		connection.query(sql, function (error, results) {
 		  if (error) {
@@ -24,7 +25,7 @@ pool.getConnection(function(err, connection) {
 		  		}
 		  		else {
 		  			console.log("Deleted Table...");
-		  			if (index==7) {
+		  			if (index==0) {
 							pool.end();	
 						}
 		  		}	  		
@@ -32,7 +33,7 @@ pool.getConnection(function(err, connection) {
 		  }
 		  else {
 		  	console.log("Created table");
-		  	if (index==7) {
+		  	if (index==0) {
 					pool.end();
 				}
 		  }
