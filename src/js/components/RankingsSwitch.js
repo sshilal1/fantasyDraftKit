@@ -18,8 +18,15 @@ export default class RankingsSwitch extends React.Component {
       bg3: false,
       selected: this.props.selectedRanking
     }
-  }
 
+    var bgForRank = {"yahoo": "bg1","espn": "bg2","pros": "bg3"};
+    const bg = bgForRank[props.selectedRanking];
+
+    this.setState({
+      [bg]: true
+    })
+  }
+  /*
   componentWillReceiveProps(nextProps) {
     if (this.props.selectedRanking !== nextProps.selectedRanking) {
 
@@ -32,13 +39,16 @@ export default class RankingsSwitch extends React.Component {
         bg3: false
       });
 
-      this.setState({[bg]: true})
+      this.setState({
+        [bg]: true,
+        selected: nextProps.selectedRanking
+      })
 
       return true;
     }
     return false;
   }
-
+  */
   playerSwitchRanks(rankings,num) {
 
     var bgstr = "bg" + num;

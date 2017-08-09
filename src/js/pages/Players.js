@@ -44,17 +44,7 @@ export default class Players extends React.Component {
   componentWillMount() {
     PlayerStore.on("change", this.getPlayers);
     PlayerStore.on("hide", this.getPlayers);
-    /*this.delayedCallback = _.debounce(function (event) {
-      const filter = event.target.value;
-      console.log(filter);
-      PlayerActions.filterPlayers(filter);
-    }, 500);*/
   }
-  /*
-  handleFilter(event) {
-    event.persist();
-    this.delayedCallback(event);
-  }*/
 
   componentDidMount() {
     window.addEventListener("scroll", this.handleScroll);

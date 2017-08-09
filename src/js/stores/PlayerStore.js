@@ -197,7 +197,7 @@ class PlayerStore extends EventEmitter {
 				}
 			}
 		}
-		this.emit("change");
+		this.sortPlayers("overallrank");
 	}
 
 	updateStats(stats) {

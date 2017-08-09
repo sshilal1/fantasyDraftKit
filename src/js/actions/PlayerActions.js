@@ -101,25 +101,6 @@ export function getRanks(rankingorg) {
 	});
 }
 
-export function getYahooRanks() {
-
-  axios.post('/yahoo', {
-    data: "test"
-  })
-  .then(function (response) {
-    console.log(response);
-    
-    dispatcher.dispatch({
-      type: "UPDATE_YAHOO_RANKS",
-      rankings: response.data
-    });
-    
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
-
 export function fetchStats(id,teamid) {
 
   axios.post('/stats', {
