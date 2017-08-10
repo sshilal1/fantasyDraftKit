@@ -35,27 +35,27 @@ export default class PlayerCard extends React.Component {
 	
   render() {
 	  
-		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide,selectedRanking } = this.props;
-		
+		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide,selectedRanking } = this.props;	
+		var lastnameClass = lastname.length > 8 ? "xlarge text" : "xxlarge text";
+
 		if (hide) {
 			return null;
 		}
 
 		else {
-
 	    return (
 	      <div className="Card">
 	        <Flexbox className="card-row header" flexDirection="row" justifyContent="space-between">
 						<div>
 							<div className="text">{firstname}</div>
-							<div className="xxlarge text">{lastname.toUpperCase()}</div>
+							<div style={{height:"45px"}} className={lastnameClass}>{lastname.toUpperCase()}</div>
 						</div>
 						<div className="xlarge text">{position.toUpperCase()}</div>
 	        </Flexbox>
 					<Flexbox className="card-row" flexDirection="row" justifyContent="space-between">
 						<ReactImageFallback className="player-img" src={"../../images/" + id + ".jpg"} fallbackImage={silhouette}/>
 						<Flexbox className="number-team" flexDirection="column" justifyContent="center">
-							<div className="center  xlarge text">{teamid.toUpperCase()}</div>
+							<div className="center xlarge text">{teamid.toUpperCase()}</div>
 							<div className="center text"># {num}</div>
 						</Flexbox>
 	        </Flexbox>
