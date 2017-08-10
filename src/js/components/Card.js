@@ -66,14 +66,14 @@ export default class PlayerCard extends React.Component {
 								<div>
 									<div className="center text">Overall</div>
 									<Flexbox flexDirection="row" justifyContent="space-around">
-										<div className="center xlarge text">{overallrank}</div>
+										<div className="center xlarge text">{overallrank>500 ? "N/A" : overallrank}</div>
 										{/*<Flexbox style={{color: "red"}} className="center text">&#8595;4</Flexbox>*/}
 									</Flexbox>
 								</div>
 								<div>
 									<div className="center text">Positional</div>
 									<Flexbox flexDirection="row" justifyContent="space-around">
-										<div className="center xlarge text">{positionrank}</div>
+										<div className="center xlarge text">{positionrank>500 ? "N/A" : positionrank}</div>
 										{/*<Flexbox style={{color: "green"}} className="center text">&#8593;2</Flexbox>*/}
 									</Flexbox>
 								</div>
