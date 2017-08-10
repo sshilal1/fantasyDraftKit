@@ -64,7 +64,7 @@ class PlayerStore extends EventEmitter {
 		}
 		
 		this.filter = "all";
-		this.playersshown = 20;
+		this.playersshown = 30;
 		this.all = initialPlayers;
 		//this.sortPlayers("overallrank");
 		this.filterPlayersPos(this.filter);
@@ -77,7 +77,8 @@ class PlayerStore extends EventEmitter {
   addPlayersToView() {
   	if (this.playersshown < 200) {
   		this.playersshown += 6;
-  		this.filterPlayersPos(this.filter);
+
+	  	this.filterPlayers(this.filter);
   	}
   }
 
@@ -136,6 +137,7 @@ class PlayerStore extends EventEmitter {
 
 	filterPlayersPos(filter) {
 
+		this.playersshown = 30;
     const all = this.all;
     const playersshown = this.playersshown;
 
@@ -171,7 +173,8 @@ class PlayerStore extends EventEmitter {
 
   	const all = this.all;
   	const playersshown = this.playersshown;
-
+  	
+  	this.filter = filter;
   	var players = [];
 
     all.forEach(function(obj,index) {

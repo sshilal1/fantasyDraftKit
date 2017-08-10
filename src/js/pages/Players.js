@@ -43,6 +43,7 @@ export default class Players extends React.Component {
 
   componentWillMount() {
     PlayerStore.on("change", this.getPlayers);
+    // Search bar clears on every "change" event, but not "hide"
     PlayerStore.on("hide", this.getPlayers);
   }
 
