@@ -66,7 +66,7 @@ class PlayerStore extends EventEmitter {
 		this.filter = "all";
 		this.playersshown = 20;
 		this.all = initialPlayers;
-		this.sortPlayers("overallrank");
+		//this.sortPlayers("overallrank");
 		this.filterPlayersPos(this.filter);
   }
 

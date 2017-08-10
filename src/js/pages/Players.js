@@ -19,9 +19,9 @@ export default class Players extends React.Component {
       all: PlayerStore.getAll(),
       players: PlayerStore.getAll()
     };
-    PlayerActions.getRanks("yahoo");
-    PlayerActions.getRanks("espn");
     PlayerActions.getRanks("pros");
+    PlayerActions.getRanks("espn");
+    PlayerActions.getRanks("yahoo");
   }
 
   handleScroll() {

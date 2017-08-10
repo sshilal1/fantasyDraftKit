@@ -94,6 +94,11 @@ export function getRanks(rankingorg) {
       rankingorg: rankingorg,
 			rankings: response.data
 		});
+
+    dispatcher.dispatch({
+      type: "SEE_RANK_ALL",
+      rankings: rankingorg
+    });
 		
 	})
 	.catch(function (error) {
