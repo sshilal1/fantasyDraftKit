@@ -80,7 +80,7 @@ export default class RankingsSwitch extends React.Component {
             <Flexbox flexDirection="row" justifyContent="space-between">
               <FlatButton backgroundColor={bg1 ? selected : non} style={{minWidth:"40px"}} onClick={() => this.playerSwitchRanks("yahoo",1)}><img style={{width:"60%"}} src={yahoo}/></FlatButton>
               <FlatButton backgroundColor={bg2 ? selected : non} style={{minWidth:"45px"}} onClick={() => this.playerSwitchRanks("espn",2)}><img style={{width:"80%"}} src={espn}/></FlatButton>
-              <FlatButton backgroundColor={bg3 ? selected : non} style={{minWidth:"85px"}} onClick={() => this.playerSwitchRanks("pros",3)}><img src={pros}/></FlatButton>
+              <FlatButton backgroundColor={bg3 ? selected : non} style={{minWidth:"85px"}} onClick={() => this.playerSwitchRanks("pros",3)}><img style={{width:"80%"}} src={pros}/></FlatButton>
             </Flexbox>
           </div>
         </MuiThemeProvider>
