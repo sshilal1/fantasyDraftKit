@@ -75,7 +75,7 @@ class PlayerStore extends EventEmitter {
   }
 
   addPlayersToView() {
-  	if (this.playersshown < 100) {
+  	if (this.playersshown < 60) {
   		this.playersshown += 6;
   		this.filterPlayersPos(this.filter);
   	}

@@ -5,6 +5,7 @@ import Flexbox from 'flexbox-react';
 
 import PlayerStore from "../stores/PlayerStore";
 import * as PlayerActions from "../actions/PlayerActions";
+import yahoo from '../../images/yahoo-small.png'
 import espn from '../../images/espn.png'
 import pros from '../../images/fantasypros.png'
 
@@ -77,7 +78,7 @@ export default class RankingsSwitch extends React.Component {
         <MuiThemeProvider>
           <div>
             <Flexbox flexDirection="row" justifyContent="space-between">
-              <FlatButton backgroundColor={bg1 ? selected : non} style={{minWidth:"40px"}} onClick={() => this.playerSwitchRanks("yahoo",1)} className="text">Total</FlatButton>
+              <FlatButton backgroundColor={bg1 ? selected : non} style={{minWidth:"40px"}} onClick={() => this.playerSwitchRanks("yahoo",1)}><img style={{width:"60%"}} src={yahoo}/></FlatButton>
               <FlatButton backgroundColor={bg2 ? selected : non} style={{minWidth:"45px"}} onClick={() => this.playerSwitchRanks("espn",2)}><img style={{width:"80%"}} src={espn}/></FlatButton>
               <FlatButton backgroundColor={bg3 ? selected : non} style={{minWidth:"85px"}} onClick={() => this.playerSwitchRanks("pros",3)}><img src={pros}/></FlatButton>
             </Flexbox>
