@@ -1,5 +1,5 @@
 node_modules
-dist/bundle.js
+*bundle.js
 .idea/*
 yarn.lock
 *.trace
