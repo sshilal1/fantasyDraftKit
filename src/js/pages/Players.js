@@ -95,7 +95,7 @@ export default class Players extends React.Component {
 
     return (
 			<MuiThemeProvider>
-        <div>
+        <div style={{overflow: "overlay"}} >
           <AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "white" }}>
             <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
               <div><PageSwitch/></div>
@@ -114,7 +114,7 @@ export default class Players extends React.Component {
   					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center"> 						
   						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton>
   					</Flexbox>
-  					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
+  					<Flexbox style={{overflow: "overlay"}} flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </div>
 			</MuiThemeProvider>
