@@ -39,7 +39,7 @@ export default class Comparisons extends React.Component {
   }*/
   render() {
     return (
-      <div> Comparison Page! </div>
+      <div style={{ paddingTop: 72 }}> Comparison Page! </div>
     )
   }
 }

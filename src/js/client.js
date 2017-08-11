@@ -11,6 +11,8 @@ import {
 import Players from "./pages/Players";
 import Comparisons from "./pages/Comparisons";
 
+import TopNavBar from "./components/TopNavBar";
+
 //const app = document.getElementById('app');
 //ReactDOM.render(<Players/>, app);
 
@@ -38,7 +40,7 @@ const Header = () => (
 
 const App = () => (
   <div>
-    <Header />
+    <TopNavBar />
     <Main />
   </div>
 )

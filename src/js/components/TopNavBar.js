@@ -3,7 +3,16 @@ import Flexbox from 'flexbox-react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {FlatButton,TextField,Toggle,AppBar} from 'material-ui';
 
+import CustomTextField from '../components/CustomTextField';
+import PageSwitch from '../components/PageSwitch';
+import GlobalRankSwitch from '../components/GlobalRankSwitch';
 import * as PlayerActions from "../actions/PlayerActions";
+import {
+  HashRouter,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
 
 export default class TopNavBar extends React.Component {
 
@@ -22,14 +31,19 @@ export default class TopNavBar extends React.Component {
 
   render() {
 
-  	const {appbar} = this.props;
-
     return (
     	<MuiThemeProvider>
         <div>
 		    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "white" }}>
 		        <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
-		          <div><PageSwitch/></div>
+		          <div>
+		          	<div style={{position:"fixed",left:0}}>
+		          		
+		          	<FlatButton><Link to='/'>Home</Link></FlatButton>
+        					<Link to='/comparisons'>Comparisons</Link>
+		          	</div>
+		          	<PageSwitch/>
+		          </div>
 		          <Flexbox flexDirection="row" justifyContent="space-between">
 		            <GlobalRankSwitch/>
 		            <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
