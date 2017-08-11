@@ -37,11 +37,10 @@ export default class TopNavBar extends React.Component {
 		    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "white" }}>
 		        <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
 		          <div>
-		          	<div style={{position:"fixed",left:0}}>
-		          		
-		          	<FlatButton><Link to='/'>Home</Link></FlatButton>
-        					<Link to='/comparisons'>Comparisons</Link>
-		          	</div>
+		          	<Flexbox flexDirection="column" style={{position:"fixed",left:5}}>
+			          	<Link to='/'><FlatButton style={{textAlign:"left"}}>Home</FlatButton></Link>
+			          	<Link to='/comparisons'><FlatButton>Comparisons</FlatButton></Link>
+		          	</Flexbox>
 		          	<PageSwitch/>
 		          </div>
 		          <Flexbox flexDirection="row" justifyContent="space-between">

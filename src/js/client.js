@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//import { Router, Route, IndexRoute } from "react-router";
 import {
   HashRouter,
   Switch,
@@ -10,7 +9,6 @@ import {
 
 import Players from "./pages/Players";
 import Comparisons from "./pages/Comparisons";
-
 import TopNavBar from "./components/TopNavBar";
 
 //const app = document.getElementById('app');
@@ -23,19 +21,6 @@ const Main = () => (
       <Route path='/comparisons' component={Comparisons}/>
     </Switch>
   </main>
-)
-
-// The Header creates links that can be used to navigate
-// between routes.
-const Header = () => (
-  <header>
-    <nav>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/comparisons'>Comparisons</Link></li>
-      </ul>
-    </nav>
-  </header>
 )
 
 const App = () => (
