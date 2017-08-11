@@ -3,6 +3,7 @@ var request = require("request-promise");
 var cheerio = require('cheerio');
 
 var url = 'http://fftoolbox.scout.com/football/depth-charts.cfm';
+var allPlayers = [];
 
 request(url, function(error, response, html){
 	if(!error){
@@ -20,10 +21,17 @@ request(url, function(error, response, html){
 				
 				var teamName = team.children().eq(0).children().eq(1).text();
 				var players = team.children().eq(1).children();
+
+				var hrefProp = team.children().eq(0).children().eq(1).attr('href');
+				if (hrefProp) {
+					var teamId = hrefProp.match(/=(\w+)/)[1];
+				}
+				else
+					var teamId = "none";
 				
 				if(teamCount>8 && (teamName != "")) {
 
-					console.log('\n' + teamName + '\n');
+					console.log('\n' + teamName + ' ' + teamId + '\n');
 
 					players.each(function() {
 						var player = $(this);
@@ -31,7 +39,15 @@ request(url, function(error, response, html){
 						var depth = player.first().text().split(' ').shift();		
 						var playerName = player.children().last().text();
 
-						console.log(playerName + ": " + depth);
+						var obj = {
+							"name": playerName,
+							"depth": depth,
+							"team": teamName,
+							"teamid": teamId
+						}
+						allPlayers.push(obj);
+
+						//console.log(playerName + ": " + depth);
 					})
 				}
 				teamCount++;
@@ -39,5 +55,6 @@ request(url, function(error, response, html){
 		})
 	}
 }).then(function() {
-	console.log("\n\nDone loading teams"); 
+	console.log("\n\nDone loading teams");
+	console.log(allPlayers);
 })
