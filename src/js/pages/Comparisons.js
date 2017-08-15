@@ -1,7 +1,11 @@
 import React from "react";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {FlatButton} from 'material-ui';
+import Flexbox from 'flexbox-react';
 
+import Card from "../components/Card";
 import * as PlayerActions from "../actions/PlayerActions";
-import ComparisonStore from "../stores/PlayerStore";
+import ComparisonStore from "../stores/ComparisonStore";
 
 export default class Comparisons extends React.Component {
   constructor() {
@@ -10,42 +14,24 @@ export default class Comparisons extends React.Component {
       players: ComparisonStore.getAll()
     };
   }
-  /*
-  componentWillMount() {
-    TodoStore.on("change", this.getTodos);
-  }
-
-  componentWillUnmount() {
-    TodoStore.removeListener("change", this.getTodos);
-  }
-
-  getTodos() {
-    this.setState({
-      todos: TodoStore.getAll(),
-    });
-  }
-
-  reloadTodos() {
-    TodoActions.reloadTodos();
-  }
 
   render() {
-    const { todos } = this.state;
 
-    const TodoComponents = todos.map((todo) => {
-        return <Todo key={todo.id} {...todo}/>;
+    const { players } = this.state;
+    
+    const PlayerComponents = players.map((card) => {
+        return <Card key={card.id} {...card}/>;
     });
+
     return (
-      <div>
-        <button onClick={this.reloadTodos.bind(this)}>Reload!</button>
-        <h1>Todos</h1>
-        <ul>{TodoComponents}</ul>
-      </div>
-    );
-  }*/
-  render() {
-    return (
-      <div style={{ paddingTop: 72 }}> Comparison Page! </div>
+      <MuiThemeProvider>
+        <div style={{overflow: "overlay"}} >
+          <div style={{ paddingTop: 72 }}>
+            Comparisons!
+            <Flexbox style={{overflow: "overlay"}} flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
+          </div>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

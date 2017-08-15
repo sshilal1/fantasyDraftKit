@@ -6,7 +6,6 @@ import MenuItem from 'material-ui/MenuItem';
 
 import BioTable from './BioTable';
 import StatsTable from './StatsTable';
-import * as PlayerActions from "../actions/PlayerActions";
 
 export default class ButtonDrop extends React.Component {
 
@@ -23,13 +22,6 @@ export default class ButtonDrop extends React.Component {
       return true;
     }
     return false;
-  }
-
-  compare() {
-    const player = this.props;
-    console.log("test");
-    PlayerActions.comparePlayer(player);
-    console.log("test2");
   }
 
   handleTouchTap = (event) => {
@@ -61,8 +53,7 @@ export default class ButtonDrop extends React.Component {
 
     return (
       <div>
-        <FlatButton onClick={this.compare.bind(this)} label="c" className="text" />
-        <FlatButton onClick={this.handleTouchTap} label={this.props.text} className="text" />
+        <FlatButton style={{minWidth:"50px"}} onClick={this.handleTouchTap} label={this.props.text} className="text" />
         <Popover open={this.state.open}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}

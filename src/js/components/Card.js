@@ -6,6 +6,7 @@ import './Card.css';
 
 import ButtonDrop from './ButtonDrop';
 import RankingsSwitch from './RankingsSwitch';
+import * as PlayerActions from "../actions/PlayerActions";
 
 import espn from '../../images/espn.png'
 import pros from '../../images/fantasypros.png'
@@ -16,6 +17,12 @@ export default class PlayerCard extends React.Component {
 	constructor() {
 		super();
 	}
+
+	compare() {
+    const player = this.props;
+    PlayerActions.comparePlayer(player);
+    console.log("test");
+  }
 
 	shouldComponentUpdate(nextProps, nextState) {
     if (this.props.hide !== nextProps.hide) {
@@ -37,6 +44,8 @@ export default class PlayerCard extends React.Component {
 	  
 		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide,selectedRanking } = this.props;	
 		var lastnameClass = lastname.length > 8 ? "xlarge text" : "xxlarge text";
+
+		var compare = compare ? 'Compare' : 'Remove';
 
 		if (hide) {
 			return null;
@@ -81,6 +90,7 @@ export default class PlayerCard extends React.Component {
 						</div>
 	        </div>
 					<Flexbox className="card-row">
+						<FlatButton style={{minWidth:"65px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
 						<ButtonDrop text="stats" age="31" id={id} rookie={rookie} teamid={teamid} stattable={true}/>
 						<ButtonDrop text="bio" stattable={false} {...this.props}/>
 	        </Flexbox>
