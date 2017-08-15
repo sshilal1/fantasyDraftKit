@@ -12,14 +12,27 @@ class ComparisonStore extends EventEmitter {
     return this.players;
   }
 
+  addPlayer(player) {
+  	this.players.push(player);
+  }
+
+  removePlayer(player) {
+  	const players = this.players;
+  	this.players = _.reject(players, function(o) { o.id == player.id; });
+  }
+
   handleActions(action) {
     switch(action.type) {
-      case "CREATE_PLAYER": {
-        this.createPlayer(action.player);
+      case "C_ADD_PLAYER": {
+        this.addPlayer(action.player);
         break;
       }
-      case "REACHED_BOTTOM": {
-				this.addPlayersToView();
+      case "C_REMOVE_PLAYER": {
+				this.removePlayer(action.player);
+				break;
+			}
+			case "C_CLEAR_ALL": {
+				this.clearPlayers();
 				break;
 			}
     }
