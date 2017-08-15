@@ -1,8 +1,14 @@
 import React from "react";
 
+import * as PlayerActions from "../actions/PlayerActions";
+import ComparisonStore from "../stores/PlayerStore";
+
 export default class Comparisons extends React.Component {
   constructor() {
     super();
+    this.state = {
+      players: ComparisonStore.getAll()
+    };
   }
   /*
   componentWillMount() {

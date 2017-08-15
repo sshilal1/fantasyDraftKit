@@ -125,3 +125,10 @@ export function fetchStats(id,teamid) {
     console.log(error);
   });
 }
+
+export function comparePlayer(player) {
+  dispatcher.dispatch({
+    type: "C_ADD_PLAYER",
+    player: player
+  });
+}

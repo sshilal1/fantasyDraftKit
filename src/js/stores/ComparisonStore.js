@@ -5,7 +5,8 @@ import _ from 'lodash';
 
 class ComparisonStore extends EventEmitter {
   constructor() {
-    super()
+    super();
+    this.players = [];
   }
 
   getAll() {
@@ -13,6 +14,7 @@ class ComparisonStore extends EventEmitter {
   }
 
   addPlayer(player) {
+  	console.log("player");
   	this.players.push(player);
   }
 
