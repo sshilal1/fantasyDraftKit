@@ -53,6 +53,7 @@ class PlayerStore extends EventEmitter {
 					positionrank: 998
 				},
 				hide: false,
+				comparing: false
 			};
 			
 			for (var person of initialPlayers) {
@@ -224,6 +225,17 @@ class PlayerStore extends EventEmitter {
     return this.players[index].stats;
 	}
 
+	comparePlayer(player) {
+		const players = this.players;
+		const id = player.id;
+
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    this.players[index].comparing = !player.comparing;
+    console.log("comparing", player.name);
+    this.emit("change");
+	}
+
   handleActions(action) {
     switch(action.type) {
       case "CREATE_PLAYER": {
@@ -269,6 +281,10 @@ class PlayerStore extends EventEmitter {
 			}
 			case "RECEIVE_STATS": {
 				this.updateStats(action.stats);
+				break;
+			}
+			case "C_ADD_PLAYER": {
+				this.comparePlayer(action.player);
 				break;
 			}
     }

@@ -14,8 +14,9 @@ class ComparisonStore extends EventEmitter {
   }
 
   addPlayer(player) {
-  	console.log("player");
-  	this.players.push(player);
+    var newPlayer = Object.assign({}, player);
+    newPlayer.comparing = true;
+  	this.players.push(newPlayer);
   }
 
   removePlayer(player) {
