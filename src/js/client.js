@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {
   HashRouter,
+  BrowserRouter,
   Switch,
   Route,
   Link
@@ -33,7 +34,7 @@ const App = (pagename) => (
 // This demo uses a HashRouter instead of BrowserRouter
 // because there is no server to match URLs
 ReactDOM.render((
-  <HashRouter>
+  <BrowserRouter>
     <App pagename={"test"} />
-  </HashRouter>
+  </BrowserRouter>
 ), document.getElementById('app'))
