@@ -23,9 +23,9 @@ const Main = () => (
   </main>
 )
 
-const App = () => (
+const App = (pagename) => (
   <div>
-    <TopNavBar />
+    <TopNavBar page={pagename.pagename} />
     <Main />
   </div>
 )
@@ -34,6 +34,6 @@ const App = () => (
 // because there is no server to match URLs
 ReactDOM.render((
   <HashRouter>
-    <App />
+    <App pagename={"test"} />
   </HashRouter>
 ), document.getElementById('app'))
