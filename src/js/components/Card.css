@@ -9,6 +9,30 @@
 	margin: 5px;
 	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12)
 }
+
+.compare {
+  animation: sendto 1s linear;
+}
+
+@keyframes sendto {
+	100% {
+		transform: scale(.1) translateY(-50%) translateX(-50%);
+	}
+}
+
+@keyframes topleft {
+	0% {
+		position:fixed;
+	}
+	100% {
+		position:fixed;
+    left: 0;
+    top: 0;
+    margin-left:10px;
+    margin-top:5px;
+  }
+}
+
 /* ---Generals--- */
 .card-row {
 	padding:2px;

@@ -16,12 +16,19 @@ export default class PlayerCard extends React.Component {
 	
 	constructor() {
 		super();
+		this.state = {
+			animate: false
+		}
 	}
 
 	compare() {
     const player = this.props;
+
+    this.setState({
+    	animate: !this.state.animate
+    });
+
     PlayerActions.comparePlayer(player);
-    console.log("test");
   }
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -37,6 +44,9 @@ export default class PlayerCard extends React.Component {
     if (this.props.selectedRanking !== nextProps.selectedRanking) {
       return true;
     }
+    if (this.state.animate !== nextState.animate) {
+      return true;
+    }
     return false;
   }
 	
@@ -44,8 +54,9 @@ export default class PlayerCard extends React.Component {
 	  
 		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide,selectedRanking } = this.props;	
 		var lastnameClass = lastname.length > 8 ? "xlarge text" : "xxlarge text";
+		var compareClass = this.state.animate ? "text compare" : "text";
 
-		var compare = compare ? 'Compare' : 'Remove';
+		var compare = this.state.animate ? 'Remove' : 'Compare';
 
 		if (hide) {
 			return null;
