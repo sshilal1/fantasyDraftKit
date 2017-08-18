@@ -33,6 +33,7 @@ export default class CustomTextField extends React.Component {
 
   componentWillUnmount() {
     console.log("unmounting");
+    PlayerActions.filterPlayers("all");
     PlayerStore.removeListener("change",this.clearField);
   }
 
