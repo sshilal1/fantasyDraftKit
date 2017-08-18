@@ -52,7 +52,6 @@ class PlayerStore extends EventEmitter {
 					overallrank: 998,
 					positionrank: 998
 				},
-				hide: false,
 				comparing: false
 			};
 			
@@ -113,15 +112,22 @@ class PlayerStore extends EventEmitter {
 	
 	showRanks(rankings) {
 		const all = this.all;
-		
+		const players = this.players;
+
+		for (var player in players) {
+			this.players[player].overallrank = this.all[player][rankings].overallrank;
+			this.players[player].positionrank = this.all[player][rankings].positionrank;
+			this.players[player].selectedRanking = rankings;
+		}
+		console.log(this.filter);
+		//this.sortPlayers("overallrank");
+		this.emit("hide");
+
 		for (var player in all) {
 			this.all[player].overallrank = this.all[player][rankings].overallrank;
 			this.all[player].positionrank = this.all[player][rankings].positionrank;
 			this.all[player].selectedRanking = rankings;
 		}
-		this.sortPlayers("overallrank");
-		this.filterPlayersPos(this.filter);
-		this.emit("change");
 	}
 	
 	sortPlayers(sort) {
@@ -141,6 +147,7 @@ class PlayerStore extends EventEmitter {
 		this.playersshown = 30;
     const all = this.all;
     const playersshown = this.playersshown;
+    console.log("filtering all players by", filter);
 
     this.filter = filter;
     this.players = [];
@@ -297,5 +304,7 @@ class PlayerStore extends EventEmitter {
 
 const playerStore = new PlayerStore;
 dispatcher.register(playerStore.handleActions.bind(playerStore));
+
+window.playerstore = playerStore;
 
 export default playerStore;

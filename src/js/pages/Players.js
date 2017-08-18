@@ -33,7 +33,6 @@ export default class Players extends React.Component {
   }
 
   getPlayers() {
-    console.log("players");
     this.setState({
       players: PlayerStore.getAll(),
     });

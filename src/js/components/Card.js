@@ -29,9 +29,6 @@ export default class PlayerCard extends React.Component {
   }
 
 	shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.hide !== nextProps.hide) {
-      return true;
-    }
     if (this.props.overallrank !== nextProps.overallrank) {
       return true;
     }
@@ -49,60 +46,55 @@ export default class PlayerCard extends React.Component {
 	
   render() {
 	  
-		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,hide,selectedRanking,comparing } = this.props;	
+		const { id,firstname,lastname,position,num,teamid,overallrank,positionrank,rookie,selectedRanking,comparing } = this.props;	
 		var lastnameClass = lastname.length > 8 ? "xlarge text" : "xxlarge text";
 
 		var compare = comparing ? 'Remove' : 'Compare';
+		var compareBg = comparing ? 'rgba(153,153,153,.2)' : 'rgba(0,0,0,0)';
 
-		if (hide) {
-			return null;
-		}
-
-		else {
-	    return (
-	      <div className="Card">
-	        <Flexbox className="card-row header" flexDirection="row" justifyContent="space-between">
-						<div>
-							<div className="text">{firstname}</div>
-							<div style={{height:"45px"}} className={lastnameClass}>{lastname.toUpperCase()}</div>
-						</div>
-						<div className="xlarge text">{position.toUpperCase()}</div>
-	        </Flexbox>
-					<Flexbox className="card-row" flexDirection="row" justifyContent="space-between">
-						<ReactImageFallback className="player-img" src={"../../images/" + id + ".jpg"} fallbackImage={silhouette}/>
-						<Flexbox className="number-team" flexDirection="column" justifyContent="center">
-							<div className="center xlarge text">{teamid.toUpperCase()}</div>
-							<div className="center text"># {num}</div>
+	  return (
+      <div className="Card">
+        <Flexbox className="card-row header" flexDirection="row" justifyContent="space-between">
+					<div>
+						<div className="text">{firstname}</div>
+						<div style={{height:"45px"}} className={lastnameClass}>{lastname.toUpperCase()}</div>
+					</div>
+					<div className="xlarge text">{position.toUpperCase()}</div>
+        </Flexbox>
+				<Flexbox className="card-row" flexDirection="row" justifyContent="space-between">
+					<ReactImageFallback className="player-img" src={"../../images/" + id + ".jpg"} fallbackImage={silhouette}/>
+					<Flexbox className="number-team" flexDirection="column" justifyContent="center">
+						<div className="center xlarge text">{teamid.toUpperCase()}</div>
+						<div className="center text"># {num}</div>
+					</Flexbox>
+        </Flexbox>
+				<div className="card-row">
+					<div className="rankings-title">
+						<RankingsSwitch id={id} selectedRanking={selectedRanking}/>
+						<Flexbox flexDirection="row" justifyContent="space-around">
+							<div>
+								<div className="center text">Overall</div>
+								<Flexbox flexDirection="row" justifyContent="space-around">
+									<div className="center xlarge text">{overallrank>500 ? "N/A" : overallrank}</div>
+									{/*<Flexbox style={{color: "red"}} className="center text">&#8595;4</Flexbox>*/}
+								</Flexbox>
+							</div>
+							<div>
+								<div className="center text">Positional</div>
+								<Flexbox flexDirection="row" justifyContent="space-around">
+									<div className="center xlarge text">{positionrank>500 ? "N/A" : positionrank}</div>
+									{/*<Flexbox style={{color: "green"}} className="center text">&#8593;2</Flexbox>*/}
+								</Flexbox>
+							</div>
 						</Flexbox>
-	        </Flexbox>
-					<div className="card-row">
-						<div className="rankings-title">
-							<RankingsSwitch id={id} selectedRanking={selectedRanking}/>
-							<Flexbox flexDirection="row" justifyContent="space-around">
-								<div>
-									<div className="center text">Overall</div>
-									<Flexbox flexDirection="row" justifyContent="space-around">
-										<div className="center xlarge text">{overallrank>500 ? "N/A" : overallrank}</div>
-										{/*<Flexbox style={{color: "red"}} className="center text">&#8595;4</Flexbox>*/}
-									</Flexbox>
-								</div>
-								<div>
-									<div className="center text">Positional</div>
-									<Flexbox flexDirection="row" justifyContent="space-around">
-										<div className="center xlarge text">{positionrank>500 ? "N/A" : positionrank}</div>
-										{/*<Flexbox style={{color: "green"}} className="center text">&#8593;2</Flexbox>*/}
-									</Flexbox>
-								</div>
-							</Flexbox>
-						</div>
-	        </div>
-					<Flexbox className="card-row">
-						<FlatButton style={{minWidth:"65px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
-						<ButtonDrop text="stats" age="31" id={id} rookie={rookie} teamid={teamid} stattable={true}/>
-						<ButtonDrop text="bio" stattable={false} {...this.props}/>
-	        </Flexbox>
-	    	</div>
-  		);
-    }
+					</div>
+        </div>
+				<Flexbox className="card-row">
+					<FlatButton backgroundColor={compareBg} style={{minWidth:"65px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
+					<ButtonDrop text="stats" age="31" id={id} rookie={rookie} teamid={teamid} stattable={true}/>
+					<ButtonDrop text="bio" stattable={false} {...this.props}/>
+        </Flexbox>
+    	</div>
+		);
   }
 }

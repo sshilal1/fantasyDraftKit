@@ -22,6 +22,7 @@ export default class CustomTextField extends React.Component {
   }
 
   componentWillMount() {
+    console.log("mounting");
     PlayerStore.on("change", this.clearField);
     this.delayedCallback = _.debounce(function (event) {
       const filter = event.target.value;
@@ -31,10 +32,12 @@ export default class CustomTextField extends React.Component {
   }
 
   componentWillUnmount() {
+    console.log("unmounting");
     PlayerStore.removeListener("change",this.clearField);
   }
 
   handleFilter(event) {
+    console.log("filtering by", event.target.value);
     this.setState({
       value: event.target.value,
     });

@@ -28,7 +28,8 @@ export default class TopNavBar extends React.Component {
 	}
 
 	focusInput() {
-		this.input.focus();
+		if (this.input)
+			this.input.focus();
 	}
 
 	componentDidMount() {
