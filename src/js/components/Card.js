@@ -20,7 +20,12 @@ export default class PlayerCard extends React.Component {
 
 	compare() {
     const player = this.props;
-    PlayerActions.comparePlayer(player);
+    if (!player.comparing) {
+    	PlayerActions.comparePlayer(player);
+    }
+    else {
+    	PlayerActions.removePlayer(player);
+    }
   }
 
 	shouldComponentUpdate(nextProps, nextState) {

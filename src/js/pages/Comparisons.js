@@ -10,9 +10,25 @@ import ComparisonStore from "../stores/ComparisonStore";
 export default class Comparisons extends React.Component {
   constructor() {
     super();
+    this.getPlayers = this.getPlayers.bind(this);
     this.state = {
       players: ComparisonStore.getAll()
     };
+  }
+
+  getPlayers() {
+    console.log("comparisons");
+    this.setState({
+      players: ComparisonStore.getAll(),
+    });
+  }
+
+  componentWillMount() {
+    ComparisonStore.on("compare", this.getPlayers);
+  }
+
+  componentWillUnmount() {
+    ComparisonStore.removeListener("compare", this.getPlayers);
   }
 
   render() {

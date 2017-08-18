@@ -132,3 +132,10 @@ export function comparePlayer(player) {
     player: player
   });
 }
+
+export function removePlayer(player) {
+  dispatcher.dispatch({
+    type: "C_REMOVE_PLAYER",
+    player: player
+  });
+}

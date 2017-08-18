@@ -17,11 +17,17 @@ class ComparisonStore extends EventEmitter {
     var newPlayer = Object.assign({}, player);
     newPlayer.comparing = true;
   	this.players.push(newPlayer);
+  	this.emit("compare");
   }
 
   removePlayer(player) {
   	const players = this.players;
-  	this.players = _.reject(players, function(o) { o.id == player.id; });
+  	const id = player.id;
+  	this.players = _.reject(players, function(o) {
+  		console.log("rejecting", o);
+  		return o.id == id; 
+  	});
+  	this.emit("compare");
   }
 
   handleActions(action) {
@@ -35,7 +41,7 @@ class ComparisonStore extends EventEmitter {
 				break;
 			}
 			case "C_CLEAR_ALL": {
-				this.clearPlayers();
+				//this.clearPlayers();
 				break;
 			}
     }

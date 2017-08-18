@@ -33,6 +33,7 @@ export default class Players extends React.Component {
   }
 
   getPlayers() {
+    console.log("players");
     this.setState({
       players: PlayerStore.getAll(),
     });
@@ -50,6 +51,8 @@ export default class Players extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
+    PlayerStore.removeListener("change", this.getPlayers);
+    PlayerStore.removeListener("hide", this.getPlayers);
   }
 
   createPlayer() {

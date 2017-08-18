@@ -30,6 +30,10 @@ export default class CustomTextField extends React.Component {
     }, 500);
   }
 
+  componentWillUnmount() {
+    PlayerStore.removeListener("change",this.clearField);
+  }
+
   handleFilter(event) {
     this.setState({
       value: event.target.value,
