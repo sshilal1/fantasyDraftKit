@@ -2,26 +2,46 @@ import React from "react";
 import Flexbox from 'flexbox-react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {FlatButton,TextField,Toggle,AppBar} from 'material-ui';
-
-import CustomTextField from '../components/CustomTextField';
-import PageSwitch from '../components/PageSwitch';
-import GlobalRankSwitch from '../components/GlobalRankSwitch';
-import * as PlayerActions from "../actions/PlayerActions";
 import {
   HashRouter,
   Switch,
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom';
+
+import CustomTextField from '../components/CustomTextField';
+import PageSwitch from '../components/PageSwitch';
+import GlobalRankSwitch from '../components/GlobalRankSwitch';
+import * as PlayerActions from "../actions/PlayerActions";
+import PlayerStore from "../stores/PlayerStore";
 
 export default class TopNavBar extends React.Component {
 
 	constructor() {
 		super();
+		this.focusInput = this.focusInput.bind(this);
 		this.state = {
 			nav:"home"
 		}
 	}
+
+	focusInput() {
+		this.input.focus();
+	}
+
+	componentDidMount() {
+    this.focusInput();
+  }
+
+  componentWillMount() {
+    PlayerStore.on("change", this.focusInput);
+    PlayerStore.on("hide", this.focusInput);
+  }
+
+  componentWillUnmount() {
+    PlayerStore.removeListener("change", this.focusInput);
+    PlayerStore.removeListener("hide", this.focusInput);
+  }
 
 	toggleSortBy(e, isInputChecked) {
     if(isInputChecked) {
@@ -71,7 +91,7 @@ export default class TopNavBar extends React.Component {
 			              <Toggle style={{width:"50px"}} onToggle={this.toggleSortBy.bind(this)}/>
 			              <div>Name</div>
 			            </Flexbox>
-			            <CustomTextField/>
+			            <CustomTextField inputRef={input => this.input = input}/>
 			          </Flexbox>
 			        </Flexbox>
 			      </AppBar>
