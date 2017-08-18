@@ -226,12 +226,12 @@ class PlayerStore extends EventEmitter {
 	}
 
 	comparePlayer(player,comparing) {
-		const players = this.players;
+		const all = this.all;
 		const id = player.id;
 
-    var index = _.findIndex(players, function(o) { return o.id == id; });
+    var index = _.findIndex(all, function(o) { return o.id == id; });
 
-    this.players[index].comparing = comparing;
+    this.all[index].comparing = comparing;
     console.log("comparing", player.name);
     this.emit("change");
 	}
