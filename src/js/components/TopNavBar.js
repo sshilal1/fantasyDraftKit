@@ -8,6 +8,8 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 import CustomTextField from '../components/CustomTextField';
 import PageSwitch from '../components/PageSwitch';
