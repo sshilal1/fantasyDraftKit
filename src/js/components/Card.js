@@ -106,14 +106,3 @@ export default class PlayerCard extends React.Component {
     }
   }
 }
-
-/*
-name
-number
-position
-picture
-team picture
-espn rank
-bio button (opens bio - height, weight, age, college, etc...)
-stats button (opens stats)
-*/

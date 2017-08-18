@@ -74,7 +74,7 @@ export default class RankingsSwitch extends React.Component {
     const {bg1, bg2, bg3} = this.state;
 
     return (
-      <div>
+      <Flexbox flexDirection="column" justifyContent="center">
         <MuiThemeProvider>
           <div>
             <Flexbox flexDirection="row" justifyContent="space-between">
@@ -84,7 +84,7 @@ export default class RankingsSwitch extends React.Component {
             </Flexbox>
           </div>
         </MuiThemeProvider>
-      </div>
+      </Flexbox>
     );
   }
 }

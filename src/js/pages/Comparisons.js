@@ -3,7 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {FlatButton} from 'material-ui';
 import Flexbox from 'flexbox-react';
 
-import Card from "../components/Card";
+import CompareCard from "../components/CompareCard";
 import * as PlayerActions from "../actions/PlayerActions";
 import ComparisonStore from "../stores/ComparisonStore";
 
@@ -36,7 +36,7 @@ export default class Comparisons extends React.Component {
     const { players } = this.state;
     
     const PlayerComponents = players.map((card) => {
-        return <Card key={card.id} {...card}/>;
+        return <CompareCard key={card.id} {...card}/>;
     });
 
     return (
@@ -44,7 +44,7 @@ export default class Comparisons extends React.Component {
         <div style={{overflow: "overlay"}} >
           <div style={{ paddingTop: 72 }}>
             Comparisons!
-            <Flexbox style={{overflow: "overlay"}} flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
+            <Flexbox style={{overflow: "overlay"}} flexDirection="column" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </div>
       </MuiThemeProvider>
