@@ -119,8 +119,7 @@ class PlayerStore extends EventEmitter {
 			this.players[player].positionrank = this.all[player][rankings].positionrank;
 			this.players[player].selectedRanking = rankings;
 		}
-		console.log(this.filter);
-		//this.sortPlayers("overallrank");
+		this.sortPlayers("overallrank");
 		this.emit("hide");
 
 		for (var player in all) {
@@ -128,6 +127,8 @@ class PlayerStore extends EventEmitter {
 			this.all[player].positionrank = this.all[player][rankings].positionrank;
 			this.all[player].selectedRanking = rankings;
 		}
+		this.sortPlayers("overallrank");
+		this.emit("hide");
 	}
 	
 	sortPlayers(sort) {
