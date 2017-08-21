@@ -25,8 +25,8 @@ var con = mysql.createConnection({
 con.connect();
 
 
-http.listen(3000, function(){
-	console.log('listening on *:3000');
+http.listen(4000, function(){
+	console.log('listening on *:4000');
 });
 
 app.post('/ranks', function(req, res) {
