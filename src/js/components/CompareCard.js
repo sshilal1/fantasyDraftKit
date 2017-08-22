@@ -32,6 +32,9 @@ export default class PlayerCard extends React.Component {
     if (this.props.comparing !== nextProps.comparing) {
       return true;
     }
+    if (this.props.selectedRanking !== nextProps.selectedRanking) {
+      return true;
+    }
     return false;
   }
 	

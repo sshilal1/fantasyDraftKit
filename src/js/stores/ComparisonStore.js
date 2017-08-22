@@ -30,6 +30,18 @@ class ComparisonStore extends EventEmitter {
   	this.emit("compare");
   }
 
+  showRank(rankings,id) {
+
+    const players = this.players;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    this.players[index].overallrank = this.players[index][rankings].overallrank;
+    this.players[index].positionrank = this.players[index][rankings].positionrank;
+    this.players[index].selectedRanking = rankings;
+
+    this.emit("compare");
+  }
+
   handleActions(action) {
     switch(action.type) {
       case "C_ADD_PLAYER": {
@@ -44,6 +56,10 @@ class ComparisonStore extends EventEmitter {
 				//this.clearPlayers();
 				break;
 			}
+      case "SEE_RANK": {
+        this.showRank(action.rankings, action.id);
+        break;
+      }
     }
   }
 }
