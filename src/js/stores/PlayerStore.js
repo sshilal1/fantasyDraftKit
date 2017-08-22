@@ -121,7 +121,7 @@ class PlayerStore extends EventEmitter {
 		this.players[index].positionrank = this.players[index][rankings].positionrank;
 		this.players[index].selectedRanking = rankings;
 
-		this.emit("change");
+		this.emit("hide");
   }
 	
 	showRanks(rankings) {
