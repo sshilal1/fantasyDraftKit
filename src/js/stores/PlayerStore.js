@@ -74,6 +74,16 @@ class PlayerStore extends EventEmitter {
     return this.players;
   }
 
+  populatePlayers() {
+  	const all = this.all;
+  	const playersshown = this.playersshown;
+  	this.players = [];
+  	
+  	for(var i=0;i<playersshown;i++) {
+  		this.players.push(all[i]);
+  	}
+  }
+
   addPlayersToView() {
   	if (this.playersshown < 200) {
   		this.playersshown += 6;
@@ -119,7 +129,7 @@ class PlayerStore extends EventEmitter {
 			this.players[player].positionrank = this.all[player][rankings].positionrank;
 			this.players[player].selectedRanking = rankings;
 		}
-		this.sortPlayers("overallrank");
+		//this.sortPlayers("overallrank");
 		this.emit("hide");
 
 		for (var player in all) {
@@ -127,11 +137,14 @@ class PlayerStore extends EventEmitter {
 			this.all[player].positionrank = this.all[player][rankings].positionrank;
 			this.all[player].selectedRanking = rankings;
 		}
-		this.sortPlayers("overallrank");
+		//this.sortPlayers("overallrank");
 		this.emit("hide");
 	}
 	
 	sortPlayers(sort) {
+
+		this.players = [];
+		
 		this.all.sort(function(a,b) {
 			if (a[sort]< b[sort])
 				return -1;
@@ -139,8 +152,9 @@ class PlayerStore extends EventEmitter {
 				return 1;
 			return 0;
 		})
-		this.filterPlayersPos(this.filter);
-		this.emit("change");
+
+		this.populatePlayers();
+		this.emit("hide");
 	}
 
 	filterPlayersPos(filter) {
