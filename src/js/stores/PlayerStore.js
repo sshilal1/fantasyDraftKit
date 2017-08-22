@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 
 import dispatcher from "../dispatcher";
 
-//import playerData from './nyg-team.json';
+import * as PlayerActions from "../actions/PlayerActions";
 import playerData from '../../allplayers.json';
 import _ from 'lodash';
 
@@ -66,8 +66,12 @@ class PlayerStore extends EventEmitter {
 		this.filter = "all";
 		this.playersshown = 30;
 		this.all = initialPlayers;
-		//this.sortPlayers("overallrank");
-		this.filterPlayersPos(this.filter);
+		this.populatePlayers();
+
+		PlayerActions.getRanks("pros");
+    PlayerActions.getRanks("espn");
+    PlayerActions.getRanks("yahoo");
+    PlayerActions.sortBy("overallrank");
   }
 
   getAll() {
@@ -129,7 +133,7 @@ class PlayerStore extends EventEmitter {
 			this.players[player].positionrank = this.all[player][rankings].positionrank;
 			this.players[player].selectedRanking = rankings;
 		}
-		//this.sortPlayers("overallrank");
+		this.sortPlayers("overallrank");
 		this.emit("hide");
 
 		for (var player in all) {
@@ -137,14 +141,11 @@ class PlayerStore extends EventEmitter {
 			this.all[player].positionrank = this.all[player][rankings].positionrank;
 			this.all[player].selectedRanking = rankings;
 		}
-		//this.sortPlayers("overallrank");
-		this.emit("hide");
+		this.sortAll("overallrank");
 	}
 	
-	sortPlayers(sort) {
+	sortAll(sort) {
 
-		this.players = [];
-		
 		this.all.sort(function(a,b) {
 			if (a[sort]< b[sort])
 				return -1;
@@ -152,8 +153,18 @@ class PlayerStore extends EventEmitter {
 				return 1;
 			return 0;
 		})
+	}
 
-		this.populatePlayers();
+	sortPlayers(sort) {
+
+		this.players.sort(function(a,b) {
+			if (a[sort]< b[sort])
+				return -1;
+			if (a[sort] > b[sort])
+				return 1;
+			return 0;
+		})
+
 		this.emit("hide");
 	}
 
@@ -282,7 +293,7 @@ class PlayerStore extends EventEmitter {
 				break;
 			}
 			case "SORT_PLAYERS": {
-				this.sortPlayers(action.sort);
+				this.sortAll(action.sort);
 				break;
 			}
       case "FILTER_PLAYERS": {
