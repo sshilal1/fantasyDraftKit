@@ -78,18 +78,20 @@ export default class StatsTable extends React.Component {
 
   render() {
 
-    var rushingstats= this.state.rushingstats;
-    var receivingstats = this.state.receivingstats;
-    var passingstats = this.state.passingstats;
+    const {rushingstats,receivingstats,passingstats} = this.state;
+
+    var sortedRushing = [].push(rushingstats);
+    var sortedReceiving = [].push(receivingstats);
+    var sortedPassing = [].push(passingstats);
 
     const alternatingColor = ['#d5d5d5', '#a9a9a9'];
     var rushingHeader = false;
     var receivingHeader = false;
-    var passingstats = false;
+    var passingHeader = false;
 
-    rushingstats.sort(function(a, b){return b.yr - a.yr});
-    receivingstats.sort(function(c, d){return d.yr - c.yr});
-    rushingstats.sort(function(e, f){return f.yr - e.yr});
+    sortedRushing.sort(function(a, b){return b.yr - a.yr});
+    sortedReceiving.sort(function(c, d){return d.yr - c.yr});
+    sortedPassing.sort(function(e, f){return f.yr - e.yr});
 
     const RushingStats = rushingstats.map((season, index, array) => {
       if (array[index].att > 0) {
