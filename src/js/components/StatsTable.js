@@ -52,28 +52,9 @@ export default class StatsTable extends React.Component {
     const {id, fetched, teamid} = this.state;
 
     if (!fetched && !this.props.rookie) {
-      // fetch them
+      // If not fetched and not a rookie
       PlayerActions.fetchStats(id,teamid);
     }
-
-    /*if ((!this.props.rookie) && (!fetched)) {
-      axios.post('/stats', {
-        id: this.props.id
-      })
-      .then((result)=> {
-        console.log(result);
-        
-        this.setState({
-          rushingstats: result.data.rushingstats,
-          receivingstats: result.data.receivingstats,
-          passingstats: result.data.passingstats,
-          fetched: true
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }*/
   }
 
   render() {

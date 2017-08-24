@@ -61,6 +61,13 @@ export function sortBy(sortKey) {
 	});
 }
 
+export function sortDisplayed(sortKey) {
+  dispatcher.dispatch({
+    type: "SORT_DISPLAYED_PLAYERS",
+    sort: sortKey
+  });
+}
+
 export function filterPlayers(filter) {
   dispatcher.dispatch({
     type: "FILTER_PLAYERS",

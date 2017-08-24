@@ -71,7 +71,7 @@ class PlayerStore extends EventEmitter {
 		PlayerActions.getRanks("pros");
     PlayerActions.getRanks("espn");
     PlayerActions.getRanks("yahoo");
-    PlayerActions.sortBy("overallrank");
+    this.filterPlayersPos("all");
   }
 
   getAll() {
@@ -129,8 +129,8 @@ class PlayerStore extends EventEmitter {
 		const players = this.players;
 
 		for (var player in players) {
-			this.players[player].overallrank = this.all[player][rankings].overallrank;
-			this.players[player].positionrank = this.all[player][rankings].positionrank;
+			this.players[player].overallrank = this.players[player][rankings].overallrank;
+			this.players[player].positionrank = this.players[player][rankings].positionrank;
 			this.players[player].selectedRanking = rankings;
 		}
 		this.sortPlayers("overallrank");
@@ -234,7 +234,6 @@ class PlayerStore extends EventEmitter {
 				}
 			}
 		}
-		this.sortPlayers("overallrank");
 	}
 
 	updateStats(stats) {
@@ -294,6 +293,10 @@ class PlayerStore extends EventEmitter {
 			}
 			case "SORT_PLAYERS": {
 				this.sortAll(action.sort);
+				break;
+			}
+			case "SORT_DISPLAYED_PLAYERS": {
+				this.sortPlayers(action.sort);
 				break;
 			}
       case "FILTER_PLAYERS": {
