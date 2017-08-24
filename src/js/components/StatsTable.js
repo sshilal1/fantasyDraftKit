@@ -62,9 +62,6 @@ export default class StatsTable extends React.Component {
     const {rushingstats,receivingstats,passingstats} = this.state;
 
     const alternatingColor = ['#d5d5d5', '#a9a9a9'];
-    var rushingHeader = false;
-    var receivingHeader = false;
-    var passingHeader = false;
 
     rushingstats.sort(function(a, b) {return b.yr - a.yr});
     receivingstats.sort(function(c, d){return d.yr - c.yr});
@@ -72,21 +69,18 @@ export default class StatsTable extends React.Component {
 
     const RushingStats = rushingstats.map((season, index, array) => {
       if (array[index].att > 0) {
-        rushingHeader = true;
         return <RushingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
       }
     });
 
     const ReceivingStats = receivingstats.map((season, index, array) => {
       if (array[index].tar > 0) {
-        receivingHeader = true;
         return <ReceivingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
       }
     });
 
     const PassingStats = passingstats.map((season, index, array) => {
       if (array[index].att > 0) {
-        passingHeader = true;
         return <PassingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
       }
     });
