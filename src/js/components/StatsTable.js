@@ -87,12 +87,12 @@ export default class StatsTable extends React.Component {
 
     if (!this.props.rookie) {
       return (
-        <div style={{minHeight:"200px",padding:"10px"}}>
+        <div style={{maxHeight:"400px",padding:"15px"}}>
           <RushingHeader should={RushingStats.length > 0}/>
           {RushingStats}
           <ReceivingHeader should={ReceivingStats.length > 0}/>
           {ReceivingStats}
-          <PassingHeader should={passingHeader}/>
+          <PassingHeader should={PassingStats.length > 0}/>
           {PassingStats}
         </div>
       );

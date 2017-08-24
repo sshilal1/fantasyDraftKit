@@ -54,7 +54,8 @@ export default class ButtonDrop extends React.Component {
     return (
       <div>
         <FlatButton style={{minWidth:"50px"}} onClick={this.handleTouchTap} label={this.props.text} className="text" />
-        <Popover open={this.state.open}
+        <Popover style={{minWidth:"550px"}}
+          open={this.state.open}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
           targetOrigin={{horizontal: 'left', vertical: 'top'}}
