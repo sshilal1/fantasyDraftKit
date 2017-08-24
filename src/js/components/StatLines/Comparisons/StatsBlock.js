@@ -19,7 +19,7 @@ export default class StatsBlock extends React.Component {
     passingstats.sort(function(e, f){return f.yr - e.yr});
 
     return (
-      <Flexbox style={{fontWeight:"bold",backgroundColor:"lightgrey"}} justifyContent="space-between">
+      <Flexbox style={{width:"342px", fontWeight:"bold",backgroundColor:"lightgrey"}} justifyContent="space-between">
         <PassingStatsBlock stats={passingstats}/>
       </Flexbox>
     );
