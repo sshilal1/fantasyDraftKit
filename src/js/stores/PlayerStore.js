@@ -71,7 +71,6 @@ class PlayerStore extends EventEmitter {
 		PlayerActions.getRanks("pros");
     PlayerActions.getRanks("espn");
     PlayerActions.getRanks("yahoo");
-    this.filterPlayersPos("all");
   }
 
   getAll() {
@@ -234,6 +233,7 @@ class PlayerStore extends EventEmitter {
 				}
 			}
 		}
+		this.filterPlayersPos("all");
 	}
 
 	updateStats(stats) {
