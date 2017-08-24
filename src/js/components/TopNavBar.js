@@ -54,7 +54,8 @@ export default class TopNavBar extends React.Component {
       PlayerActions.sortBy("overallrank");
     }
   }
-
+  /*
+  <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
   toggleCompareBy(e, isInputChecked) {
     if(isInputChecked) {
       console.log("By year");
@@ -62,7 +63,7 @@ export default class TopNavBar extends React.Component {
     else {
       console.log("Career");
     }
-  }
+  }*/
 
   changeNav() {
   	const page = this.state.nav;
@@ -89,11 +90,6 @@ export default class TopNavBar extends React.Component {
 			          </div>
 			          <Flexbox flexDirection="row" justifyContent="space-between">
 			            <GlobalRankSwitch/>
-			            <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
-			              <div>Rank</div>
-			              <Toggle style={{width:"50px"}} onToggle={this.toggleSortBy.bind(this)}/>
-			              <div>Name</div>
-			            </Flexbox>
 			            <CustomTextField inputRef={input => this.input = input}/>
 			          </Flexbox>
 			        </Flexbox>
