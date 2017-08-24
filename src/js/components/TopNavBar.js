@@ -54,8 +54,7 @@ export default class TopNavBar extends React.Component {
       PlayerActions.sortBy("overallrank");
     }
   }
-  /*
-  <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
+
   toggleCompareBy(e, isInputChecked) {
     if(isInputChecked) {
       console.log("By year");
@@ -63,7 +62,7 @@ export default class TopNavBar extends React.Component {
     else {
       console.log("Career");
     }
-  }*/
+  }
 
   changeNav() {
   	const page = this.state.nav;
