@@ -21,6 +21,10 @@ export default class PlayerCard extends React.Component {
 	compare() {
     const player = this.props;
     if (!player.comparing) {
+    	if (!player.stats.fetched) {
+    		console.log("no stats fetched yet, doing so now...");
+    		PlayerActions.fetchStats(player.id,player.teamid);
+    	}
     	PlayerActions.comparePlayer(player);
     }
     else {
@@ -39,6 +43,9 @@ export default class PlayerCard extends React.Component {
       return true;
     }
     if (this.props.comparing !== nextProps.comparing) {
+      return true;
+    }
+    if (this.props.stats !== nextProps.stats) {
       return true;
     }
     return false;

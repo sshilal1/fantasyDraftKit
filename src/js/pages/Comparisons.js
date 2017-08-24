@@ -43,7 +43,6 @@ export default class Comparisons extends React.Component {
       <MuiThemeProvider>
         <div style={{overflow: "overlay"}} >
           <div style={{ paddingTop: 72 }}>
-            Comparisons!
             <Flexbox style={{overflow: "overlay"}} flexDirection="column" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </div>
