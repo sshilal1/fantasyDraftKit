@@ -78,19 +78,21 @@ export default class TopNavBar extends React.Component {
 	    return (
 	    	<MuiThemeProvider>
 	        <div>
-			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "white" }}>
+			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "c0c0c0" }}>
+			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+		          	<Link to='/'><FlatButton onClick={this.changeNav.bind(this)} style={{textAlign:"left"}}>Home</FlatButton></Link>
+		          	<Link to='/comparisons'><FlatButton onClick={this.changeNav.bind(this)}>Comparisons</FlatButton></Link>
+	          	</Flexbox>
 			        <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
-			          <div>
-			          	<Flexbox flexDirection="column" style={{position:"fixed",left:5}}>
-				          	<Link to='/'><FlatButton onClick={this.changeNav.bind(this)} style={{textAlign:"left"}}>Home</FlatButton></Link>
-				          	<Link to='/comparisons'><FlatButton onClick={this.changeNav.bind(this)}>Comparisons</FlatButton></Link>
-			          	</Flexbox>
-			          	<PageSwitch/>
-			          </div>
+		          	<PageSwitch/>
 			          <Flexbox flexDirection="row" justifyContent="space-between">
 			            <GlobalRankSwitch/>
 			            <CustomTextField inputRef={input => this.input = input}/>
 			          </Flexbox>
+			        </Flexbox>
+			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+			        	<div className="kavoon xlarge" style={{color:"#2f90c3"}}>Fantasy Draft Kit</div>
+			        	<div className="kavoon">Stephen Shilale</div>
 			        </Flexbox>
 			      </AppBar>
 			    </div>
@@ -101,21 +103,19 @@ export default class TopNavBar extends React.Component {
 	  	return(
 	  		<MuiThemeProvider>
 	        <div>
-			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "white" }}>
-			        <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{height:"72px",margin: "0 auto"}}>
-			          <div>
-			          	<Flexbox flexDirection="column" style={{position:"fixed",left:5,top:0}}>
-				          	<Link to='/'><FlatButton onClick={this.changeNav.bind(this)} style={{textAlign:"left"}}>Home</FlatButton></Link>
-				          	<Link to='/comparisons'><FlatButton onClick={this.changeNav.bind(this)}>Comparisons</FlatButton></Link>
-			          	</Flexbox>
-			          </div>
-			          <Flexbox flexDirection="row" justifyContent="space-between">
-			            <Flexbox flexDirection="row" style={{width:"130px",height:"28px",paddingTop:"8px"}}>
-			              <div>Career</div>
-			              <Toggle style={{width:"50px"}} onToggle={this.toggleCompareBy.bind(this)}/>
-			              <div style={{minWidth:"100px"}}>By Year</div>
-			            </Flexbox>
-			          </Flexbox>
+			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "#c0c0c0" }}>
+			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+		          	<Link to='/'><FlatButton onClick={this.changeNav.bind(this)} style={{textAlign:"left"}}>Home</FlatButton></Link>
+		          	<Link to='/comparisons'><FlatButton onClick={this.changeNav.bind(this)}>Comparisons</FlatButton></Link>
+	          	</Flexbox>
+							<Flexbox flexDirection="row" style={{height:"28px",paddingTop:"8px", margin: "0 auto"}}>
+	              <div>Career</div>
+	              <Toggle style={{width:"50px"}} onToggle={this.toggleCompareBy.bind(this)}/>
+	              <div style={{minWidth:"100px"}}>By Year</div>
+	            </Flexbox>
+			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+			        	<div className="kavoon xlarge" style={{color:"#2f90c3"}}>Fantasy Draft Kit</div>
+			        	<div className="kavoon">Stephen Shilale</div>
 			        </Flexbox>
 			      </AppBar>
 			    </div>

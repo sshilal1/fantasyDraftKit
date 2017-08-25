@@ -1,13 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Cuprum');
+@import url('https://fonts.googleapis.com/css?family=Kavoon');
 
 .text {
 	font-family: 'Cuprum', sans-serif !important;
+}
+.kavoon {
+	font-family: 'Kavoon', sans-serif !important;
 }
 
 .Card {
   width:180px;
 	margin: 5px;
-	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+	box-shadow: 1px 1px 6px rgb(47, 144, 195), 5px 5px 8px rgba(0, 0, 0, 0.12);
+	background-color: white;
 }
 
 .Comparecard {

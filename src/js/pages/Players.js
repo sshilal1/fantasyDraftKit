@@ -86,9 +86,9 @@ export default class Players extends React.Component {
 
     return (
 			<MuiThemeProvider>
-        <div style={{overflow: "overlay"}} >
+        <div>
           <div style={{ paddingTop: 72 }}>
-  					<Flexbox style={{overflow: "overlay", padding:"20px"}} flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
+  					<Flexbox style={{overflow: "overlay", padding:"20px", backgroundColor:"#676767"}} flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </div>
 			</MuiThemeProvider>

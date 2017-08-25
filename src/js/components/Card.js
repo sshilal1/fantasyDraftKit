@@ -57,7 +57,7 @@ export default class PlayerCard extends React.Component {
 		var lastnameClass = lastname.length > 8 ? "xlarge text" : "xxlarge text";
 
 		var compare = comparing ? 'Remove' : 'Compare';
-		var compareBg = comparing ? 'rgba(153,153,153,.2)' : 'rgba(0,0,0,0)';
+		var compareBg = comparing ? 'rgba(47,144,195,.5)' : 'rgba(0,0,0,0)';
 
 	  return (
       <div className="Card">
@@ -97,7 +97,7 @@ export default class PlayerCard extends React.Component {
 					</div>
         </div>
 				<Flexbox className="card-row">
-					<FlatButton backgroundColor={compareBg} style={{minWidth:"58px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
+					<FlatButton hoverColor="#79b5d4" backgroundColor={compareBg} style={{minWidth:"58px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
 					<ButtonDrop text="stats" age="31" id={id} rookie={rookie} teamid={teamid} stattable={true}/>
 					<ButtonDrop text="info" stattable={false} {...this.props}/>
         </Flexbox>

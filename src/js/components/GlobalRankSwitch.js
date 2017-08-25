@@ -38,7 +38,7 @@ export default class GlobalRankSwitch extends React.Component {
 
   render() {
 
-    const selected = "rgba(153,153,153,.2)";
+    const selected = "rgba(47,144,195,.5)";
     const non = "rgba(0,0,0,0)";
 
     return (
