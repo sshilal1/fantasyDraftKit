@@ -86,9 +86,6 @@ export default class PlayerCard extends React.Component {
 								</Flexbox>
 			        </Flexbox>
 			    	</div>
-			    	<div className="PassingStatsblock">
-		    			<StatsBlock stats={stats}/>
-		    		</div>
 		    	</Flexbox>
 	    	</div>
   		);
