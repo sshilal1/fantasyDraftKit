@@ -7,10 +7,17 @@ import * as PlayerActions from "../actions/PlayerActions";
 
 class DepthPlayer extends React.Component {
   render() {
-    const {name, depth, team, teamid} = this.props;
+    const {name, depth, team, teamid, myplayer} = this.props;
+
+    if (myplayer) {
+      var textstyle={color: "red",fontSize:"smaller"};
+    }
+    else {
+      textstyle={fontSize:"smaller"}
+    }
 
     return (
-      <div className="text" style={{fontSize:"smaller"}}>{depth} {name}</div>
+      <div className="text" style={textstyle}>{depth} {name}</div>
     );
   }
 }
@@ -61,12 +68,13 @@ export default class BioTable extends React.Component {
 
   render() {
 
-    const {age, height, weight, experience, college} = this.props;
+    const {age, height, weight, experience, college, name} = this.props;
     const {depth, teamid, position, team} = this.state;
 
     const DepthChart = depth.map((player) => {
+      var myplayer = (player.name.toLowerCase() == name);
       return (
-        <DepthPlayer key={player.name} {...player}/>
+        <DepthPlayer key={player.name} myplayer={myplayer} {...player}/>
       );
     });
     
@@ -83,6 +91,7 @@ export default class BioTable extends React.Component {
         <div className="text" style={{ padding:"20px"}}>
           <div className="text xlarge">{teamid.toUpperCase()} {position.toUpperCase()} Depth</div>
           <div>{DepthChart}</div>
+          <div className="text xxsmall">Updated: 8/25/2017</div>
         </div>
       </Flexbox>
     )
