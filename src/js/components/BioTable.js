@@ -26,6 +26,7 @@ export default class BioTable extends React.Component {
     this.state = {
       id: props.id,
       teamid: props.teamid,
+      team: "",
       depth: depth,
       position: props.position,
       fetched: false
@@ -45,6 +46,7 @@ export default class BioTable extends React.Component {
 
     this.setState({
       depth: depth,
+      team: (depth.length!=0 ? depth[0].team : ""),
       fetched: (depth.length != 0)
     });
   }
@@ -60,7 +62,7 @@ export default class BioTable extends React.Component {
   render() {
 
     const {age, height, weight, experience, college} = this.props;
-    const {depth, teamid, position} = this.state;
+    const {depth, teamid, position, team} = this.state;
 
     const DepthChart = depth.map((player) => {
       return (
@@ -72,16 +74,16 @@ export default class BioTable extends React.Component {
     
     return (
       <Flexbox>
-        <div className="text large" style={{ padding:"20px", width:"250px"}}>
-          <div>Bio</div>
+        <div className="text large" style={{ padding:"20px"}}>
+          <div className="text xlarge">Bio</div>
           <div style={{fontSize:"smaller"}}>Age: {age}</div>
           <div style={{fontSize:"smaller"}}>Height: {height}</div>
           <div style={{fontSize:"smaller"}}>Weight: {weight}</div>
           <div style={{fontSize:"smaller"}}>Experience: {experience}</div>
           <div style={{fontSize:"smaller"}}>College: {college}</div>
         </div>
-        <div className="text" style={{ padding:"20px", width:"250px"}}>
-          <div>{teamid.toUpperCase()} {position} Depth</div>
+        <div className="text" style={{ padding:"20px"}}>
+          <div className="text xlarge">{teamid.toUpperCase()} {position.toUpperCase()} Depth</div>
           <div>{DepthChart}</div>
         </div>
       </Flexbox>

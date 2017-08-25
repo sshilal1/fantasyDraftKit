@@ -46,15 +46,17 @@ export default class ButtonDrop extends React.Component {
 
     if(this.props.stattable) {
       var table = <StatsTable id={id} rookie={rookie} teamid={teamid}/>;
+      var popoverStyle = {minWidth:"550px"};
     }
     else {
       var table = <BioTable id={id} teamid={teamid} position={position} age={age} height={height} weight={weight} experience={experience} college={college}/>;
+      var popoverStyle = {minWidth:0};
     }
 
     return (
       <div>
         <FlatButton style={{minWidth:"50px"}} onClick={this.handleTouchTap} label={this.props.text} className="text" />
-        <Popover style={{minWidth:"550px"}}
+        <Popover style={popoverStyle}
           open={this.state.open}
           anchorEl={this.state.anchorEl}
           anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
