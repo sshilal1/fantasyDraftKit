@@ -133,6 +133,29 @@ export function fetchStats(id,teamid) {
   });
 }
 
+export function fetchDepth(id,position,teamid) {
+
+  var pos = position == 'K' ? 'pk' : position;
+
+  axios.post('/depth', {
+    position: pos,
+    teamid: teamid
+  })
+  .then(function (response) {
+    console.log(response);
+    
+    dispatcher.dispatch({
+      type: "RECEIVE_DEPTH",
+      depth: response.data,
+      id: id
+    });
+    
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 export function comparePlayer(player) {
   dispatcher.dispatch({
     type: "C_ADD_PLAYER",

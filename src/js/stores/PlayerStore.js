@@ -52,7 +52,8 @@ class PlayerStore extends EventEmitter {
 					overallrank: 998,
 					positionrank: 998
 				},
-				comparing: false
+				comparing: false,
+				depth: []
 			};
 			
 			for (var person of initialPlayers) {
@@ -250,11 +251,27 @@ class PlayerStore extends EventEmitter {
 		this.emit("stats");
 	}
 
+	updateDepth(depth,id) {
+		const players = this.players;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    this.players[index].depth = depth;
+
+		this.emit("depth");
+	}
+
 	getStats(id) {
 		const players = this.players;
     var index = _.findIndex(players, function(o) { return o.id == id; });
 
     return this.players[index].stats;
+	}
+
+	getDepth(id) {
+		const players = this.players;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    return this.players[index].depth;
 	}
 
 	comparePlayer(player,comparing) {
@@ -317,6 +334,10 @@ class PlayerStore extends EventEmitter {
 			}
 			case "RECEIVE_STATS": {
 				this.updateStats(action.stats);
+				break;
+			}
+			case "RECEIVE_DEPTH": {
+				this.updateDepth(action.depth, action.id);
 				break;
 			}
 			case "C_ADD_PLAYER": {

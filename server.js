@@ -36,6 +36,15 @@ app.post('/ranks', function(req, res) {
 	})
 })
 
+app.post('/depth', function(req, res) {
+	var sql = "SELECT * FROM depth_teams WHERE teamid='" + req.body.teamid + "' AND depth LIKE '" + req.body.position + "%';";
+	console.log(sql);
+	con.query(sql, function (err, result) {
+		res.send(result);
+		console.log(result);
+	})
+})
+
 app.post('/stats', function(req, res) {
 
 	console.log(req.body);
