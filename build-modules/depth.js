@@ -1,6 +1,7 @@
 var fs = require('fs');
 var request = require("request-promise");
 var cheerio = require('cheerio');
+var mysql = require('mysql');
 
 var url = 'http://fftoolbox.scout.com/football/depth-charts.cfm';
 var allPlayers = [];
@@ -46,8 +47,6 @@ request(url, function(error, response, html){
 							"teamid": teamId
 						}
 						allPlayers.push(obj);
-
-						//console.log(playerName + ": " + depth);
 					})
 				}
 				teamCount++;
@@ -55,6 +54,35 @@ request(url, function(error, response, html){
 		})
 	}
 }).then(function() {
-	console.log("\n\nDone loading teams");
-	console.log(allPlayers);
+
+	console.log("\n\nDone loading depth charts");
+
+	var con = mysql.createConnection({
+		host: "***",
+	user: "***",
+	password: "***",
+	database: "***",
+	port: 3306
+	});
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log("Connected!");
+		
+		for (player of allPlayers) {
+			var sql = 'INSERT INTO depth_teams VALUES ("' + player.name + '", "' + player.depth + '", "' + player.team + '", "' + player.teamid + '");';
+			console.log(sql);
+			try {
+				errorF = false;
+				con.query(sql, function (err, result) {
+					if (err) throw err;
+					else console.log("Entry added");
+				});
+				if (errorF) throw err;
+			}
+			catch (e) {
+				console.log("Error adding player " + rankings[i].name);
+			}
+		}
+		con.end();
+	});
 })
