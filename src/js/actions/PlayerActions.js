@@ -135,7 +135,7 @@ export function fetchStats(id,teamid) {
 
 export function fetchDepth(id,position,teamid) {
 
-  var pos = position == 'K' ? 'pk' : position;
+  var pos = position == 'k' ? 'pk' : position;
 
   axios.post('/depth', {
     position: pos,

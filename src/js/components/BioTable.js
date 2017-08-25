@@ -29,7 +29,7 @@ export default class BioTable extends React.Component {
       team: "",
       depth: depth,
       position: props.position,
-      fetched: false
+      fetched: (depth.length != 0)
     }
   }
 
@@ -69,8 +69,6 @@ export default class BioTable extends React.Component {
         <DepthPlayer key={player.name} {...player}/>
       );
     });
-
-    console.log(DepthChart);
     
     return (
       <Flexbox>
