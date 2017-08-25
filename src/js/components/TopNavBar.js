@@ -16,14 +16,18 @@ import PageSwitch from '../components/PageSwitch';
 import GlobalRankSwitch from '../components/GlobalRankSwitch';
 import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";
+import ComparisonStore from "../stores/ComparisonStore";
+import ComparisonNotification from '../components/StatLines/Comparisons/ComparisonNotification';
 
 export default class TopNavBar extends React.Component {
 
 	constructor() {
 		super();
 		//this.focusInput = this.focusInput.bind(this);
+		this.updateComparisonCount = this.updateComparisonCount.bind(this);
 		this.state = {
-			nav:"home"
+			nav:"home",
+			comparisons: []
 		}
 	}
 
@@ -35,24 +39,30 @@ export default class TopNavBar extends React.Component {
 	componentDidMount() {
     this.focusInput();
   }
-
+	*/
   componentWillMount() {
-    PlayerStore.on("change", this.focusInput);
-    PlayerStore.on("hide", this.focusInput);
+  	ComparisonStore.on("compare", this.updateComparisonCount);
+    //PlayerStore.on("change", this.focusInput);
+    //PlayerStore.on("hide", this.focusInput);
   }
 
   componentWillUnmount() {
-    PlayerStore.removeListener("change", this.focusInput);
-    PlayerStore.removeListener("hide", this.focusInput);
+  	ComparisonStore.removeListener("compare", this.updateComparisonCount);
+    //PlayerStore.removeListener("change", this.focusInput);
+    //PlayerStore.removeListener("hide", this.focusInput);
   }
-	*/
-	toggleSortBy(e, isInputChecked) {
-    if(isInputChecked) {
-      PlayerActions.sortBy("lastname");
-    }
-    else {
-      PlayerActions.sortBy("overallrank");
-    }
+
+  updateComparisonCount() {
+
+  	const comparisons = ComparisonStore.getAll();
+  	console.log("Updating comparisons...");
+  	this.setState({
+  		comparisons: comparisons
+  	})
+
+  	if (comparisons.length > 0) {
+  		console.log("Found some Comparisons!", comparisons.length);
+  	}
   }
 
   toggleCompareBy(e, isInputChecked) {
@@ -78,6 +88,9 @@ export default class TopNavBar extends React.Component {
 
   render() {
 
+  	var comparisoncount = this.state.comparisons.length;
+  	console.log("Count at render",comparisoncount);
+
   	const selected = "rgba(47,144,195,.5)";
     const non = "rgba(0,0,0,0)";
 
@@ -87,8 +100,23 @@ export default class TopNavBar extends React.Component {
 	        <div>
 			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "#c0c0c0" }}>
 			        <Flexbox flexDirection="column" style={{width:"200px"}}>
-		          	<Link to='/'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? selected : non} className="text xlarge start" onClick={this.changeNavH.bind(this)}>Home</FlatButton></Link>
-		          	<Link to='/comparisons'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? non : selected} className="text" onClick={this.changeNavC.bind(this)}>Comparisons</FlatButton></Link>
+		          	<Link to='/'>
+		          		<FlatButton hoverColor="#79b5d4"
+		          			backgroundColor={this.state.nav == "home" ? selected : non}
+		          			className="text xlarge start"
+		          			onClick={this.changeNavH.bind(this)}>Home
+		          		</FlatButton>
+		          	</Link>
+		          	<Link to='/comparisons'>
+		          		<Flexbox flexDirection="row">
+			          		<FlatButton hoverColor="#79b5d4"
+			          			backgroundColor={this.state.nav == "home" ? non : selected}
+			          			className="text"
+			          			onClick={this.changeNavC.bind(this)}>Comparisons
+			          		</FlatButton>
+			          		<ComparisonNotification count={comparisoncount}/>
+			          	</Flexbox>
+		          	</Link>
 	          	</Flexbox>
 			        <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
 		          	<PageSwitch/>
@@ -112,8 +140,23 @@ export default class TopNavBar extends React.Component {
 	        <div>
 			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "#c0c0c0" }}>
 			        <Flexbox flexDirection="column" style={{width:"200px"}}>
-		          	<Link to='/'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? selected : non} className="text xlarge start" onClick={this.changeNavH.bind(this)}>Home</FlatButton></Link>
-		          	<Link to='/comparisons'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? non : selected} className="text" onClick={this.changeNavC.bind(this)}>Comparisons</FlatButton></Link>
+		          	<Link to='/'>
+		          		<FlatButton hoverColor="#79b5d4" 
+		          			backgroundColor={this.state.nav == "home" ? selected : non}
+		          			className="text xlarge start"
+		          			onClick={this.changeNavH.bind(this)}>Home
+		          		</FlatButton>
+		          	</Link>
+		          	<Link to='/comparisons'>
+		          		<Flexbox flexDirection="row">
+			          		<FlatButton hoverColor="#79b5d4" 
+			          			backgroundColor={this.state.nav == "home" ? non : selected} 
+			          			className="text" 
+			          			onClick={this.changeNavC.bind(this)}>Comparisons
+			          		</FlatButton>
+			          		<ComparisonNotification count={comparisoncount}/>
+			          	</Flexbox>
+		          	</Link>
 	          	</Flexbox>
 							<Flexbox flexDirection="row" style={{height:"28px",paddingTop:"8px", margin: "0 auto"}}>
 	              <div>Career</div>
