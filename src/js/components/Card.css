@@ -68,11 +68,14 @@
 .xxlarge {
 	font-size:xx-large;
 }
-.center {
-	text-align: center;
+.start {
+	text-align: start;
 }
 .end {
 	text-align: end;
+}
+.center {
+	text-align: left;
 }
 /* --------------- */
 

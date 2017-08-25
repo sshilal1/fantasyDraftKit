@@ -64,24 +64,31 @@ export default class TopNavBar extends React.Component {
     }
   }
 
-  changeNav() {
-  	const page = this.state.nav;
-
+  changeNavH() {
   	this.setState({
-  		nav: page == "home" ? "compare" : "home",
+  		nav: "home",
+  	})
+  }
+
+  changeNavC() {
+  	this.setState({
+  		nav: "compare",
   	})
   }
 
   render() {
 
+  	const selected = "rgba(47,144,195,.5)";
+    const non = "rgba(0,0,0,0)";
+
   	if (this.state.nav == "home") {
 	    return (
 	    	<MuiThemeProvider>
 	        <div>
-			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "c0c0c0" }}>
+			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "#c0c0c0" }}>
 			        <Flexbox flexDirection="column" style={{width:"200px"}}>
-		          	<Link to='/'><FlatButton onClick={this.changeNav.bind(this)} style={{textAlign:"left"}}>Home</FlatButton></Link>
-		          	<Link to='/comparisons'><FlatButton onClick={this.changeNav.bind(this)}>Comparisons</FlatButton></Link>
+		          	<Link to='/'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? selected : non} className="text xlarge start" onClick={this.changeNavH.bind(this)}>Home</FlatButton></Link>
+		          	<Link to='/comparisons'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? non : selected} className="text" onClick={this.changeNavC.bind(this)}>Comparisons</FlatButton></Link>
 	          	</Flexbox>
 			        <Flexbox flexDirection="column" flexWrap="wrap" justifyContent="center" style={{margin: "0 auto"}}>
 		          	<PageSwitch/>
@@ -105,8 +112,8 @@ export default class TopNavBar extends React.Component {
 	        <div>
 			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "#c0c0c0" }}>
 			        <Flexbox flexDirection="column" style={{width:"200px"}}>
-		          	<Link to='/'><FlatButton onClick={this.changeNav.bind(this)} style={{textAlign:"left"}}>Home</FlatButton></Link>
-		          	<Link to='/comparisons'><FlatButton onClick={this.changeNav.bind(this)}>Comparisons</FlatButton></Link>
+		          	<Link to='/'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? selected : non} className="text xlarge start" onClick={this.changeNavH.bind(this)}>Home</FlatButton></Link>
+		          	<Link to='/comparisons'><FlatButton hoverColor="#79b5d4" backgroundColor={this.state.nav == "home" ? non : selected} className="text" onClick={this.changeNavC.bind(this)}>Comparisons</FlatButton></Link>
 	          	</Flexbox>
 							<Flexbox flexDirection="row" style={{height:"28px",paddingTop:"8px", margin: "0 auto"}}>
 	              <div>Career</div>

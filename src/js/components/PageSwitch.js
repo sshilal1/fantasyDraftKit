@@ -49,13 +49,13 @@ export default class PageSwitch extends React.Component {
         <MuiThemeProvider>
           <div>
             <Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center">
-              <FlatButton backgroundColor={this.state.bg1 ? selected : non} onClick={() => this.pageSwitchTo("all",1)}>All</FlatButton>
-              <FlatButton backgroundColor={this.state.bg2 ? selected : non} onClick={() => this.pageSwitchTo("qb",2)}>QBs</FlatButton>
-              <FlatButton backgroundColor={this.state.bg3 ? selected : non} onClick={() => this.pageSwitchTo("rb",3)}>RBs</FlatButton>
-              <FlatButton backgroundColor={this.state.bg4 ? selected : non} onClick={() => this.pageSwitchTo("wr",4)}>WRs</FlatButton>
-              <FlatButton backgroundColor={this.state.bg5 ? selected : non} onClick={() => this.pageSwitchTo("te",5)}>TEs</FlatButton>
-              <FlatButton backgroundColor={this.state.bg6 ? selected : non} onClick={() => this.pageSwitchTo("k",6)}>Ks</FlatButton>
-              <FlatButton backgroundColor={this.state.bg7 ? selected : non} onClick={() => this.pageSwitchTo("def",7)}>DEF</FlatButton>
+              <FlatButton hoverColor="#79b5d4" backgroundColor={this.state.bg1 ? selected : non} onClick={() => this.pageSwitchTo("all",1)}>All</FlatButton>
+              <FlatButton hoverColor="#79b5d4" backgroundColor={this.state.bg2 ? selected : non} onClick={() => this.pageSwitchTo("qb",2)}>QBs</FlatButton>
+              <FlatButton hoverColor="#79b5d4" backgroundColor={this.state.bg3 ? selected : non} onClick={() => this.pageSwitchTo("rb",3)}>RBs</FlatButton>
+              <FlatButton hoverColor="#79b5d4" backgroundColor={this.state.bg4 ? selected : non} onClick={() => this.pageSwitchTo("wr",4)}>WRs</FlatButton>
+              <FlatButton hoverColor="#79b5d4" backgroundColor={this.state.bg5 ? selected : non} onClick={() => this.pageSwitchTo("te",5)}>TEs</FlatButton>
+              <FlatButton hoverColor="#79b5d4" backgroundColor={this.state.bg6 ? selected : non} onClick={() => this.pageSwitchTo("k",6)}>Ks</FlatButton>
+              <FlatButton hoverColor="#79b5d4" backgroundColor={this.state.bg7 ? selected : non} onClick={() => this.pageSwitchTo("def",7)}>DEF</FlatButton>
             </Flexbox>
           </div>
         </MuiThemeProvider>
