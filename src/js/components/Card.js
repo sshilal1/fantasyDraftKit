@@ -97,9 +97,9 @@ export default class PlayerCard extends React.Component {
 					</div>
         </div>
 				<Flexbox className="card-row">
-					<FlatButton backgroundColor={compareBg} style={{minWidth:"65px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
+					<FlatButton backgroundColor={compareBg} style={{minWidth:"58px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
 					<ButtonDrop text="stats" age="31" id={id} rookie={rookie} teamid={teamid} stattable={true}/>
-					<ButtonDrop text="bio" stattable={false} {...this.props}/>
+					<ButtonDrop text="info" stattable={false} {...this.props}/>
         </Flexbox>
     	</div>
 		);

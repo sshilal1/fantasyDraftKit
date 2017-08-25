@@ -67,11 +67,6 @@ export default class Players extends React.Component {
 
     PlayerActions.modPlayer(mod);
   }
-	
-	getRanks() {
-		const { players } = this.state;
-		PlayerActions.getRanks(players);
-	}
 
   toggleSortBy(e, isInputChecked) {
     if(isInputChecked) {
@@ -93,10 +88,7 @@ export default class Players extends React.Component {
 			<MuiThemeProvider>
         <div style={{overflow: "overlay"}} >
           <div style={{ paddingTop: 72 }}>
-  					<Flexbox flexDirection="row" flexWrap="wrap" justifyContent="center"> 						
-  						<FlatButton onClick={this.getRanks.bind(this)}>Get Ranks</FlatButton>
-  					</Flexbox>
-  					<Flexbox style={{overflow: "overlay"}} flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
+  					<Flexbox style={{overflow: "overlay", padding:"20px"}} flexDirection="row" flexWrap="wrap" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </div>
 			</MuiThemeProvider>

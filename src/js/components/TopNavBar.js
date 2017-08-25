@@ -21,13 +21,13 @@ export default class TopNavBar extends React.Component {
 
 	constructor() {
 		super();
-		this.focusInput = this.focusInput.bind(this);
+		//this.focusInput = this.focusInput.bind(this);
 		this.state = {
 			nav:"home"
 		}
 	}
 
-	focusInput() {
+	/*focusInput() {
 		if (this.input)
 			this.input.focus();
 	}
@@ -45,7 +45,7 @@ export default class TopNavBar extends React.Component {
     PlayerStore.removeListener("change", this.focusInput);
     PlayerStore.removeListener("hide", this.focusInput);
   }
-
+	*/
 	toggleSortBy(e, isInputChecked) {
     if(isInputChecked) {
       PlayerActions.sortBy("lastname");
