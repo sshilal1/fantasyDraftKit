@@ -20,11 +20,39 @@ export default class StatsBlock extends React.Component {
     receivingstats.sort(function(c, d){return d.yr - c.yr});
     passingstats.sort(function(e, f){return f.yr - e.yr});
 
-    //<PassingStatsBlock stats={passingstats}/>
+    var teststats = [
+      {
+        yr:2016,
+        cmp:285,
+        att:137,
+        cpct:99.9,
+        yds:5694,
+        td:10,
+        i:9,
+      },
+      {
+        yr:2015,
+        cmp:456,
+        att:500,
+        cpct:65.5,
+        yds:4567,
+        td:30,
+        i:14,
+      },
+      {
+        yr:2014,
+        cmp:909,
+        att:527,
+        cpct:0.04,
+        yds:3482,
+        td:20,
+        i:35,
+      },
+    ];
 
     return (
       <Flexbox style={{flex:2}} justifyContent="space-between">
-        <PassingStatsBlock stats={passingstats}/>
+        <PassingStatsBlock stats={teststats}/>
         <ReceivingStatsBlock stats={receivingstats}/>
         <RushingStatsBlock stats={rushingstats}/>
       </Flexbox>

@@ -15,10 +15,10 @@ app.get('/', function (req, res) {
 
 
 var con = mysql.createConnection({
-	host: "east2-mysql-instance1.c9cuq70xxmoo.us-east-1.rds.amazonaws.com",
-	user: "sshilal1",
-	password: "Ofyvenow45",
-	database: "fantasykit",
+	host: "***",
+	user: "***",
+	password: "***",
+	database: "***",
 	port: 3306
 });
 
