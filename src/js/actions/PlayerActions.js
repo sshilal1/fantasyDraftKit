@@ -169,3 +169,10 @@ export function removePlayer(player) {
     player: player
   });
 }
+
+export function changeComparisonYear(year) {
+  dispatcher.dispatch({
+    type: "C_CHANGE_YEAR",
+    year: year
+  });
+}

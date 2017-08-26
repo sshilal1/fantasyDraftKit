@@ -18,6 +18,7 @@ import * as PlayerActions from "../actions/PlayerActions";
 import PlayerStore from "../stores/PlayerStore";
 import ComparisonStore from "../stores/ComparisonStore";
 import ComparisonNotification from '../components/StatLines/Comparisons/ComparisonNotification';
+import YearChangeDropdown from '../components/StatLines/YearChangeDropdown';
 
 export default class TopNavBar extends React.Component {
 
@@ -89,6 +90,8 @@ export default class TopNavBar extends React.Component {
   render() {
 
   	var comparisoncount = this.state.comparisons.length;
+  	const seasons = ['2016','2015','2014'];
+		
   	console.log("Count at render",comparisoncount);
 
   	const selected = "rgba(47,144,195,.5)";
@@ -162,6 +165,7 @@ export default class TopNavBar extends React.Component {
 	              <div>Career</div>
 	              <Toggle style={{width:"50px"}} onToggle={this.toggleCompareBy.bind(this)}/>
 	              <div style={{minWidth:"100px"}}>By Year</div>
+	              <YearChangeDropdown seasons={seasons}/>
 	            </Flexbox>
 			        <Flexbox flexDirection="column" style={{width:"200px"}}>
 			        	<div className="kavoon xlarge" style={{color:"#2f90c3"}}>Fantasy Draft Kit</div>
