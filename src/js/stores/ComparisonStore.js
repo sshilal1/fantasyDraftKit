@@ -56,6 +56,10 @@ class ComparisonStore extends EventEmitter {
 				//this.clearPlayers();
 				break;
 			}
+      case "C_CHANGE_YEAR": {
+        this.emit("yearchange", action.year);
+        break;
+      }
       case "SEE_RANK": {
         this.showRank(action.rankings, action.id);
         break;

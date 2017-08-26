@@ -1,11 +1,14 @@
 import React from "react";
 import Flexbox from 'flexbox-react';
 
+import ComparisonStore from "../../../stores/ComparisonStore";
+
 export default class PassingStatsBlock extends React.Component {
 
   constructor(props) {
     super(props);
     console.log(props.stats);
+    this.updateYear = this.updateYear.bind(this);
     /*this.state = {
       yr:props.stats[0].yr,
       cmp:props.stats[0].cmp,
@@ -23,6 +26,58 @@ export default class PassingStatsBlock extends React.Component {
       td:30,
       i:14,
     }
+  }
+
+  componentWillMount() {
+    ComparisonStore.on("yearchange", this.updateYear);
+  }
+
+  componentWillUnmount() {
+    ComparisonStore.removeListener("yearchange", this.updateYear);
+  }
+
+  updateYear(year) {
+    console.log(year);
+    var seasons = [
+      {
+        yr:2016,
+        cmp:285,
+        att:137,
+        cpct:99.9,
+        yds:5694,
+        td:10,
+        i:9,
+      },
+      {
+        yr:2015,
+        cmp:456,
+        att:500,
+        cpct:65.5,
+        yds:4567,
+        td:30,
+        i:14,
+      },
+      {
+        yr:2014,
+        cmp:909,
+        att:527,
+        cpct:0.04,
+        yds:3482,
+        td:20,
+        i:35,
+      },
+    ];
+
+    var index = _.findIndex(seasons, function(o) { return o.yr.toString() == year; });
+
+    this.setState({
+      cmp:seasons[index].cmp,
+      att:seasons[index].att,
+      cpct:seasons[index].cpct,
+      yds:seasons[index].yds,
+      td:seasons[index].td,
+      i:seasons[index].i
+    })
   }
 
   render() {
