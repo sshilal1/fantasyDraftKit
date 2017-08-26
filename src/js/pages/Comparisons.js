@@ -60,7 +60,7 @@ export default class Comparisons extends React.Component {
                 <RushingBlockHeader/>
               </Flexbox>
             </Flexbox>
-            <Flexbox style={{overflow: "overlay"}} flexDirection="column" justifyContent="center">{PlayerComponents}</Flexbox>
+            <Flexbox style={{overflow: "hidden"}} flexDirection="column" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </div>
       </MuiThemeProvider>

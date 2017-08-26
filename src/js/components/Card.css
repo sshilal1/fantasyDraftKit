@@ -28,10 +28,10 @@
 }
 
 .ComparisonStatItem {
-	font-size: x-large;
+	font-size: large;
 	text-align: center;
 	margin:10px;
-	height: 30px;
+	height: 20px;
 	display: flex;
 	flex: 1;
 	justify-content: center;
@@ -98,9 +98,17 @@
 	width:90px;
 	height:65px;
 }
+.player-img-small {
+	width:80px;
+	height:55px;
+}
 .number-team {
 	width:90px;
 	height:65px;
+}
+.number-team-small {
+	width:90px;
+	height:55px;
 }
 
 .rank-button {

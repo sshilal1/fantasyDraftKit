@@ -56,33 +56,23 @@ export default class PlayerCard extends React.Component {
 	    		<Flexbox>
 			      <div className="Comparecard">
 			        <Flexbox className="card-row header" flexDirection="row" justifyContent="space-between">
-								<ReactImageFallback className="player-img" src={"../../images/" + id + ".jpg"} fallbackImage={silhouette}/>
-								<div>
-									<div className="text">{firstname}</div>
-									<div style={{height:"45px"}} className={lastnameClass}>{lastname.toUpperCase()}</div>
-								</div>
-								<Flexbox className="number-team" flexDirection="column" justifyContent="flex-end">
-									<div className="end xxlarge text">{position.toUpperCase()}</div>							
-									<div className="end large text">{teamid.toUpperCase()}</div>
-								</Flexbox>
-								<Flexbox style={{minWidth:"100px"}} flexDirection="row" justifyContent="flex-end">
-									<FlatButton style={{minWidth:"80px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
-								</Flexbox>
-			        </Flexbox>
-
-							<Flexbox className="card-row" flexDirection="row" justifyContent="space-around">
-								<RankingsSwitch id={id} selectedRanking={selectedRanking}/>
 								<Flexbox flexDirection="column">
-									<div className="center text">Overall</div>
+									<div className="center text">Rank</div>
 									<Flexbox flexDirection="row" justifyContent="space-around">
 										<div className="center xlarge text">{overallrank>500 ? "N/A" : overallrank}</div>
 									</Flexbox>
 								</Flexbox>
-								<Flexbox flexDirection="column">
-									<div className="center text">Positional</div>
-									<Flexbox flexDirection="row" justifyContent="space-around">
-										<div className="center xlarge text">{positionrank>500 ? "N/A" : positionrank}</div>
-									</Flexbox>
+								<ReactImageFallback className="player-img-small" src={"../../images/" + id + ".jpg"} fallbackImage={silhouette}/>
+								<div style={{height:"55px"}}>
+									<div className="text">{firstname}</div>
+									<div style={{height:"45px"}} className={lastnameClass}>{lastname.toUpperCase()}</div>
+								</div>
+								<Flexbox className="number-team-small" flexDirection="column" justifyContent="flex-end">
+									<div className="end xlarge text">{position.toUpperCase()}</div>							
+									<div className="end large text">{teamid.toUpperCase()}</div>
+								</Flexbox>
+								<Flexbox style={{minWidth:"100px"}} flexDirection="row" justifyContent="flex-end">
+									<FlatButton style={{minWidth:"80px"}} onClick={this.compare.bind(this)} label={compare} labelStyle={{paddingLeft:0,paddingRight:0}} className="text" />
 								</Flexbox>
 			        </Flexbox>
 			    	</div>
