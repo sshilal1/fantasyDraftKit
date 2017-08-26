@@ -6,6 +6,9 @@ import Flexbox from 'flexbox-react';
 import CompareCard from "../components/CompareCard";
 import * as PlayerActions from "../actions/PlayerActions";
 import ComparisonStore from "../stores/ComparisonStore";
+import PassingBlockHeader from "../components/StatLines/Comparisons/PassingBlockHeader";
+import RushingBlockHeader from "../components/StatLines/Comparisons/RushingBlockHeader";
+import ReceivingBlockHeader from "../components/StatLines/Comparisons/ReceivingBlockHeader";
 
 export default class Comparisons extends React.Component {
   constructor() {
@@ -38,7 +41,7 @@ export default class Comparisons extends React.Component {
     const headerStyle = {
       margin:"5px",
       justifyContent: "center",
-      flex:1
+      flex:1.2
     }
     
     const PlayerComponents = players.map((card) => {
@@ -50,11 +53,11 @@ export default class Comparisons extends React.Component {
         <div style={{overflow: "overlay"}} >
           <div style={{ paddingTop: 72 }}>
             <Flexbox>
-              <Flexbox style={{width:"420px", margin:"5px"}}>Card Header</Flexbox>
+              <Flexbox style={{width:"420px", margin:"5px"}}></Flexbox>
               <Flexbox flex="2">
-                <Flexbox style={headerStyle}>PassingHeader</Flexbox>
-                <Flexbox style={headerStyle}>ReceivingHeader</Flexbox>
-                <Flexbox style={headerStyle}>RushingHeader</Flexbox>
+                <PassingBlockHeader/>
+                <ReceivingBlockHeader/>
+                <RushingBlockHeader/>
               </Flexbox>
             </Flexbox>
             <Flexbox style={{overflow: "overlay"}} flexDirection="column" justifyContent="center">{PlayerComponents}</Flexbox>

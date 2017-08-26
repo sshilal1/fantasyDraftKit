@@ -33,8 +33,8 @@ export default class PassingStatsBlock extends React.Component {
 
     return (
       <Flexbox className="ComparisonStatBlock text" style={{flex:1.2}} justifyContent="space-between">
-        <div className="ComparisonStatItem">{formattedCmp}</div>
-        <div className="ComparisonStatItem">{yds}</div>
+        <div className="ComparisonStatItem" style={{flex:4}}>{formattedCmp}</div>
+        <div className="ComparisonStatItem" style={{flex:2}}>{yds}</div>
         <div className="ComparisonStatItem">{td}</div>
         <div className="ComparisonStatItem">{i}</div>
       </Flexbox>

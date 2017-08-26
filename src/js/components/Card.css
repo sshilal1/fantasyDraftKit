@@ -32,6 +32,9 @@
 	text-align: center;
 	margin:10px;
 	height: 30px;
+	display: flex;
+	flex: 1;
+	justify-content: center;
 }
 
 .compare {
