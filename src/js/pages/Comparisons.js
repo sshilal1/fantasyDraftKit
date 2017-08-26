@@ -34,6 +34,12 @@ export default class Comparisons extends React.Component {
   render() {
 
     const { players } = this.state;
+
+    const headerStyle = {
+      margin:"5px",
+      justifyContent: "center",
+      flex:1
+    }
     
     const PlayerComponents = players.map((card) => {
         return <CompareCard key={card.id} {...card}/>;
@@ -43,6 +49,14 @@ export default class Comparisons extends React.Component {
       <MuiThemeProvider>
         <div style={{overflow: "overlay"}} >
           <div style={{ paddingTop: 72 }}>
+            <Flexbox>
+              <Flexbox style={{width:"420px", margin:"5px"}}>Card Header</Flexbox>
+              <Flexbox flex="2">
+                <Flexbox style={headerStyle}>PassingHeader</Flexbox>
+                <Flexbox style={headerStyle}>ReceivingHeader</Flexbox>
+                <Flexbox style={headerStyle}>RushingHeader</Flexbox>
+              </Flexbox>
+            </Flexbox>
             <Flexbox style={{overflow: "overlay"}} flexDirection="column" justifyContent="center">{PlayerComponents}</Flexbox>
           </div>
         </div>

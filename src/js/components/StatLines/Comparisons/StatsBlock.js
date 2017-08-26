@@ -2,6 +2,8 @@ import React from "react";
 import Flexbox from 'flexbox-react';
 
 import PassingStatsBlock from './PassingStatsBlock';
+import ReceivingStatsBlock from './ReceivingStatsBlock';
+import RushingStatsBlock from './RushingStatsBlock';
 
 export default class StatsBlock extends React.Component {
 
@@ -18,9 +20,13 @@ export default class StatsBlock extends React.Component {
     receivingstats.sort(function(c, d){return d.yr - c.yr});
     passingstats.sort(function(e, f){return f.yr - e.yr});
 
+    //<PassingStatsBlock stats={passingstats}/>
+
     return (
-      <Flexbox style={{width:"342px", fontWeight:"bold",backgroundColor:"lightgrey"}} justifyContent="space-between">
+      <Flexbox style={{flex:2}} justifyContent="space-between">
         <PassingStatsBlock stats={passingstats}/>
+        <ReceivingStatsBlock stats={receivingstats}/>
+        <RushingStatsBlock stats={rushingstats}/>
       </Flexbox>
     );
   }
