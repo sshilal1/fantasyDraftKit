@@ -3,19 +3,21 @@ import Flexbox from 'flexbox-react';
 
 import ComparisonStore from "../../../stores/ComparisonStore";
 
+const noseason = {
+  cmp:"-",
+  att:"-",
+  cpct:"-",
+  yds:"-",
+  td:"-",
+  i:"-",
+};
+
 export default class PassingStatsBlock extends React.Component {
 
   constructor(props) {
     super(props);
     this.updateYear = this.updateYear.bind(this);
-    this.state = {
-      cmp:"-",
-      att:"-",
-      cpct:"-",
-      yds:"-",
-      td:"-",
-      i:"-",
-    }
+    this.state = noseason;
   }
 
   componentWillMount() {
@@ -47,14 +49,7 @@ export default class PassingStatsBlock extends React.Component {
       });
     }
     else {
-      this.setState({
-        cmp:"-",
-        att:"-",
-        cpct:"-",
-        yds:"-",
-        td:"-",
-        i:"-",
-      })
+      this.setState(noseason);
     }
   }
 

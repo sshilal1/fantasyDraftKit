@@ -50,10 +50,20 @@ export default class StatsBlock extends React.Component {
       },
     ];
 
+    var testreceiving = [
+      {
+        yr:2015,
+        rec:89,
+        tar:203,
+        yds:984,
+        td:7
+      }
+    ];
+
     return (
       <Flexbox style={{flex:2}} justifyContent="space-between">
         <PassingStatsBlock stats={teststats}/>
-        <ReceivingStatsBlock stats={receivingstats}/>
+        <ReceivingStatsBlock stats={testreceiving}/>
         <RushingStatsBlock stats={rushingstats}/>
       </Flexbox>
     );
