@@ -93,6 +93,11 @@ export default class TopNavBar extends React.Component {
   	
   	var seasons = [];
   	for (var player of this.state.comparisons) {
+  		player.stats.passingstats.forEach(function(season) {
+				if (!_.includes(seasons, season.yr)) {
+				  seasons.push(season.yr);
+				}
+			});
   		player.stats.rushingstats.forEach(function(season) {
 				if (!_.includes(seasons, season.yr)) {
 				  seasons.push(season.yr);
@@ -104,7 +109,7 @@ export default class TopNavBar extends React.Component {
 				}
 			});
   	}
-  	//const seasons = ['2016','2015','2014'];
+  	seasons.sort(function(a, b) {return b.yr - a.yr});
 		
   	console.log("Count at render",comparisoncount);
 

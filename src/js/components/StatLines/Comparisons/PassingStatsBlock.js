@@ -42,14 +42,26 @@ export default class PassingStatsBlock extends React.Component {
 
     var index = _.findIndex(seasons, function(o) { return o.yr.toString() == year; });
 
-    this.setState({
-      cmp:seasons[index].cmp,
-      att:seasons[index].att,
-      cpct:seasons[index].cpct,
-      yds:seasons[index].yds,
-      td:seasons[index].td,
-      i:seasons[index].i
-    })
+    if (index != -1) {
+      this.setState({
+        cmp:seasons[index].cmp,
+        att:seasons[index].att,
+        cpct:seasons[index].cpct,
+        yds:seasons[index].yds,
+        td:seasons[index].td,
+        i:seasons[index].i
+      });
+    }
+    else {
+      this.setState({
+        cmp:"-",
+        att:"-",
+        cpct:"-",
+        yds:"-",
+        td:"-",
+        i:"-",
+      })
+    }
   }
 
   render() {
