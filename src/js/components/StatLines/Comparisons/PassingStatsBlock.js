@@ -7,24 +7,14 @@ export default class PassingStatsBlock extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props.stats);
     this.updateYear = this.updateYear.bind(this);
-    /*this.state = {
-      yr:props.stats[0].yr,
-      cmp:props.stats[0].cmp,
-      att:props.stats[0].att,
-      cpct:props.stats[0].cpct,
-      yds:props.stats[0].yds,
-      td:props.stats[0].td,
-      i:props.stats[0].i,
-    }*/
     this.state = {
-      cmp:456,
-      att:500,
-      cpct:65.5,
-      yds:4567,
-      td:30,
-      i:14,
+      cmp:"-",
+      att:"-",
+      cpct:"-",
+      yds:"-",
+      td:"-",
+      i:"-",
     }
   }
 
@@ -34,6 +24,10 @@ export default class PassingStatsBlock extends React.Component {
 
   componentWillUnmount() {
     ComparisonStore.removeListener("yearchange", this.updateYear);
+  }
+
+  componentDidMount() {
+    this.updateYear(this.props.stats[0].yr);
   }
 
   updateYear(year) {
