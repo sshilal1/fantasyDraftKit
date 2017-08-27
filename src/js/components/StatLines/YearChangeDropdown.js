@@ -23,6 +23,7 @@ export default class YearChangeDropdown extends React.Component {
   render() {
 
     const {seasons} = this.state;
+    console.log(seasons);
 
     var items = [];
     for (var season of seasons) {

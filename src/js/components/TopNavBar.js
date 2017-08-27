@@ -90,7 +90,21 @@ export default class TopNavBar extends React.Component {
   render() {
 
   	var comparisoncount = this.state.comparisons.length;
-  	const seasons = ['2016','2015','2014'];
+  	
+  	var seasons = [];
+  	for (var player of this.state.comparisons) {
+  		player.stats.rushingstats.forEach(function(season) {
+				if (!_.includes(seasons, season.yr)) {
+				  seasons.push(season.yr);
+				}
+			});
+			player.stats.receivingstats.forEach(function(season) {
+				if (!_.includes(seasons, season.yr)) {
+				  seasons.push(season.yr);
+				}
+			});
+  	}
+  	//const seasons = ['2016','2015','2014'];
 		
   	console.log("Count at render",comparisoncount);
 
