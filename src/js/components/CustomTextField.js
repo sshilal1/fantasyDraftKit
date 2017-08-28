@@ -30,7 +30,13 @@ export default class CustomTextField extends React.Component {
     }, 500);
   }
 
+  componentWillUnmount() {
+    PlayerActions.filterPlayers("all");
+    PlayerStore.removeListener("change",this.clearField);
+  }
+
   handleFilter(event) {
+    console.log("filtering by", event.target.value);
     this.setState({
       value: event.target.value,
     });
@@ -42,7 +48,7 @@ export default class CustomTextField extends React.Component {
     return (
       <MuiThemeProvider>
       	<div>
-  	      <TextField style={{width:"130px",height:"36px"}} hintText="Filter Players" onChange={this.handleFilter.bind(this)} value={this.state.value} />
+  	      <TextField ref={this.props.inputRef} style={{width:"130px",height:"36px"}} hintText="Filter Players" onChange={this.handleFilter.bind(this)} value={this.state.value} />
        	</div>
       </MuiThemeProvider>
     );

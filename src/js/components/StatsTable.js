@@ -52,67 +52,47 @@ export default class StatsTable extends React.Component {
     const {id, fetched, teamid} = this.state;
 
     if (!fetched && !this.props.rookie) {
-      // fetch them
+      // If not fetched and not a rookie
       PlayerActions.fetchStats(id,teamid);
     }
-
-    /*if ((!this.props.rookie) && (!fetched)) {
-      axios.post('/stats', {
-        id: this.props.id
-      })
-      .then((result)=> {
-        console.log(result);
-        
-        this.setState({
-          rushingstats: result.data.rushingstats,
-          receivingstats: result.data.receivingstats,
-          passingstats: result.data.passingstats,
-          fetched: true
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }*/
   }
 
   render() {
 
-    const { rushingstats,receivingstats,passingstats } = this.state;
+    const {rushingstats,receivingstats,passingstats} = this.state;
+
     const alternatingColor = ['#d5d5d5', '#a9a9a9'];
-    var rushingHeader = false;
-    var receivingHeader = false;
-    var passingHeader = false;
+
+    rushingstats.sort(function(a, b) {return b.yr - a.yr});
+    receivingstats.sort(function(c, d){return d.yr - c.yr});
+    passingstats.sort(function(e, f){return f.yr - e.yr});
 
     const RushingStats = rushingstats.map((season, index, array) => {
       if (array[index].att > 0) {
-        rushingHeader = true;
         return <RushingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
       }
     });
 
     const ReceivingStats = receivingstats.map((season, index, array) => {
       if (array[index].tar > 0) {
-        receivingHeader = true;
         return <ReceivingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
       }
     });
 
     const PassingStats = passingstats.map((season, index, array) => {
       if (array[index].att > 0) {
-        passingHeader = true;
         return <PassingStatLine key={index} color={alternatingColor[index % alternatingColor.length]} {...season}/>;
       }
     });
 
     if (!this.props.rookie) {
       return (
-        <div style={{maxHeight:"300px",padding:"10px"}}>
+        <div style={{maxHeight:"400px",padding:"15px"}}>
           <RushingHeader should={RushingStats.length > 0}/>
           {RushingStats}
           <ReceivingHeader should={ReceivingStats.length > 0}/>
           {ReceivingStats}
-          <PassingHeader should={passingHeader}/>
+          <PassingHeader should={PassingStats.length > 0}/>
           {PassingStats}
         </div>
       );

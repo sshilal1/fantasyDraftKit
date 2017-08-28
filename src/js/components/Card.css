@@ -1,20 +1,74 @@
 @import url('https://fonts.googleapis.com/css?family=Cuprum');
+@import url('https://fonts.googleapis.com/css?family=Kavoon');
 
 .text {
 	font-family: 'Cuprum', sans-serif !important;
+}
+.kavoon {
+	font-family: 'Kavoon', sans-serif !important;
 }
 
 .Card {
   width:180px;
 	margin: 5px;
-	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12)
+	box-shadow: 1px 1px 6px rgb(47, 144, 195), 5px 5px 8px rgba(0, 0, 0, 0.12);
+	background-color: white;
 }
+
+.Comparecard {
+	width:420px;
+	margin: 5px;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.ComparisonStatBlock {
+	background-color: lightgrey;
+	margin:5px;
+	align-items: center;
+}
+
+.ComparisonStatItem {
+	font-size: large;
+	text-align: center;
+	margin:10px;
+	height: 20px;
+	display: flex;
+	flex: 1;
+	justify-content: center;
+}
+
+.compare {
+  animation: sendto 1s linear;
+}
+
+@keyframes sendto {
+	100% {
+		transform: scale(.1) translateY(-50%) translateX(-50%);
+	}
+}
+
+@keyframes topleft {
+	0% {
+		position:fixed;
+	}
+	100% {
+		position:fixed;
+    left: 0;
+    top: 0;
+    margin-left:10px;
+    margin-top:5px;
+  }
+}
+
 /* ---Generals--- */
 .card-row {
 	padding:2px;
 }
 .xsmall {
 	font-size:x-small;
+}
+.xxsmall {
+	font-size:xx-small;
 }
 .large {
 	font-size:large;
@@ -25,8 +79,14 @@
 .xxlarge {
 	font-size:xx-large;
 }
+.start {
+	text-align: start;
+}
+.end {
+	text-align: end;
+}
 .center {
-	text-align: center;
+	text-align: left;
 }
 /* --------------- */
 
@@ -38,9 +98,17 @@
 	width:90px;
 	height:65px;
 }
+.player-img-small {
+	width:80px;
+	height:55px;
+}
 .number-team {
 	width:90px;
 	height:65px;
+}
+.number-team-small {
+	width:90px;
+	height:55px;
 }
 
 .rank-button {

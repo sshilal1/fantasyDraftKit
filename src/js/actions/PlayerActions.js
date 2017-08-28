@@ -61,6 +61,13 @@ export function sortBy(sortKey) {
 	});
 }
 
+export function sortDisplayed(sortKey) {
+  dispatcher.dispatch({
+    type: "SORT_DISPLAYED_PLAYERS",
+    sort: sortKey
+  });
+}
+
 export function filterPlayers(filter) {
   dispatcher.dispatch({
     type: "FILTER_PLAYERS",
@@ -123,5 +130,56 @@ export function fetchStats(id,teamid) {
   })
   .catch(function (error) {
     console.log(error);
+  });
+}
+
+export function fetchDepth(id,position,teamid) {
+
+  var pos = position == 'k' ? 'pk' : position;
+
+  axios.post('/depth', {
+    position: pos,
+    teamid: teamid
+  })
+  .then(function (response) {
+    console.log(response);
+    
+    dispatcher.dispatch({
+      type: "RECEIVE_DEPTH",
+      depth: response.data,
+      id: id
+    });
+    
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+export function comparePlayer(player) {
+  dispatcher.dispatch({
+    type: "C_ADD_PLAYER",
+    player: player
+  });
+}
+
+export function compareAll(position) {
+  dispatcher.dispatch({
+    type: "C_COMPARE_ALL",
+    position: position
+  });
+}
+
+export function removePlayer(player) {
+  dispatcher.dispatch({
+    type: "C_REMOVE_PLAYER",
+    player: player
+  });
+}
+
+export function changeComparisonYear(year) {
+  dispatcher.dispatch({
+    type: "C_CHANGE_YEAR",
+    year: year
   });
 }

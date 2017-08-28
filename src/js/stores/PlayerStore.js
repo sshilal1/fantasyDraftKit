@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 
 import dispatcher from "../dispatcher";
 
-//import playerData from './nyg-team.json';
+import * as PlayerActions from "../actions/PlayerActions";
 import playerData from '../../allplayers.json';
 import _ from 'lodash';
 
@@ -52,7 +52,8 @@ class PlayerStore extends EventEmitter {
 					overallrank: 998,
 					positionrank: 998
 				},
-				hide: false,
+				comparing: false,
+				depth: []
 			};
 			
 			for (var person of initialPlayers) {
@@ -66,12 +67,25 @@ class PlayerStore extends EventEmitter {
 		this.filter = "all";
 		this.playersshown = 30;
 		this.all = initialPlayers;
-		//this.sortPlayers("overallrank");
-		this.filterPlayersPos(this.filter);
+		this.populatePlayers();
+
+		PlayerActions.getRanks("pros");
+    PlayerActions.getRanks("espn");
+    PlayerActions.getRanks("yahoo");
   }
 
   getAll() {
     return this.players;
+  }
+
+  populatePlayers() {
+  	const all = this.all;
+  	const playersshown = this.playersshown;
+  	this.players = [];
+  	
+  	for(var i=0;i<playersshown;i++) {
+  		this.players.push(all[i]);
+  	}
   }
 
   addPlayersToView() {
@@ -107,23 +121,31 @@ class PlayerStore extends EventEmitter {
 		this.players[index].positionrank = this.players[index][rankings].positionrank;
 		this.players[index].selectedRanking = rankings;
 
-		this.emit("change");
+		this.emit("hide");
   }
 	
 	showRanks(rankings) {
 		const all = this.all;
-		
+		const players = this.players;
+
+		for (var player in players) {
+			this.players[player].overallrank = this.players[player][rankings].overallrank;
+			this.players[player].positionrank = this.players[player][rankings].positionrank;
+			this.players[player].selectedRanking = rankings;
+		}
+		this.sortPlayers("overallrank");
+		this.emit("hide");
+
 		for (var player in all) {
 			this.all[player].overallrank = this.all[player][rankings].overallrank;
 			this.all[player].positionrank = this.all[player][rankings].positionrank;
 			this.all[player].selectedRanking = rankings;
 		}
-		this.sortPlayers("overallrank");
-		this.filterPlayersPos(this.filter);
-		this.emit("change");
+		this.sortAll("overallrank");
 	}
 	
-	sortPlayers(sort) {
+	sortAll(sort) {
+
 		this.all.sort(function(a,b) {
 			if (a[sort]< b[sort])
 				return -1;
@@ -131,8 +153,19 @@ class PlayerStore extends EventEmitter {
 				return 1;
 			return 0;
 		})
-		this.filterPlayersPos(this.filter);
-		this.emit("change");
+	}
+
+	sortPlayers(sort) {
+
+		this.players.sort(function(a,b) {
+			if (a[sort]< b[sort])
+				return -1;
+			if (a[sort] > b[sort])
+				return 1;
+			return 0;
+		})
+
+		this.emit("hide");
 	}
 
 	filterPlayersPos(filter) {
@@ -140,6 +173,7 @@ class PlayerStore extends EventEmitter {
 		this.playersshown = 30;
     const all = this.all;
     const playersshown = this.playersshown;
+    console.log("filtering all players by", filter);
 
     this.filter = filter;
     this.players = [];
@@ -200,7 +234,7 @@ class PlayerStore extends EventEmitter {
 				}
 			}
 		}
-		this.sortPlayers("overallrank");
+		this.filterPlayersPos("all");
 	}
 
 	updateStats(stats) {
@@ -217,11 +251,54 @@ class PlayerStore extends EventEmitter {
 		this.emit("stats");
 	}
 
+	updateDepth(depth,id) {
+		const players = this.players;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    this.players[index].depth = depth;
+
+		this.emit("depth");
+	}
+
 	getStats(id) {
 		const players = this.players;
     var index = _.findIndex(players, function(o) { return o.id == id; });
 
     return this.players[index].stats;
+	}
+
+	getDepth(id) {
+		const players = this.players;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    return this.players[index].depth;
+	}
+
+	comparePlayer(player,comparing) {
+		const all = this.all;
+		const id = player.id;
+
+    var index = _.findIndex(all, function(o) { return o.id == id; });
+
+    this.all[index].comparing = comparing;
+    console.log("comparing", player.name);
+    this.emit("change");
+	}
+
+	compareAll(position) {
+		const all = this.all;
+		var self = this;
+
+		var count=0;
+    all.forEach(function(obj,index) {
+			if (_.includes(obj, position)) {
+				if (count > 10) {
+					return;
+				}
+				count++;
+			  PlayerActions.comparePlayer(obj);
+			}
+		});
 	}
 
   handleActions(action) {
@@ -248,6 +325,10 @@ class PlayerStore extends EventEmitter {
 				break;
 			}
 			case "SORT_PLAYERS": {
+				this.sortAll(action.sort);
+				break;
+			}
+			case "SORT_DISPLAYED_PLAYERS": {
 				this.sortPlayers(action.sort);
 				break;
 			}
@@ -271,11 +352,29 @@ class PlayerStore extends EventEmitter {
 				this.updateStats(action.stats);
 				break;
 			}
+			case "RECEIVE_DEPTH": {
+				this.updateDepth(action.depth, action.id);
+				break;
+			}
+			case "C_ADD_PLAYER": {
+				this.comparePlayer(action.player,true);
+				break;
+			}
+			case "C_REMOVE_PLAYER": {
+				this.comparePlayer(action.player,false);
+				break;
+			}
+			case "C_COMPARE_ALL": {
+        this.compareAll(action.position);
+        break;
+      }
     }
   }
 }
 
 const playerStore = new PlayerStore;
 dispatcher.register(playerStore.handleActions.bind(playerStore));
+
+window.playerstore = playerStore;
 
 export default playerStore;
