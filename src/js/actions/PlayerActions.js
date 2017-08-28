@@ -163,6 +163,13 @@ export function comparePlayer(player) {
   });
 }
 
+export function compareAll(position) {
+  dispatcher.dispatch({
+    type: "C_COMPARE_ALL",
+    position: position
+  });
+}
+
 export function removePlayer(player) {
   dispatcher.dispatch({
     type: "C_REMOVE_PLAYER",

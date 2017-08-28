@@ -30,7 +30,7 @@ export default class YearChangeDropdown extends React.Component {
     }
 
     return (
-      <DropDownMenu maxHeight={200} value={this.state.value} onChange={this.handleChange.bind(this)}>
+      <DropDownMenu underlineStyle={{display:"none"}} maxHeight={200} value={this.state.value} onChange={this.handleChange.bind(this)}>
         {items}
       </DropDownMenu>
     );

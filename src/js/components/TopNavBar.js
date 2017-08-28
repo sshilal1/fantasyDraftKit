@@ -12,6 +12,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 import CustomTextField from '../components/CustomTextField';
+import CompareAllSwitch from '../components/CompareAllSwitch';
+
 import PageSwitch from '../components/PageSwitch';
 import GlobalRankSwitch from '../components/GlobalRankSwitch';
 import * as PlayerActions from "../actions/PlayerActions";
@@ -40,6 +42,10 @@ export default class TopNavBar extends React.Component {
 	componentDidMount() {
     this.focusInput();
   }
+
+    <Toggle style={{width:"50px"}} onToggle={this.toggleCompareBy.bind(this)}/>
+  <div style={{minWidth:"100px"}}>By Year</div>
+
 	*/
   componentWillMount() {
   	ComparisonStore.on("compare", this.updateComparisonCount);
@@ -181,9 +187,7 @@ export default class TopNavBar extends React.Component {
 		          	</Link>
 	          	</Flexbox>
 							<Flexbox flexDirection="row" style={{height:"28px",paddingTop:"8px", margin: "0 auto"}}>
-	              <div>Career</div>
-	              <Toggle style={{width:"50px"}} onToggle={this.toggleCompareBy.bind(this)}/>
-	              <div style={{minWidth:"100px"}}>By Year</div>
+	              <Flexbox style={{height: "38px", alignItems: "flex-end"}} >Season</Flexbox>
 	              <YearChangeDropdown seasons={seasons}/>
 	            </Flexbox>
 			        <Flexbox flexDirection="column" style={{width:"200px"}}>

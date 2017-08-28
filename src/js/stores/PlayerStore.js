@@ -285,6 +285,22 @@ class PlayerStore extends EventEmitter {
     this.emit("change");
 	}
 
+	compareAll(position) {
+		const all = this.all;
+		var self = this;
+
+		var count=0;
+    all.forEach(function(obj,index) {
+			if (_.includes(obj, position)) {
+				if (count > 10) {
+					return;
+				}
+				count++;
+			  PlayerActions.comparePlayer(obj);
+			}
+		});
+	}
+
   handleActions(action) {
     switch(action.type) {
       case "CREATE_PLAYER": {
@@ -348,6 +364,10 @@ class PlayerStore extends EventEmitter {
 				this.comparePlayer(action.player,false);
 				break;
 			}
+			case "C_COMPARE_ALL": {
+        this.compareAll(action.position);
+        break;
+      }
     }
   }
 }
