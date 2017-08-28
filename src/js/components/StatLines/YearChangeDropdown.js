@@ -8,9 +8,12 @@ export default class YearChangeDropdown extends React.Component {
 
   constructor(props) {
     super(props);
+    var seasons = props.seasons;
+    seasons.sort(function(a, b) {return b - a});
+
     this.state = {
-      value: props.seasons[0],
-      seasons: props.seasons
+      value: seasons[0],
+      seasons: seasons
     };
   }
 

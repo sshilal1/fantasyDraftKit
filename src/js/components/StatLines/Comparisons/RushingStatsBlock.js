@@ -8,7 +8,7 @@ const noseason = {
   yds:"-",
   avg:"-",
   td:"-",
-  fl: "-"
+  fml: "-"
 };
 
 export default class RushingStatsBlock extends React.Component {
@@ -43,7 +43,7 @@ export default class RushingStatsBlock extends React.Component {
         yds:seasons[index].yds,
         avg:seasons[index].avg,
         td:seasons[index].td,
-        fl:seasons[index].fl,
+        fml:seasons[index].fml,
       });
     }
     else {
@@ -53,7 +53,7 @@ export default class RushingStatsBlock extends React.Component {
 
   render() {
 
-  	const {att, fl, yds, avg, td} = this.state;
+  	const {att, fml, yds, avg, td} = this.state;
 
     return (
       <Flexbox className="ComparisonStatBlock text" style={{flex:1.2}} justifyContent="space-between">
@@ -61,7 +61,7 @@ export default class RushingStatsBlock extends React.Component {
         <div className="ComparisonStatItem">{yds}</div>
         <div className="ComparisonStatItem">{avg}</div>
         <div className="ComparisonStatItem">{td}</div>
-        <div className="ComparisonStatItem">{fl}</div>
+        <div className="ComparisonStatItem">{fml}</div>
       </Flexbox>
     );
   }

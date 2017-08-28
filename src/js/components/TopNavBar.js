@@ -102,20 +102,22 @@ export default class TopNavBar extends React.Component {
   		player.stats.passingstats.forEach(function(season) {
 				if (!_.includes(seasons, season.yr)) {
 				  seasons.push(season.yr);
+				  
 				}
 			});
   		player.stats.rushingstats.forEach(function(season) {
 				if (!_.includes(seasons, season.yr)) {
 				  seasons.push(season.yr);
+				  
 				}
 			});
 			player.stats.receivingstats.forEach(function(season) {
 				if (!_.includes(seasons, season.yr)) {
 				  seasons.push(season.yr);
+				  
 				}
 			});
   	}
-  	seasons.sort(function(a, b) {return b.yr - a.yr});
 		
   	console.log("Count at render",comparisoncount);
 
