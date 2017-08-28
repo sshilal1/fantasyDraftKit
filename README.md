@@ -1,5 +1,5 @@
 # Fantasy Football Draft Kit
-[See Live](https://www.github.com/sshilal1/fantasyDraftKit)
+[See Live](http://www.fantasydraftkit.org)
 
 ## In order to host this application there is some building that needs to take place:
 * First, the server downloads all the player images
