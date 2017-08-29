@@ -20,7 +20,7 @@ class PlayerStore extends EventEmitter {
 			var newPlayer = {
 				name : player.name.toLowerCase(),
 				firstname : first,
-				lastname : last,
+				lastname : (last == 'Beckham') ? 'Beckham Jr.' : last,
 				id : player.id,
 				position: player.position.toLowerCase(),
 				num: player.num,
