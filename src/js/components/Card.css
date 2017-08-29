@@ -8,6 +8,14 @@
 	font-family: 'Kavoon', sans-serif !important;
 }
 
+.headerBox {
+	width: 250px;
+	background-color: #b8b7b7;
+	padding: 0px 10px;
+	border-radius: 10px;
+	flex-direction: column;
+}
+
 .Card {
   width:180px;
 	margin: 5px;

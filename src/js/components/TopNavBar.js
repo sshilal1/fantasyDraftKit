@@ -129,7 +129,7 @@ export default class TopNavBar extends React.Component {
 	    	<MuiThemeProvider>
 	        <div>
 			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "#c0c0c0" }}>
-			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+			        <Flexbox className="headerBox">
 		          	<Link to='/'>
 		          		<FlatButton hoverColor="#79b5d4"
 		          			backgroundColor={this.state.nav == "home" ? selected : non}
@@ -155,9 +155,10 @@ export default class TopNavBar extends React.Component {
 			            <CustomTextField inputRef={input => this.input = input}/>
 			          </Flexbox>
 			        </Flexbox>
-			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+			        <Flexbox className="headerBox">
 			        	<div className="kavoon xlarge" style={{color:"#2f90c3"}}>Fantasy Draft Kit</div>
 			        	<div className="kavoon">Stephen Shilale</div>
+			        	<div className="text xxsmall">Updated: 8/29/2017</div>
 			        </Flexbox>
 			      </AppBar>
 			    </div>
@@ -169,7 +170,7 @@ export default class TopNavBar extends React.Component {
 	  		<MuiThemeProvider>
 	        <div>
 			    	<AppBar showMenuIconButton={false} titleStyle={{boxFlex:0, flex:0}} style={{ position: "fixed", backgroundColor: "#c0c0c0" }}>
-			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+			        <Flexbox className="headerBox">
 		          	<Link to='/'>
 		          		<FlatButton hoverColor="#79b5d4" 
 		          			backgroundColor={this.state.nav == "home" ? selected : non}
@@ -192,7 +193,7 @@ export default class TopNavBar extends React.Component {
 	              <Flexbox style={{height: "38px", alignItems: "flex-end"}} >Season</Flexbox>
 	              <YearChangeDropdown seasons={seasons}/>
 	            </Flexbox>
-			        <Flexbox flexDirection="column" style={{width:"200px"}}>
+			        <Flexbox className="headerBox">
 			        	<div className="kavoon xlarge" style={{color:"#2f90c3"}}>Fantasy Draft Kit</div>
 			        	<div className="kavoon">Stephen Shilale</div>
 			        </Flexbox>
