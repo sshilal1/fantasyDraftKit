@@ -11,7 +11,11 @@ var pool = mysql.createPool({
 });
 
 var filters = ["all","qb","rb","wr","te","def","k","flex"];
+// Currently only making "all" tables
 filters = ["all"];
+
+/*ALTER TABLE `fantasykit`.`yahoo_rankings_all_old` 
+RENAME TO  `fantasykit`.`yahoo_rankings_all` ;*/
 
 pool.getConnection(function(err, connection) {
 	filters.forEach(function(filter,index) {
