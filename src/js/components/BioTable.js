@@ -2,6 +2,7 @@ import React from "react";
 import axios from 'axios';
 import Flexbox from 'flexbox-react';
 
+import Schedule from "./Schedule";
 import PlayerStore from "../stores/PlayerStore";
 import * as PlayerActions from "../actions/PlayerActions";
 
@@ -29,12 +30,14 @@ export default class BioTable extends React.Component {
 
     this.getPlayerInfo = this.getPlayerInfo.bind(this);
     var depth = PlayerStore.getDepth(props.id);
+    var matchups = PlayerStore.getMatchups(props.teamid);
 
     this.state = {
       id: props.id,
       teamid: props.teamid,
       team: "",
       depth: depth,
+      matchups: matchups,
       position: props.position,
       fetched: (depth.length != 0)
     }
@@ -71,7 +74,9 @@ export default class BioTable extends React.Component {
   render() {
 
     const {age, height, weight, experience, college, name} = this.props;
-    const {depth, teamid, position, team} = this.state;
+    const {depth, matchups, teamid, position, team} = this.state;
+
+    console.log(matchups);
 
     const DepthChart = depth.map((player) => {
       var myplayer = (player.name.toLowerCase() == name);
@@ -83,12 +88,16 @@ export default class BioTable extends React.Component {
     return (
       <Flexbox>
         <div className="text large" style={{ padding:"20px"}}>
-          <div className="text xlarge">Bio</div>
-          <div style={{fontSize:"smaller"}}>Age: {age}</div>
-          <div style={{fontSize:"smaller"}}>Height: {height}</div>
-          <div style={{fontSize:"smaller"}}>Weight: {weight}</div>
-          <div style={{fontSize:"smaller"}}>Experience: {experience}</div>
-          <div style={{fontSize:"smaller"}}>College: {college}</div>
+          <Flexbox justifyContent="space-between">
+            <div style={{fontSize:"smaller"}}>Age: {age}</div>
+            <div style={{fontSize:"smaller"}}>Height: {height}</div>
+            <div style={{fontSize:"smaller"}}>Weight: {weight}</div>
+          </Flexbox>
+          <Flexbox justifyContent="space-between" style={{width:"250px"}}>
+            <div style={{fontSize:"smaller"}}>Experience: {experience}</div>
+            <div style={{fontSize:"smaller"}}>College: {college}</div>
+          </Flexbox>
+          <Schedule matchups={matchups}/>
         </div>
         <div className="text" style={{ padding:"20px"}}>
           <div className="text xlarge">{teamid.toUpperCase()} {position.toUpperCase()} Depth</div>
