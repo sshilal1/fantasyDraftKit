@@ -4,11 +4,12 @@ var cheerio = require('cheerio');
 var mysql = require('mysql');
 
 var team = process.argv[2];
+var teamFileString = 'local-storage/matchups/' + team + '.json';
 
 var url = 'http://www.espn.com/nfl/team/schedule/_/name/' + team + '/';
 console.log(url);
 
-var returnObj = {};
+var matchups = [];
 
 request(url, function(error, response, html){
 	if(!error){
@@ -34,13 +35,24 @@ request(url, function(error, response, html){
 
 				if (weekCount > 8 && teamId != "") {
 					console.log(week + ' ' + teamId);
+					var weekObj = {
+						week: week,
+						teamid: teamId
+					}
+					matchups.push(weekObj);
 				}
-
 				weekCount++;
 			})
 		})
 	}
 }).then(function() {
 	console.log("\n\nDone loading matchups");
+	console.log("\n\nWriting to File...");
+
+	var jsonfile = require('jsonfile');
+
+	jsonfile.writeFile(teamFileString, matchups, function (err) {
+		console.error(err);
+	})
 })
 

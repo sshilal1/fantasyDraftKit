@@ -21,6 +21,10 @@ const statsDir = 'local-storage/stats';
 if (!fs.existsSync(statsDir)) {
 	fs.mkdirSync(statsDir);
 }
+const matchupDir = 'local-storage/matchups';
+if (!fs.existsSync(matchupDir)) {
+	fs.mkdirSync(matchupDir);
+}
 
 const tsFormat = () => (new Date()).toLocaleTimeString();
 var logger = new (winston.Logger)({
@@ -76,7 +80,7 @@ for (var team in teams) {
 // Matchups Build
 // --------------------
 for (var team in teams) {
-	logger.info('-Building stats for players on: ' + teams[team] + '...');
+	logger.info('-Building matchups for team: ' + teams[team] + '...');
 	var teamExecStr = 'node ./build-modules/matchups.js ' + teams[team];
 	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 }
