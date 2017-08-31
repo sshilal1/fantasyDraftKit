@@ -156,6 +156,28 @@ export function fetchDepth(id,position,teamid) {
   });
 }
 
+export function fetchMatchups() {
+
+  var teams = ["buf","mia","ne","nyj","bal","cin","cle","pit","hou","ind","jax","ten","den","kc","oak","lac","dal","nyg","phi","wsh","chi","det","gb","min","atl","car","no","tb","ari","lar","sf","sea"];
+
+  for (var team in teams) {
+    const teamid = teams[team];
+    axios.post('/matchups', {
+      team: teamid
+    })
+    .then(function (response) {
+      dispatcher.dispatch({
+        type: "RECEIVE_MATCHUPS",
+        team: teamid,
+        matchups: response.data
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+}
+
 export function comparePlayer(player) {
   dispatcher.dispatch({
     type: "C_ADD_PLAYER",

@@ -68,10 +68,12 @@ class PlayerStore extends EventEmitter {
 		this.playersshown = 30;
 		this.all = initialPlayers;
 		this.populatePlayers();
+		this.matchups = {};
 
 		PlayerActions.getRanks("pros");
     PlayerActions.getRanks("espn");
     PlayerActions.getRanks("yahoo");
+    PlayerActions.fetchMatchups();
   }
 
   getAll() {
@@ -251,6 +253,13 @@ class PlayerStore extends EventEmitter {
 		this.emit("stats");
 	}
 
+	getStats(id) {
+		const players = this.players;
+    var index = _.findIndex(players, function(o) { return o.id == id; });
+
+    return this.players[index].stats;
+	}
+
 	updateDepth(depth,id) {
 		const players = this.players;
     var index = _.findIndex(players, function(o) { return o.id == id; });
@@ -260,18 +269,20 @@ class PlayerStore extends EventEmitter {
 		this.emit("depth");
 	}
 
-	getStats(id) {
-		const players = this.players;
-    var index = _.findIndex(players, function(o) { return o.id == id; });
-
-    return this.players[index].stats;
-	}
-
 	getDepth(id) {
 		const players = this.players;
     var index = _.findIndex(players, function(o) { return o.id == id; });
 
     return this.players[index].depth;
+	}
+
+	updateMatchups(matchups,team) {
+    this.matchups[team] = matchups;
+	}
+
+	getMatchups(team) {
+		console.log(this.matchups);
+		return this.matchups[team];
 	}
 
 	comparePlayer(player,comparing) {
@@ -354,6 +365,10 @@ class PlayerStore extends EventEmitter {
 			}
 			case "RECEIVE_DEPTH": {
 				this.updateDepth(action.depth, action.id);
+				break;
+			}
+			case "RECEIVE_MATCHUPS": {
+				this.updateMatchups(action.matchups, action.team);
 				break;
 			}
 			case "C_ADD_PLAYER": {

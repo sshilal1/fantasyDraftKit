@@ -27,7 +27,7 @@ export default class BioTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getDepth = this.getDepth.bind(this);
+    this.getPlayerInfo = this.getPlayerInfo.bind(this);
     var depth = PlayerStore.getDepth(props.id);
 
     this.state = {
@@ -41,18 +41,20 @@ export default class BioTable extends React.Component {
   }
 
   componentWillMount() {
-    PlayerStore.on("depth", this.getDepth);
+    PlayerStore.on("depth", this.getPlayerInfo);
   }
 
   componentWillUnmount() {
-    PlayerStore.removeListener("depth", this.getDepth);
+    PlayerStore.removeListener("depth", this.getPlayerInfo);
   }
 
-  getDepth() {
+  getPlayerInfo() {
     var depth = PlayerStore.getDepth(this.props.id);
+    var matchups = PlayerStore.getMatchups(this.props.teamid);
 
     this.setState({
       depth: depth,
+      matchups: matchups,
       team: (depth.length!=0 ? depth[0].team : ""),
       fetched: (depth.length != 0)
     });
