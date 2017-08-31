@@ -71,3 +71,12 @@ for (var team in teams) {
 	var teamExecStr = 'node ./build-modules/getstats.js ' + teams[team];
 	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 }
+// --------------------
+// --------------------
+// Matchups Build
+// --------------------
+for (var team in teams) {
+	logger.info('-Building stats for players on: ' + teams[team] + '...');
+	var teamExecStr = 'node ./build-modules/getstats.js ' + teams[team];
+	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
+}
