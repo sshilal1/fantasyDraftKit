@@ -49,7 +49,15 @@ app.post('/stats', function(req, res) {
 
 	console.log(req.body);
 	var filepath = './local-storage/stats/' + req.body.team + '/' + req.body.id + '.json';
-	console.log(filepath);
+
+	var parsedJson = require(filepath);
+	res.send(parsedJson);
+})
+
+app.post('/matchups', function(req, res) {
+
+	console.log(req.body);
+	var filepath = './local-storage/matchups/' + req.body.team + '.json';
 
 	var parsedJson = require(filepath);
 	res.send(parsedJson);
