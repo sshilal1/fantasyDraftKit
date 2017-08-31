@@ -77,6 +77,6 @@ for (var team in teams) {
 // --------------------
 for (var team in teams) {
 	logger.info('-Building stats for players on: ' + teams[team] + '...');
-	var teamExecStr = 'node ./build-modules/getstats.js ' + teams[team];
+	var teamExecStr = 'node ./build-modules/matchups.js ' + teams[team];
 	execSync(teamExecStr, {encoding: 'utf8', stdio:[0,1,2]});
 }
