@@ -8,9 +8,10 @@ export default class Schedule extends React.Component {
     console.log(matchups);
 
     const ScheduleList = matchups.map((week) => {
-      return (
-        <div key={week.week}>{week.week} {week.teamid}</div>
-      );
+    	if (parseInt(week.week))
+      	return <div key={week.week}>{week.week} | {week.teamid}</div>;
+      else
+      	return null;
     });
 
     return (
